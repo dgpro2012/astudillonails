@@ -305,6 +305,7 @@ function Index() {
           </div>
         </article>
 
+        <DisenoPersonalizado />
         <ClientasFelices />
         <OfertaFinal />
         <Envios />
