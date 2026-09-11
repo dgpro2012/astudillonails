@@ -262,6 +262,9 @@ function Index() {
             </p>
           </div>
 
+          {/* CTA rápido above the fold */}
+          <CtaRapido />
+
           {/* Razones */}
           <div className="mt-12 space-y-14">
             {razones.map((r) => (
@@ -504,6 +507,28 @@ function Envios() {
           <span className="font-bold text-foreground">350 371 2704</span>.
         </li>
       </ul>
+    </section>
+  );
+}
+
+function CtaRapido() {
+  return (
+    <section className="mt-8 rounded-3xl border-2 border-dashed border-primary bg-card p-6 text-center shadow-lg">
+      <p className="text-xs font-bold uppercase tracking-widest text-sale">Oferta de lanzamiento</p>
+      <h2 className="mt-2 text-2xl font-bold text-foreground sm:text-3xl">
+        ¿Lista sin leer todo? 💅
+      </h2>
+      <p className="mt-2 text-sm text-muted-foreground">
+        Lleva tu kit Astudillo Nails por solo{" "}
+        <span className="font-display text-2xl font-bold text-sale">$49.900</span>{" "}
+        con envío gratis.
+      </p>
+      <div className="mt-5">
+        <CtaButton>Quiero mi kit ahora · $49.900</CtaButton>
+      </div>
+      <p className="mt-3 text-xs text-muted-foreground">
+        🛡️ ¿No te quedan? Te ayudamos a cambiarlas sin costo.
+      </p>
     </section>
   );
 }
