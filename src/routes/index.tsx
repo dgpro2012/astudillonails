@@ -211,7 +211,7 @@ function Index() {
       <div className="bg-sale text-sale-foreground">
         <div className="mx-auto flex max-w-3xl flex-col items-center gap-2 px-4 py-2 text-center sm:flex-row sm:justify-between">
           <p className="text-xs font-bold tracking-wide sm:text-sm">
-            ✨ ENVÍO GRATIS A TODA COLOMBIA · Solo por hoy 💅
+            ✨ ENVÍO GRATIS A MEDELLÍN · Resto de Colombia por transportadora 💅
           </p>
           <Countdown />
         </div>
@@ -478,7 +478,7 @@ function OfertaFinal() {
             🔥 Riesgo de agotarse: <span className="font-bold text-foreground">alto</span>
           </p>
           <p>
-            🚚 Envío: <span className="font-bold text-foreground">gratis a toda Colombia</span>
+            🚚 Envío: <span className="font-bold text-foreground">gratis a Medellín</span> · Resto de Colombia por transportadora
           </p>
           <p>
             💬 Pides fácil por <span className="font-bold text-foreground">WhatsApp</span>, sin
@@ -497,7 +497,7 @@ function Envios() {
       <ul className="mt-3 space-y-2 text-sm text-muted-foreground">
         <li>
           📍 <span className="font-bold text-foreground">Medellín y Área Metropolitana:</span>{" "}
-          recibes al siguiente día hábil.
+          envío gratis y recibes al siguiente día hábil.
         </li>
         <li>
           🇨🇴 <span className="font-bold text-foreground">Resto del país:</span> tiempo de entrega
@@ -522,7 +522,7 @@ function CtaRapido() {
       <p className="mt-2 text-sm text-muted-foreground">
         Lleva tu kit Astudillo Nails por solo{" "}
         <span className="font-display text-2xl font-bold text-sale">$49.900</span>{" "}
-        con envío gratis.
+        con envío gratis a Medellín.
       </p>
       <div className="mt-5">
         <CtaButton>Quiero mi kit ahora · $49.900</CtaButton>
