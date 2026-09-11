@@ -262,6 +262,9 @@ function Index() {
             </p>
           </div>
 
+          {/* CTA rápido above the fold */}
+          <CtaRapido />
+
           {/* Razones */}
           <div className="mt-12 space-y-14">
             {razones.map((r) => (
