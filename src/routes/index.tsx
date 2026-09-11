@@ -218,10 +218,7 @@ function Index() {
         </div>
       </div>
 
-      <header
-        className="border-b border-[#e8b8b9]"
-        style={{ backgroundColor: "#FACECD" }}
-      >
+      <header className="border-b border-border bg-cream">
         <div className="mx-auto max-w-3xl px-4 py-3 text-center">
           <img
             src={logoAsset.url}
