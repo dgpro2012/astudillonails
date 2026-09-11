@@ -1,6 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 
+import logoAsset from "@/assets/astudillo-logo.png.asset.json";
 import razon1 from "@/assets/razon-1.jpg";
 import razon2 from "@/assets/razon-2.jpg";
 import razon3 from "@/assets/razon-3.jpg";
@@ -217,11 +218,16 @@ function Index() {
         </div>
       </div>
 
-      <header className="border-b border-border bg-card">
+      <header
+        className="border-b border-[#e8b8b9]"
+        style={{ backgroundColor: "#FACECD" }}
+      >
         <div className="mx-auto max-w-3xl px-4 py-3 text-center">
-          <span className="font-display text-lg font-bold tracking-tight text-primary">
-            Astudillo Nails
-          </span>
+          <img
+            src={logoAsset.url}
+            alt="Astudillo Nails"
+            className="mx-auto h-12 w-auto"
+          />
         </div>
       </header>
 
