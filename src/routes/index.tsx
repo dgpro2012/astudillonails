@@ -533,3 +533,69 @@ function CtaRapido() {
     </section>
   );
 }
+
+function DisenoPersonalizado() {
+  return (
+    <section className="mt-14 rounded-3xl border border-border bg-card p-6 shadow-xl sm:p-8">
+      <div className="text-center">
+        <p className="text-xs font-bold uppercase tracking-widest text-primary">
+          Hecho a mano para ti
+        </p>
+        <h2 className="mt-2 text-2xl font-bold text-foreground sm:text-3xl">
+          ¿Cómo elegimos tu diseño personalizado? ✨
+        </h2>
+        <p className="mx-auto mt-3 max-w-xl text-sm text-muted-foreground">
+          Tienes dos opciones: escoger un set ya listo del catálogo o pedirlo hecho a tu gusto. Tú eliges, nosotras lo hacemos realidad.
+        </p>
+      </div>
+
+      <div className="mt-8 grid gap-4 sm:grid-cols-2">
+        <div className="rounded-2xl bg-muted p-5 text-center">
+          <p className="text-2xl">💅</p>
+          <h3 className="mt-2 text-lg font-bold text-foreground">Set del catálogo</h3>
+          <p className="mt-1 text-sm text-muted-foreground">
+            Diseños ya hechos, listos para enviar.
+          </p>
+          <p className="mt-3 font-display text-3xl font-bold text-sale">$49.900</p>
+          <p className="mt-1 text-xs font-bold uppercase tracking-widest text-muted-foreground">
+            Entrega en 24h tras confirmar pago
+          </p>
+        </div>
+
+        <div className="rounded-2xl bg-muted p-5 text-center">
+          <p className="text-2xl">🎨</p>
+          <h3 className="mt-2 text-lg font-bold text-foreground">Diseño personalizado</h3>
+          <p className="mt-1 text-sm text-muted-foreground">
+            Color, forma y detalles hechos a tu gusto.
+          </p>
+          <p className="mt-3 font-display text-3xl font-bold text-sale">$59.900</p>
+          <p className="mt-1 text-xs font-bold uppercase tracking-widest text-muted-foreground">
+            Entrega en 48h tras confirmar pago
+          </p>
+        </div>
+      </div>
+
+      <div className="mt-8 rounded-2xl bg-cream p-6">
+        <h3 className="text-lg font-bold text-foreground">Así funciona el paso a paso</h3>
+        <ol className="mt-4 space-y-3 text-sm text-muted-foreground">
+          <li>
+            <span className="font-bold text-foreground">1. Escríbenos por WhatsApp</span> con el color, la forma o una foto de referencia.
+          </li>
+          <li>
+            <span className="font-bold text-foreground">2. Te confirmamos el diseño</span> y el precio antes de que pagues.
+          </li>
+          <li>
+            <span className="font-bold text-foreground">3. Pagas y empezamos</span> a hacer tu set a mano, una a una.
+          </li>
+          <li>
+            <span className="font-bold text-foreground">4. Te enviamos</span> en el tiempo acordado: 24h para catálogo, 48h para personalizado.
+          </li>
+        </ol>
+      </div>
+
+      <div className="mt-6 text-center">
+        <CtaButton>Quiero mi diseño personalizado · $59.900</CtaButton>
+      </div>
+    </section>
+  );
+}
