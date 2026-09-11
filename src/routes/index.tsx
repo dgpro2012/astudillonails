@@ -1,34 +1,36 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { Camera, Check, HeartHandshake, MessageCircle, Palette, ShieldCheck, Sparkles, Truck } from "lucide-react";
-import { useEffect, useState, type ReactNode } from "react";
+import { useEffect, useState } from "react";
 
-import cliente1 from "@/assets/cliente-1.jpg";
-import cliente2 from "@/assets/cliente-2.jpg";
-import cliente3 from "@/assets/cliente-3.jpg";
-import diseno1 from "@/assets/diseno-1.jpg";
-import diseno2 from "@/assets/diseno-2.jpg";
-import diseno3 from "@/assets/diseno-3.jpg";
-import kit from "@/assets/kit.jpg";
 import razon1 from "@/assets/razon-1.jpg";
 import razon2 from "@/assets/razon-2.jpg";
 import razon3 from "@/assets/razon-3.jpg";
 import razon5 from "@/assets/razon-5.jpg";
 import razon6 from "@/assets/razon-6.jpg";
+import kit from "@/assets/kit.jpg";
+import diseno1 from "@/assets/diseno-1.jpg";
+import diseno2 from "@/assets/diseno-2.jpg";
+import diseno3 from "@/assets/diseno-3.jpg";
+import cliente1 from "@/assets/cliente-1.jpg";
+import cliente2 from "@/assets/cliente-2.jpg";
+import cliente3 from "@/assets/cliente-3.jpg";
 
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Uñas press on personalizadas | Astudillo Nails" },
+      { title: "10 razones para no volver al salón de uñas | Astudillo Nails" },
       {
         name: "description",
         content:
-          "Uñas press on hechas a mano y listas para usar. Personaliza tu diseño o elige un set disponible por $49.900, con envíos a toda Colombia.",
+          "Uñas press on de gel con acabado de salón en 7 minutos. Kit completo por $49.900 con envío a toda Colombia. Medellín recibe al siguiente día hábil.",
       },
-      { property: "og:title", content: "Uñas press on personalizadas | Astudillo Nails" },
+      {
+        property: "og:title",
+        content: "10 razones para no volver al salón de uñas | Astudillo Nails",
+      },
       {
         property: "og:description",
         content:
-          "Elige un set listo o crea tus uñas a medida. Acabado de salón en minutos por $49.900.",
+          "Uñas press on de gel con acabado de salón en 7 minutos. Kit completo por $49.900 con envío a toda Colombia.",
       },
       { property: "og:type", content: "article" },
       { name: "twitter:card", content: "summary_large_image" },
@@ -40,78 +42,141 @@ export const Route = createFileRoute("/")({
 const WHATSAPP =
   "https://wa.me/573503712704?text=" +
   encodeURIComponent(
-    "¡Hola, Astudillo Nails! 💅 Quiero mis uñas press on de $49.900. ¿Me ayudan a elegir diseño y talla?",
+    "¡Hola Astudillo Nails! 💅 Quiero pedir el kit de uñas press on de $49.900. ¿Me ayudas?",
   );
+
+function useCountdown(seconds: number) {
+  const [left, setLeft] = useState(seconds);
+  useEffect(() => {
+    const t = setInterval(() => setLeft((s) => (s > 0 ? s - 1 : 0)), 1000);
+    return () => clearInterval(t);
+  }, []);
+  const pad = (n: number) => String(n).padStart(2, "0");
+  return {
+    h: pad(Math.floor(left / 3600)),
+    m: pad(Math.floor((left % 3600) / 60)),
+    s: pad(left % 60),
+  };
+}
+
+function Countdown({ light = false }: { light?: boolean }) {
+  const { h, m, s } = useCountdown(3 * 3600 + 59 * 60 + 58);
+  const box = light
+    ? "bg-primary text-primary-foreground"
+    : "bg-sale-foreground/15 text-sale-foreground";
+  return (
+    <div className="flex items-center gap-1 font-sans tabular-nums">
+      {[h, m, s].map((v, i) => (
+        <span key={i} className="flex items-center gap-1">
+          <span className={`rounded-md px-2 py-1 text-sm font-bold ${box}`}>{v}</span>
+          {i < 2 && <span className="font-bold">:</span>}
+        </span>
+      ))}
+    </div>
+  );
+}
+
+function CtaButton({
+  children = "Quiero mis uñas por $49.900",
+  className = "",
+}: {
+  children?: React.ReactNode;
+  className?: string;
+}) {
+  return (
+    <a
+      href={WHATSAPP}
+      target="_blank"
+      rel="noopener noreferrer"
+      className={`inline-flex w-full items-center justify-center gap-2 rounded-full bg-whatsapp px-6 py-4 text-center text-base font-bold text-whatsapp-foreground shadow-lg transition hover:brightness-95 sm:w-auto ${className}`}
+    >
+      <svg viewBox="0 0 24 24" fill="currentColor" className="size-5" aria-hidden="true">
+        <path d="M17.5 14.4c-.3-.2-1.7-.9-2-1-.3-.1-.5-.2-.7.2s-.8 1-.9 1.1c-.2.2-.3.2-.6.1-.3-.2-1.3-.5-2.4-1.5-.9-.8-1.5-1.8-1.6-2.1-.2-.3 0-.5.1-.6l.5-.6c.2-.2.2-.3.3-.5.1-.2 0-.4 0-.6l-.9-2.1c-.2-.5-.5-.5-.7-.5h-.6c-.2 0-.6.1-.8.4-.3.3-1.1 1-1.1 2.5s1.1 2.9 1.2 3.1c.2.2 2.2 3.4 5.3 4.7.7.3 1.3.5 1.8.6.7.2 1.4.2 1.9.1.6-.1 1.7-.7 2-1.4.2-.7.2-1.2.2-1.4-.1-.1-.3-.2-.6-.4M12 21.8c-1.7 0-3.4-.5-4.9-1.4l-.3-.2-3.6.9 1-3.5-.2-.4A9.7 9.7 0 1 1 12 21.8M12 2A10 10 0 0 0 3.3 17L2 22l5.2-1.4A10 10 0 1 0 12 2" />
+      </svg>
+      {children}
+    </a>
+  );
+}
 
 const razones = [
   {
     n: 1,
-    titulo: "Parecen recién salidas del salón (pero sin la cita eterna)",
+    emoji: "💎",
+    titulo: "Se ven como una manicura de gel de $150.000, sin cita",
     texto:
-      "Amiga, ese brillo y esa forma perfecta no tienen nada que envidiarle a una manicura carísima. Te las pones en casa, cuando te dé la gana, y quedas lista para el plan.",
+      "Las uñas press on de gel de Astudillo Nails tienen el mismo brillo espejo y la forma perfecta de un salón costoso. En vez de esperar turno y gastar una fortuna cada mes, tienes el acabado profesional en tu casa, cuando tú quieras.",
     img: razon1,
   },
   {
     n: 2,
-    titulo: "En 7 minutos quedas lista y divina",
+    emoji: "⏰",
+    titulo: "Uñas de ensueño en solo 7 minutos",
     texto:
-      "¿Te salió plan de última hora? Tranquila. Limpias, pegas, presionas y listo. Sin lámpara, sin esperar a que sequen y sin tener que ser experta.",
+      "¿Sin tiempo? No hay problema. Con el kit completo (20 uñas, lima, limpiador y adhesivo) te haces una manicura profesional en menos de 10 minutos, sin experiencia previa. Sin secado, sin lámpara UV, sin desorden. Limpias, pegas, presionas y listo.",
     img: razon2,
   },
   {
     n: 3,
-    titulo: "Te acompañan por más de dos semanas",
+    emoji: "💪",
+    titulo: "Duran más de 2 semanas, te lo prometemos",
     texto:
-      "Son de gel flexible, así que se sienten cómodas mientras trabajas, cocinas, entrenas o te vas de paseo. Bien puestas, aguantan firmes y con el brillo intacto.",
+      "Estas uñas se quedan donde deben estar. El gel flexible se adapta a tu uña natural y aguanta firme mientras escribes, cocinas, entrenas o viajas. Dos semanas de brillo impecable, sin saltarse ni astillarse.",
     img: razon3,
   },
   {
     n: 4,
-    titulo: "Las puedes volver a usar, qué bacano",
+    emoji: "🔁",
+    titulo: "Reutilizables: las usas varias veces",
     texto:
-      "Las retiras con cuidado, las guardas y tu set favorito queda listo para repetir. Pagas una vez y le sacas varios looks; tu bolsillo lo agradece.",
+      "A diferencia de las uñas del salón que se pierden al retirarlas, las press on de Astudillo Nails se pueden volver a usar. Con el cuidado correcto repites tu set favorito varias veces: pagas una vez y disfrutas muchas más.",
     img: diseno2,
   },
   {
     n: 5,
-    titulo: "Tus uñas naturales descansan de verdad",
+    emoji: "🧴",
+    titulo: "Cero daño en tu uña natural",
     texto:
-      "Nada de pulidores agresivos ni limas eléctricas. La aplicación es suave y el retiro también, para que sigas luciendo manos lindas sin maltratar tus uñas.",
+      "Olvídate del pulidor, la lima eléctrica y los removedores agresivos. Se aplican suave y se retiran igual de suave, con agua tibia. Uñas sanas, brillantes y sin arrepentimientos.",
     img: razon5,
   },
   {
     n: 6,
-    titulo: "Puedes elegir un set listo o pedir uno solo para ti",
+    emoji: "🎨",
+    titulo: "Diseños que se roban todas las miradas",
     texto:
-      "¿Viste un color en Pinterest o soñaste una forma específica? Nos mandas la idea por WhatsApp y la aterrizamos contigo. Cada set personalizado se hace a mano, uña por uña.",
+      "Desde nudes elegantes para la oficina hasta rojos de infarto para una cita. Nuestras colecciones cambian constantemente y cada set está curado para que tus manos se vean impecables en cualquier foto.",
     img: razon6,
   },
   {
     n: 7,
-    titulo: "Te ahorras más de $1.500.000 al año",
+    emoji: "💰",
+    titulo: "Ahorra más de $1.500.000 al año",
     texto:
-      "Haz la cuenta, parce: una visita al salón cada tres semanas se vuelve un platal. Aquí pagas $49.900, reutilizas tu set y sigues con manicure de impacto.",
+      "Una visita al salón en Colombia cuesta entre $60.000 y $120.000. Si vas cada tres semanas, son más de $1.500.000 al año. Con Astudillo Nails logras el mismo resultado (o mejor) por $49.900 y puedes repetir el look.",
     grafico: true,
   },
   {
     n: 8,
-    titulo: "Belleza linda contigo y con los animalitos",
+    emoji: "🌎",
+    titulo: "Veganas, libres de crueldad y sin químicos agresivos",
     texto:
-      "Son veganas, libres de crueldad y sin químicos agresivos. Te las pones tranquila, porque verte divina no debería costarle el bienestar a nadie.",
+      "La belleza no debería exigir sacrificios. Nuestras uñas son veganas, libres de pruebas en animales y sin los químicos que maltratan tu lámina natural. Te las pones tranquila.",
     img: diseno1,
   },
   {
     n: 9,
-    titulo: "Cero plástico tieso: son 100% gel suave",
+    emoji: "✨",
+    titulo: "Nada de plástico duro. Nada de acrílico. 100% gel suave",
     texto:
-      "Se sienten livianas, flexibles y naturales. Nada de esa presión incómoda ni del look postizo que se nota desde lejos.",
+      "No son uñas de plástico barato ni acrílico pesado. Son de gel suave: un material flexible y ultraliviano que se mueve y se siente como una uña real. Sin presión incómoda, sin look artificial.",
     img: diseno3,
   },
   {
     n: 10,
-    titulo: "Cada vez más colombianas cambiaron el salón por este plan",
+    emoji: "💖",
+    titulo: "Miles de colombianas ya no vuelven al salón",
     texto:
-      "De Medellín a Barranquilla, muchas ya entendieron el truco: manos siempre listas, menos gasto y cero carreras para conseguir cita. Te vas a preguntar por qué no lo hiciste antes.",
+      "Mujeres de Medellín, Bogotá, Cali, Barranquilla y todo el país ya cambiaron la cita del salón por 7 minutos en casa. Esto no es solo un producto: es la forma más cómoda de tener las manos siempre listas.",
     img: cliente1,
   },
 ];
@@ -120,167 +185,118 @@ const comentarios = [
   {
     user: "cata.moreno_",
     texto:
-      "Me llegaron al otro día en Medellín 😍 Me las puse rapidísimo y ya llevo más de dos semanas con ellas. Chao, salón.",
+      "Me llegaron al otro día en Medellín 😍 me las puse en 6 minutos y ya llevo 3 semanas con ellas puestas. No vuelvo al salón.",
   },
   {
     user: "valentinaosp",
     texto:
-      "Mandé la foto de mis manos y me ayudaron con la talla. Me quedaron perfectas y no me dañaron mis uñas.",
+      "Pedí desde Bucaramanga y llegaron perfectas. Lo que más me gustó: no me dañaron la uña. Antes las tenía delgaditas y ahora están sanas 🥺",
   },
   {
     user: "lauris.gil",
     texto:
-      "Por $49.900 con todo el kit… yo pagaba casi el doble cada tres semanas. La cuenta se hace sola 😂",
+      "Por $49.900 con lima, limpiador y pegante… yo pagaba 90 mil en el salón cada 3 semanas. La cuenta se hace sola 😅",
   },
   {
     user: "manuelaq",
-    texto: "Se ven demasiado naturales. Pedí un diseño a mi gusto y quedó más lindo de lo que imaginaba.",
+    texto:
+      "Se ven MUY naturales, nadie cree que son postizas. Ya voy por mi tercer set 💅🏽",
   },
 ];
 
-function useCountdown(seconds: number) {
-  const [left, setLeft] = useState(seconds);
-
-  useEffect(() => {
-    const timer = setInterval(() => setLeft((current) => (current > 0 ? current - 1 : 0)), 1000);
-    return () => clearInterval(timer);
-  }, []);
-
-  const pad = (value: number) => String(value).padStart(2, "0");
-  return {
-    h: pad(Math.floor(left / 3600)),
-    m: pad(Math.floor((left % 3600) / 60)),
-    s: pad(left % 60),
-  };
-}
-
-function Countdown() {
-  const { h, m, s } = useCountdown(3 * 3600 + 59 * 60 + 58);
-  return (
-    <div className="flex items-center gap-1 font-sans tabular-nums" aria-label={`${h} horas, ${m} minutos y ${s} segundos`}>
-      {[h, m, s].map((value, index) => (
-        <span key={`${value}-${index}`} className="flex items-center gap-1">
-          <span className="rounded-sm bg-sale-foreground px-2 py-1 text-sm font-black text-sale">{value}</span>
-          {index < 2 && <span className="font-black">:</span>}
-        </span>
-      ))}
-    </div>
-  );
-}
-
-function CtaButton({ children = "Quiero mis uñas por $49.900", className = "" }: { children?: ReactNode; className?: string }) {
-  return (
-    <a
-      href={WHATSAPP}
-      target="_blank"
-      rel="noopener noreferrer"
-      className={`inline-flex min-h-14 w-full items-center justify-center gap-2 rounded-md bg-whatsapp px-6 py-4 text-center text-base font-black text-whatsapp-foreground shadow-[var(--shadow-button)] transition hover:-translate-y-0.5 hover:brightness-95 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring sm:w-auto ${className}`}
-    >
-      <MessageCircle className="size-5" aria-hidden="true" />
-      {children}
-    </a>
-  );
-}
-
-function Garantia() {
-  return (
-    <p className="mt-3 flex items-center justify-center gap-2 text-sm font-bold text-foreground">
-      <ShieldCheck className="size-5 shrink-0 text-whatsapp" aria-hidden="true" />
-      ¿No te quedaron bien? Tranqui, te ayudamos a cambiarlas.
-    </p>
-  );
-}
-
 function Index() {
   return (
-    <div className="min-h-screen overflow-x-hidden bg-background pb-24">
+    <div className="min-h-screen bg-background pb-24">
+      {/* Barra de oferta */}
       <div className="bg-sale text-sale-foreground">
-        <div className="mx-auto flex max-w-4xl flex-col items-center gap-2 px-4 py-2 text-center sm:flex-row sm:justify-between">
-          <p className="text-xs font-black uppercase tracking-wider sm:text-sm">Envío gratis a toda Colombia · Solo por hoy</p>
+        <div className="mx-auto flex max-w-3xl flex-col items-center gap-2 px-4 py-2 text-center sm:flex-row sm:justify-between">
+          <p className="text-xs font-bold tracking-wide sm:text-sm">
+            ✨ ENVÍO GRATIS A TODA COLOMBIA · Solo por hoy 💅
+          </p>
           <Countdown />
         </div>
       </div>
 
-      <header className="border-b-4 border-primary bg-card">
-        <div className="mx-auto flex max-w-4xl items-center justify-center px-4 py-4">
-          <span className="font-display text-2xl font-black text-primary">Astudillo Nails</span>
-          <Sparkles className="ml-2 size-5 text-sale" aria-hidden="true" />
+      <header className="border-b border-border bg-card">
+        <div className="mx-auto max-w-3xl px-4 py-3 text-center">
+          <span className="font-display text-lg font-bold tracking-tight text-primary">
+            Astudillo Nails
+          </span>
         </div>
       </header>
 
-      <main className="mx-auto max-w-4xl px-4">
+      <main className="mx-auto max-w-3xl px-4">
+        {/* Encabezado del artículo */}
         <article className="pt-8">
-          <p className="mb-3 inline-block -rotate-1 bg-secondary px-3 py-1 text-xs font-black uppercase tracking-widest text-secondary-foreground">
-            Manicure en casa · A tu manera
+          <p className="mb-3 text-xs font-bold uppercase tracking-widest text-primary">
+            Belleza · Manicura en casa
           </p>
-          <h1 className="max-w-3xl text-4xl leading-[1.05] font-black text-foreground sm:text-6xl">
-            10 razones para decirle chao al salón y tener uñas divinas en casa
+          <h1 className="text-3xl leading-tight font-bold text-foreground sm:text-4xl">
+            10 razones por las que las colombianas inteligentes ya no vuelven al salón de uñas 💅
           </h1>
-          <p className="mt-5 max-w-2xl text-lg leading-relaxed text-muted-foreground">
-            Amiga, si te encanta tener las manos arregladas pero te da pereza gastar horas y un platal en el salón, esto te va a encantar.
-          </p>
 
-          <div className="mt-6 flex items-center gap-3 border-y-2 border-foreground py-4">
-            <div className="flex size-12 rotate-2 items-center justify-center rounded-full bg-accent font-display text-sm font-black text-accent-foreground">FA</div>
+          <div className="mt-6 flex items-center gap-3 border-y border-border py-4">
+            <div className="flex size-11 items-center justify-center rounded-full bg-accent font-display text-sm font-bold text-accent-foreground">
+              FA
+            </div>
             <div className="text-sm">
-              <p className="font-black text-foreground">Fernanda Astudillo</p>
-              <p className="text-muted-foreground">La amiga que te cuenta el dato · Lectura de 4 min</p>
+              <p className="font-bold text-foreground">Fernanda Astudillo</p>
+              <p className="text-muted-foreground">Actualizado hoy · Lectura de 4 min</p>
             </div>
           </div>
 
-          <section className="relative mt-7 overflow-hidden border-2 border-foreground bg-card p-5 shadow-[var(--shadow-card)] sm:p-7">
-            <div className="absolute right-0 top-0 bg-accent px-3 py-1 text-xs font-black uppercase text-accent-foreground">Compra rápida</div>
-            <p className="pr-24 text-sm font-black uppercase tracking-wider text-primary">¿Ya sabes que las quieres?</p>
-            <div className="mt-3 flex flex-col gap-5 sm:flex-row sm:items-end sm:justify-between">
-              <div>
-                <p className="font-display text-3xl font-black text-foreground">Kit completo por $49.900</p>
-                <p className="mt-1 text-sm text-muted-foreground">20 uñas + lima + limpiador + adhesivo</p>
-                <p className="mt-2 flex items-center gap-2 text-sm font-bold text-foreground">
-                  <Truck className="size-4 text-sale" aria-hidden="true" /> Envío gratis a toda Colombia
-                </p>
-              </div>
-              <CtaButton>Lo quiero ya</CtaButton>
-            </div>
-            <Garantia />
-          </section>
-
-          <div className="mt-6 grid gap-3 sm:grid-cols-2">
-            <div className="bg-primary p-5 text-primary-foreground">
-              <p className="font-display text-xl font-black">¿Lo quieres listo?</p>
-              <p className="mt-2 text-sm leading-relaxed">Elige uno de los diseños disponibles y te ayudamos a escoger la talla por WhatsApp.</p>
-            </div>
-            <div className="bg-secondary p-5 text-secondary-foreground">
-              <p className="font-display text-xl font-black">¿Lo quieres a tu pinta?</p>
-              <p className="mt-2 text-sm leading-relaxed">Mándanos tu inspiración y armamos juntas un set hecho a mano solo para ti.</p>
-            </div>
+          <div className="mt-6 rounded-xl bg-muted p-5">
+            <p className="text-sm leading-relaxed text-foreground">
+              <span className="font-bold">En resumen:</span> hoy puedes tener una manicura de gel
+              profesional desde tu casa, sin salón, sin daño y sin gastar una fortuna. Las uñas
+              press on de <span className="font-bold">Astudillo Nails</span> son la forma más
+              cómoda, bonita y duradera de tener las manos listas. Sigue leyendo y descubre por qué
+              tantas mujeres ya no vuelven atrás.
+            </p>
           </div>
 
-          <div className="mt-12 space-y-14 sm:space-y-20">
-            {razones.map((razon) => (
-              <section key={razon.n} className="relative">
-                <span className="absolute -left-2 -top-8 -z-0 font-display text-8xl font-black text-accent/35 sm:-left-12">{String(razon.n).padStart(2, "0")}</span>
-                <div className="relative z-10">
-                  <h2 className="max-w-2xl text-2xl leading-tight font-black text-foreground sm:text-4xl">{razon.titulo}</h2>
-                  <p className="mt-3 max-w-2xl text-base leading-relaxed text-muted-foreground sm:text-lg">{razon.texto}</p>
+          <div className="mt-4 rounded-xl border border-dashed border-primary/40 bg-blush/40 p-4">
+            <p className="text-sm text-foreground">
+              <span className="font-bold">Nota:</span> con este método tienes uñas de calidad de
+              salón en menos de 7 minutos, sin lámpara UV y sin experiencia.
+            </p>
+          </div>
 
-                  {razon.grafico ? (
-                    <ComparacionPrecios />
-                  ) : (
-                    <img
-                      src={razon.img}
-                      alt={razon.titulo}
-                      loading={razon.n === 1 ? "eager" : "lazy"}
-                      width={1024}
-                      height={768}
-                      className="mt-5 aspect-[4/3] w-full border-2 border-foreground object-cover shadow-[var(--shadow-image)]"
-                    />
-                  )}
+          {/* Razones */}
+          <div className="mt-12 space-y-14">
+            {razones.map((r) => (
+              <section key={r.n}>
+                <h2 className="text-xl font-bold text-foreground sm:text-2xl">
+                  {r.n}. {r.emoji} {r.titulo}
+                </h2>
+                <p className="mt-3 leading-relaxed text-muted-foreground">{r.texto}</p>
 
-                  {razon.n === 2 && <GaleriaDisenos />}
-                  {razon.n === 5 && <GuiaTalla />}
-                  {razon.n === 6 && <Personalizacion />}
-                  {razon.n === 10 && <Comentarios />}
-                </div>
+                {r.grafico ? (
+                  <ComparacionPrecios />
+                ) : (
+                  <img
+                    src={r.img}
+                    alt={r.titulo}
+                    loading={r.n === 1 ? "eager" : "lazy"}
+                    width={1024}
+                    height={768}
+                    className="mt-5 w-full rounded-2xl object-cover"
+                  />
+                )}
+
+                {r.n === 2 && <GaleriaDisenos />}
+                {r.n === 5 && (
+                  <div className="mt-8 rounded-2xl bg-cream p-6 text-center">
+                    <p className="font-display text-lg font-bold text-foreground">
+                      Kit completo por $49.900
+                    </p>
+                    <p className="mt-1 mb-4 text-sm text-muted-foreground">
+                      20 uñas + lima + limpiador + adhesivo
+                    </p>
+                    <CtaButton />
+                  </div>
+                )}
+                {r.n === 10 && <Comentarios />}
               </section>
             ))}
           </div>
@@ -291,17 +307,21 @@ function Index() {
         <Envios />
       </main>
 
-      <footer className="mt-14 border-t-4 border-primary bg-card py-8 text-center text-xs text-muted-foreground">
-        <p className="font-display text-xl font-black text-primary">Astudillo Nails</p>
-        <p className="mt-2">Hechas a mano con amor · Envíos a toda Colombia</p>
-        <p className="mt-1">WhatsApp 350 371 2704 · © {new Date().getFullYear()}</p>
+      <footer className="mt-14 border-t border-border bg-card py-8 text-center text-xs text-muted-foreground">
+        <p className="font-display text-base font-bold text-primary">Astudillo Nails</p>
+        <p className="mt-2">Envíos a toda Colombia · WhatsApp 350 371 2704</p>
+        <p className="mt-1">© {new Date().getFullYear()} Astudillo Nails</p>
       </footer>
 
-      <div className="fixed inset-x-0 bottom-0 z-50 border-t-2 border-foreground bg-card/95 px-4 py-3 backdrop-blur">
-        <div className="mx-auto flex max-w-4xl items-center gap-3">
+      {/* CTA fijo */}
+      <div className="fixed inset-x-0 bottom-0 z-50 border-t border-border bg-card/95 px-4 py-3 backdrop-blur">
+        <div className="mx-auto flex max-w-3xl items-center gap-3">
           <div className="hidden sm:block">
-            <p className="text-sm font-black text-foreground">Tu kit completo</p>
-            <p className="text-xs text-muted-foreground"><span className="line-through">$89.900</span> <span className="font-black text-sale">$49.900</span></p>
+            <p className="text-sm font-bold text-foreground">Kit Astudillo Nails</p>
+            <p className="text-xs text-muted-foreground">
+              <span className="line-through">$89.900</span>{" "}
+              <span className="font-bold text-sale">$49.900</span>
+            </p>
           </div>
           <CtaButton className="flex-1">Pedir por WhatsApp · $49.900</CtaButton>
         </div>
@@ -312,19 +332,27 @@ function Index() {
 
 function ComparacionPrecios() {
   const barras = [
-    { label: "Salón", valor: "$1.560.000", alto: "h-48", destaca: false },
+    { label: "Salón de uñas", valor: "$1.560.000", alto: "h-48", destaca: false },
     { label: "Semipermanente", valor: "$780.000", alto: "h-32", destaca: false },
-    { label: "Astudillo", valor: "$49.900", alto: "h-16", destaca: true },
+    { label: "Astudillo Nails", valor: "$49.900", alto: "h-16", destaca: true },
   ];
   return (
-    <div className="mt-5 border-2 border-foreground bg-card p-6 shadow-[var(--shadow-card)]">
-      <p className="mb-6 text-center text-xs font-black uppercase tracking-widest text-muted-foreground">Lo que podrías gastar en un año</p>
-      <div className="flex items-end justify-center gap-3 sm:gap-6">
-        {barras.map((barra) => (
-          <div key={barra.label} className="flex w-1/3 flex-col items-center gap-2">
-            <span className="text-xs font-black text-foreground sm:text-sm">{barra.valor}</span>
-            <div className={`w-full border-2 border-foreground ${barra.alto} ${barra.destaca ? "bg-whatsapp" : "bg-primary"}`} />
-            <span className="text-center text-[11px] font-bold text-muted-foreground sm:text-xs">{barra.label}</span>
+    <div className="mt-5 rounded-2xl bg-cream p-6">
+      <p className="mb-6 text-center text-xs font-bold uppercase tracking-widest text-muted-foreground">
+        Gasto aproximado al año
+      </p>
+      <div className="flex items-end justify-center gap-4">
+        {barras.map((b) => (
+          <div key={b.label} className="flex w-1/3 flex-col items-center gap-2">
+            <span className="text-sm font-bold text-foreground">{b.valor}</span>
+            <div
+              className={`w-full rounded-t-lg ${b.alto} ${
+                b.destaca ? "bg-whatsapp" : "bg-primary"
+              }`}
+            />
+            <span className="text-center text-xs font-medium text-muted-foreground">
+              {b.label}
+            </span>
           </div>
         ))}
       </div>
@@ -334,19 +362,31 @@ function ComparacionPrecios() {
 
 function GaleriaDisenos() {
   const items = [
-    { img: diseno1, nombre: "French clásico" },
-    { img: diseno2, nombre: "Nude rosé" },
-    { img: diseno3, nombre: "Chocolate" },
+    { img: diseno1, nombre: "French Clásico · Short Round" },
+    { img: diseno2, nombre: "Nude Rosé · Short Square" },
+    { img: diseno3, nombre: "Chocolate · Medium Almond" },
   ];
   return (
-    <div className="mt-8 bg-primary p-5 text-primary-foreground sm:p-7">
-      <h3 className="text-2xl font-black">Mira estos diseños tan lindos</h3>
-      <p className="mt-2 text-sm">Puedes elegir uno disponible o mandarnos esa inspiración que tienes guardada.</p>
-      <div className="mt-5 grid grid-cols-3 gap-2 sm:gap-4">
-        {items.map((item) => (
-          <figure key={item.nombre}>
-            <img src={item.img} alt={`Diseño ${item.nombre} de Astudillo Nails`} loading="lazy" width={768} height={768} className="aspect-square w-full border-2 border-primary-foreground object-cover" />
-            <figcaption className="mt-2 text-[11px] font-bold leading-tight">{item.nombre}</figcaption>
+    <div className="mt-8 rounded-2xl bg-muted p-6">
+      <h3 className="text-lg font-bold text-foreground">Mira todos los diseños disponibles</h3>
+      <p className="mt-2 text-sm text-muted-foreground">
+        Nudes para el día a día, french para tu matrimonio o un rojo elegante para tu cita.
+      </p>
+      <div className="mt-5 grid grid-cols-3 gap-3">
+        {items.map((d) => (
+          <figure key={d.nombre}>
+            <img
+              src={d.img}
+              alt={d.nombre}
+              loading="lazy"
+              width={768}
+              height={768}
+              className="aspect-square w-full rounded-xl object-cover"
+            />
+            <figcaption className="mt-2 text-[11px] leading-tight text-muted-foreground">
+              <span className="block text-sale">★★★★★</span>
+              {d.nombre}
+            </figcaption>
           </figure>
         ))}
       </div>
@@ -354,68 +394,15 @@ function GaleriaDisenos() {
   );
 }
 
-function GuiaTalla() {
-  return (
-    <section className="mt-8 border-2 border-foreground bg-accent p-5 text-accent-foreground shadow-[var(--shadow-card)] sm:p-7">
-      <div className="flex items-center gap-3">
-        <Camera className="size-7 shrink-0" aria-hidden="true" />
-        <h3 className="text-2xl font-black">¿Cómo sé qué talla pedir?</h3>
-      </div>
-      <p className="mt-3 leading-relaxed">Súper fácil: toma una foto clara desde arriba de cada mano, con los dedos relajados y sobre una superficie plana. Pon al lado una moneda nueva de $500 para usarla como referencia de tamaño.</p>
-      <p className="mt-3 font-black">Nos mandas las dos fotos por WhatsApp y te ayudamos a elegir la talla. Cero enredos.</p>
-    </section>
-  );
-}
-
-function Personalizacion() {
-  const pasos = [
-    "Nos mandas por WhatsApp el color, la forma y una foto de inspiración.",
-    "Revisamos contigo la idea, la talla y los detalles antes de empezar.",
-    "Pintamos tu set a mano y te confirmamos la fecha exacta de envío.",
-  ];
-  return (
-    <section className="mt-8 overflow-hidden border-2 border-foreground bg-card shadow-[var(--shadow-card)]">
-      <div className="bg-secondary px-5 py-4 text-secondary-foreground sm:px-7">
-        <div className="flex items-center gap-3">
-          <Palette className="size-7 shrink-0" aria-hidden="true" />
-          <h3 className="text-2xl font-black">Cómo elegimos tu diseño personalizado</h3>
-        </div>
-      </div>
-      <div className="p-5 sm:p-7">
-        <div className="grid gap-3">
-          {pasos.map((paso, index) => (
-            <div key={paso} className="flex gap-3">
-              <span className="flex size-7 shrink-0 items-center justify-center rounded-full bg-primary text-sm font-black text-primary-foreground">{index + 1}</span>
-              <p className="text-sm leading-relaxed text-foreground">{paso}</p>
-            </div>
-          ))}
-        </div>
-        <div className="mt-6 grid gap-3 sm:grid-cols-2">
-          <div className="border-2 border-primary p-4">
-            <p className="font-black text-primary">Set listo</p>
-            <p className="mt-1 text-sm text-muted-foreground">Escoges entre los disponibles y sale más rápido. Medellín recibe al siguiente día hábil.</p>
-          </div>
-          <div className="border-2 border-sale p-4">
-            <p className="font-black text-sale">Set personalizado</p>
-            <p className="mt-1 text-sm text-muted-foreground">Como se hace a mano, necesita tiempo extra. Te confirmamos la fecha antes de que hagas el pedido.</p>
-          </div>
-        </div>
-        <div className="mt-6 text-center">
-          <CtaButton>Quiero elegir mi diseño</CtaButton>
-          <Garantia />
-        </div>
-      </div>
-    </section>
-  );
-}
-
 function Comentarios() {
   return (
-    <div className="mt-8 grid gap-3 sm:grid-cols-2">
-      {comentarios.map((comentario, index) => (
-        <div key={comentario.user} className={`border-2 border-foreground p-4 ${index % 2 === 0 ? "bg-card" : "bg-blush"}`}>
-          <p className="text-sm font-black text-foreground">@{comentario.user} <span className="text-xs text-primary">✓ Compra verificada</span></p>
-          <p className="mt-2 text-sm leading-relaxed text-muted-foreground">“{comentario.texto}”</p>
+    <div className="mt-8 space-y-3">
+      {comentarios.map((c) => (
+        <div key={c.user} className="rounded-xl border border-border bg-card p-4">
+          <p className="text-sm font-bold text-foreground">
+            {c.user} <span className="ml-1 text-xs text-muted-foreground">· Verificado</span>
+          </p>
+          <p className="mt-1 text-sm leading-relaxed text-muted-foreground">{c.texto}</p>
         </div>
       ))}
     </div>
@@ -423,13 +410,23 @@ function Comentarios() {
 }
 
 function ClientasFelices() {
+  const fotos = [cliente1, cliente2, cliente3];
   return (
-    <section className="mt-20">
-      <p className="text-center text-xs font-black uppercase tracking-widest text-primary">La prueba está en esas manos</p>
-      <h2 className="mx-auto mt-2 max-w-xl text-center text-3xl font-black text-foreground sm:text-5xl">Mira cómo les quedan a nuestras chicas</h2>
-      <div className="mt-7 grid grid-cols-3 gap-2 sm:gap-4">
-        {[cliente1, cliente2, cliente3].map((foto, index) => (
-          <img key={foto} src={foto} alt={`Clienta ${index + 1} mostrando sus uñas Astudillo Nails`} loading="lazy" width={768} height={1024} className={`aspect-[3/4] w-full border-2 border-foreground object-cover ${index === 1 ? "translate-y-4" : ""}`} />
+    <section className="mt-16">
+      <h2 className="text-center text-2xl font-bold text-foreground">
+        Miles de colombianas ya tienen sus uñas listas
+      </h2>
+      <div className="mt-6 grid grid-cols-3 gap-3">
+        {fotos.map((f, i) => (
+          <img
+            key={i}
+            src={f}
+            alt="Clienta de Astudillo Nails mostrando su manicura"
+            loading="lazy"
+            width={768}
+            height={1024}
+            className="aspect-[3/4] w-full rounded-xl object-cover"
+          />
         ))}
       </div>
     </section>
@@ -438,24 +435,51 @@ function ClientasFelices() {
 
 function OfertaFinal() {
   return (
-    <section className="mt-24 overflow-hidden border-2 border-foreground bg-card shadow-[var(--shadow-offer)]">
-      <div className="bg-sale py-2 text-center text-xs font-black uppercase tracking-widest text-sale-foreground">Oferta que provoca aprovechar</div>
-      <div className="grid md:grid-cols-2">
-        <img src={kit} alt="Kit Astudillo Nails con uñas, lima, limpiador y adhesivo" loading="lazy" width={1024} height={1024} className="h-full min-h-80 w-full object-cover" />
-        <div className="flex flex-col justify-center p-6 sm:p-9">
-          <p className="text-sm font-black uppercase tracking-widest text-primary">Todo lo que necesitas</p>
-          <h2 className="mt-2 text-4xl font-black text-foreground">Tu kit Astudillo Nails</h2>
-          <p className="mt-3 text-muted-foreground">20 uñas de gel suave + lima + limpiador + adhesivo. Elige un diseño listo o cuéntanos cómo sueñas el tuyo.</p>
-          <div className="mt-5 flex items-center gap-3">
-            <span className="text-lg text-muted-foreground line-through">$89.900</span>
-            <span className="font-display text-4xl font-black text-sale">$49.900</span>
-          </div>
-          <div className="mt-5"><CtaButton /></div>
-          <Garantia />
-          <div className="mt-5 space-y-2 text-sm font-bold text-foreground">
-            <p className="flex gap-2"><Check className="size-5 text-whatsapp" aria-hidden="true" /> Envío gratis a toda Colombia</p>
-            <p className="flex gap-2"><Check className="size-5 text-whatsapp" aria-hidden="true" /> Pedido fácil por WhatsApp, sin formularios</p>
-          </div>
+    <section className="mt-16 overflow-hidden rounded-3xl border border-border bg-card shadow-xl">
+      <div className="bg-sale py-2 text-center text-xs font-bold uppercase tracking-widest text-sale-foreground">
+        Oferta de lanzamiento
+      </div>
+      <div className="p-6 text-center">
+        <img
+          src={kit}
+          alt="Kit de uñas press on Astudillo Nails con 20 uñas, lima, limpiador y adhesivo"
+          loading="lazy"
+          width={1024}
+          height={1024}
+          className="mx-auto w-full max-w-sm rounded-2xl object-cover"
+        />
+        <h2 className="mt-6 text-2xl font-bold text-foreground">Kit Astudillo Nails</h2>
+        <p className="mt-2 text-sm text-muted-foreground">
+          20 uñas de gel suave + lima + limpiador + adhesivo
+        </p>
+
+        <div className="mt-4 flex items-center justify-center gap-3">
+          <span className="text-lg text-muted-foreground line-through">$89.900</span>
+          <span className="font-display text-4xl font-bold text-sale">$49.900</span>
+        </div>
+
+        <div className="mt-5 flex flex-col items-center gap-2">
+          <p className="text-xs font-bold uppercase tracking-widest text-muted-foreground">
+            La oferta termina en:
+          </p>
+          <Countdown light />
+        </div>
+
+        <div className="mt-6">
+          <CtaButton />
+        </div>
+
+        <div className="mt-6 grid gap-2 text-left text-sm text-muted-foreground">
+          <p>
+            🔥 Riesgo de agotarse: <span className="font-bold text-foreground">alto</span>
+          </p>
+          <p>
+            🚚 Envío: <span className="font-bold text-foreground">gratis a toda Colombia</span>
+          </p>
+          <p>
+            💬 Pides fácil por <span className="font-bold text-foreground">WhatsApp</span>, sin
+            formularios
+          </p>
         </div>
       </div>
     </section>
@@ -464,16 +488,21 @@ function OfertaFinal() {
 
 function Envios() {
   return (
-    <section className="mt-10 bg-primary p-6 text-primary-foreground sm:p-8">
-      <div className="flex items-center gap-3">
-        <HeartHandshake className="size-7" aria-hidden="true" />
-        <h2 className="text-2xl font-black">Te acompañamos hasta que te queden divinas</h2>
-      </div>
-      <ul className="mt-4 space-y-3 text-sm leading-relaxed">
-        <li><strong>Medellín y Área Metropolitana:</strong> tu set estándar llega al siguiente día hábil.</li>
-        <li><strong>Resto del país:</strong> el tiempo depende de la transportadora.</li>
-        <li><strong>Diseño personalizado:</strong> te confirmamos el tiempo de elaboración y la fecha de envío por WhatsApp.</li>
-        <li><strong>¿Dudas?</strong> Escríbenos al 350 371 2704. Te ayudamos con diseño, talla y cambios.</li>
+    <section className="mt-10 rounded-2xl bg-muted p-6">
+      <h2 className="text-lg font-bold text-foreground">Envíos y entregas</h2>
+      <ul className="mt-3 space-y-2 text-sm text-muted-foreground">
+        <li>
+          📍 <span className="font-bold text-foreground">Medellín y Área Metropolitana:</span>{" "}
+          recibes al siguiente día hábil.
+        </li>
+        <li>
+          🇨🇴 <span className="font-bold text-foreground">Resto del país:</span> tiempo de entrega
+          sujeto a la transportadora.
+        </li>
+        <li>
+          💬 ¿Dudas antes de pedir? Escríbenos al WhatsApp{" "}
+          <span className="font-bold text-foreground">350 371 2704</span>.
+        </li>
       </ul>
     </section>
   );
