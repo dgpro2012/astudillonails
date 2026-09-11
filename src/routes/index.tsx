@@ -528,7 +528,7 @@ function CtaRapido() {
         <CtaButton>Quiero mi kit ahora · $49.900</CtaButton>
       </div>
       <p className="mt-3 text-xs text-muted-foreground">
-        🛡️ ¿No te quedan? Te ayudamos a cambiarlas sin costo.
+        🌸 ¿Tienes miedo de no elegir la talla correcta? Usamos tu talla personalizada para que te queden perfectas.
       </p>
     </section>
   );
