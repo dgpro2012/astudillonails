@@ -264,30 +264,38 @@ function Index() {
           {/* Catálogo de lanzamiento */}
           <CatalogoSanValentin />
 
-          {/* Razones */}
+          {/* Razones en pares: 2 beneficios por fila, una imagen por par */}
           <div className="mt-12 space-y-14">
-            {razones.map((r) => (
-              <section key={r.n}>
-                <h2 className="text-xl font-bold text-foreground sm:text-2xl">
-                  {r.n}. {r.emoji} {r.titulo}
-                </h2>
-                <p className="mt-3 leading-relaxed text-muted-foreground">{r.texto}</p>
-
-                {r.grafico ? (
+            {paresRazones.map((par, i) => (
+              <section key={i}>
+                {par.visual === "grafico" ? (
                   <ComparacionPrecios />
                 ) : (
                   <img
-                    src={r.img}
-                    alt={r.titulo}
-                    loading={r.n === 1 ? "eager" : "lazy"}
+                    src={par.img}
+                    alt={par.alt}
+                    loading={i === 0 ? "eager" : "lazy"}
                     width={1024}
-                    height={768}
-                    className="mt-5 w-full rounded-2xl object-cover"
+                    height={640}
+                    className="aspect-[16/10] w-full rounded-2xl object-cover"
                   />
                 )}
 
-                {r.n === 2 && <GaleriaDisenos />}
-                {r.n === 5 && (
+                <div className="mt-5 grid grid-cols-2 gap-4 sm:gap-8">
+                  {par.razones.map((r) => (
+                    <div key={r.n}>
+                      <h2 className="text-sm leading-snug font-bold text-foreground sm:text-xl">
+                        {r.n}. {r.emoji} {r.titulo}
+                      </h2>
+                      <p className="mt-2 text-[13px] leading-relaxed text-muted-foreground sm:text-base">
+                        {r.texto}
+                      </p>
+                    </div>
+                  ))}
+                </div>
+
+                {i === 0 && <GaleriaDisenos />}
+                {i === 2 && (
                   <div className="mt-8 rounded-2xl bg-cream p-6 text-center">
                     <p className="font-display text-lg font-bold text-foreground">
                       Todo el kit por $49.900
@@ -298,7 +306,7 @@ function Index() {
                     <CtaButton />
                   </div>
                 )}
-                {r.n === 10 && <Comentarios />}
+                {i === 4 && <Comentarios />}
               </section>
             ))}
           </div>
