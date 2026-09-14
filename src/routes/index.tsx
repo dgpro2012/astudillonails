@@ -80,13 +80,15 @@ function Countdown({ light = false }: { light?: boolean }) {
 function CtaButton({
   children = "Quiero mis uñas por $49.900 💅",
   className = "",
+  href = WHATSAPP,
 }: {
   children?: React.ReactNode;
   className?: string;
+  href?: string;
 }) {
   return (
     <a
-      href={WHATSAPP}
+      href={href}
       target="_blank"
       rel="noopener noreferrer"
       className={`inline-flex w-full items-center justify-center gap-2 rounded-full bg-whatsapp px-6 py-4 text-center text-base font-bold text-whatsapp-foreground shadow-lg transition hover:brightness-95 sm:w-auto ${className}`}
@@ -267,6 +269,9 @@ function Index() {
 
           {/* CTA rápido above the fold */}
           <CtaRapido />
+
+          {/* Catálogo de lanzamiento */}
+          <CatalogoSanValentin />
 
           {/* Razones */}
           <div className="mt-12 space-y-14">
@@ -520,6 +525,13 @@ function Envios() {
 }
 
 function CtaRapido() {
+  const beneficios = [
+    ["✋", "Hechas a mano", "Por manicuristas de Medellín"],
+    ["🔁", "Reutilizables", "Úsalas una y otra vez"],
+    ["🌸", "Tu talla exacta", "Las ajustamos para ti"],
+    ["🚚", "Envío gratis", "Medellín y Área Metropolitana"],
+  ];
+
   return (
     <section className="mt-8 rounded-3xl border-2 border-dashed border-primary bg-card p-6 text-center shadow-lg">
       <p className="text-xs font-bold uppercase tracking-widest text-sale">Precio de lanzamiento</p>
@@ -531,15 +543,80 @@ function CtaRapido() {
         <span className="font-display text-2xl font-bold text-sale">$49.900</span>{" "}
         con envío gratis en Medellín y Área Metropolitana.
       </p>
-      <p className="mt-2 text-sm text-muted-foreground">
-        ✋ Hechas a mano por las mejores manicuristas de Medellín y 🔁 totalmente
-        reutilizables.
-      </p>
+      <div className="mt-5 grid grid-cols-2 gap-px overflow-hidden rounded-2xl border border-border bg-border sm:grid-cols-4">
+        {beneficios.map(([emoji, titulo, detalle]) => (
+          <div key={titulo} className="bg-cream px-2 py-3">
+            <span className="text-lg" aria-hidden="true">{emoji}</span>
+            <p className="mt-1 text-xs font-bold text-foreground">{titulo}</p>
+            <p className="mt-0.5 text-[10px] leading-tight text-muted-foreground">{detalle}</p>
+          </div>
+        ))}
+      </div>
       <div className="mt-5">
         <CtaButton>Lo quiero ahora · $49.900</CtaButton>
       </div>
-      <p className="mt-3 text-xs text-muted-foreground">
-        🌸 ¿Te preocupa la talla? La personalizamos para que te queden perfectas.
+    </section>
+  );
+}
+
+function CatalogoSanValentin() {
+  const modelos = Array.from({ length: 5 }, (_, index) => {
+    const numero = index + 1;
+    const nombre = `Modelo ${String(numero).padStart(2, "0")}`;
+    return {
+      nombre,
+      href:
+        "https://wa.me/573503712704?text=" +
+        encodeURIComponent(
+          `¡Hola, Astudillo Nails! 💅 Quiero separar el ${nombre} de la edición San Valentín por $49.900.`,
+        ),
+    };
+  });
+
+  return (
+    <section className="mt-12 border-y border-primary/25 py-10">
+      <div className="text-center">
+        <p className="text-xs font-bold uppercase tracking-widest text-sale">
+          Edición de lanzamiento · San Valentín
+        </p>
+        <h2 className="mt-2 text-2xl font-bold text-foreground sm:text-3xl">
+          Cinco diseños listos para enamorarte 💘
+        </h2>
+        <p className="mx-auto mt-3 max-w-xl text-sm leading-relaxed text-muted-foreground">
+          Escoge tu favorito por <span className="font-bold text-foreground">$49.900</span>. Cada
+          set se pinta a mano, se prepara en tu talla y queda listo en 24 horas después de confirmar
+          el pago.
+        </p>
+      </div>
+
+      <div className="mt-7 grid grid-cols-2 gap-3 sm:grid-cols-3">
+        {modelos.map((modelo, index) => (
+          <article
+            key={modelo.nombre}
+            className={`overflow-hidden rounded-2xl border border-border bg-card ${
+              index === modelos.length - 1 ? "col-span-2 sm:col-span-1" : ""
+            }`}
+          >
+            <div className="flex aspect-[4/5] flex-col items-center justify-center bg-blush/50 px-4 text-center">
+              <span className="text-3xl" aria-hidden="true">💅</span>
+              <p className="mt-3 text-sm font-bold text-foreground">Tu foto va aquí</p>
+              <p className="mt-1 text-xs text-muted-foreground">Colección San Valentín</p>
+            </div>
+            <div className="p-3">
+              <div className="flex items-start justify-between gap-2">
+                <h3 className="text-sm font-bold text-foreground">{modelo.nombre}</h3>
+                <span className="text-sm font-bold text-sale">$49.900</span>
+              </div>
+              <CtaButton href={modelo.href} className="mt-3 px-3 py-2 text-xs">
+                Elegir este
+              </CtaButton>
+            </div>
+          </article>
+        ))}
+      </div>
+
+      <p className="mt-5 text-center text-xs text-muted-foreground">
+        Unidades limitadas de lanzamiento · Pide el tuyo directo por WhatsApp
       </p>
     </section>
   );
