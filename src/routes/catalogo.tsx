@@ -106,10 +106,10 @@ function CatalogoContenido() {
                         <p className="mt-2 text-sm font-bold text-sale">{formatoCOP(p.precio)}</p>
                         <button
                           type="button"
-                          onClick={() => agregar(p)}
+                          onClick={() => setSeleccionado(p)}
                           className="mt-3 w-full rounded-full bg-primary px-3 py-2 text-xs font-bold text-primary-foreground transition hover:brightness-95"
                         >
-                          {enCarrito ? `Agregar otro (${enCarrito.cantidad})` : "Agregar al carrito"}
+                          {enCarrito > 0 ? `Agregar otro (${enCarrito})` : "Agregar al carrito"}
                         </button>
                       </div>
                     </article>
