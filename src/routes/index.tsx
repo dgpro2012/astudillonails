@@ -233,9 +233,7 @@ function Index() {
       <main className="mx-auto max-w-3xl px-4">
         {/* Encabezado del artículo */}
         <article className="pt-8">
-          <p className="mb-3 text-xs font-bold uppercase tracking-widest text-primary">
-            Entre amigas · Uñas lindas en casa
-          </p>
+
           <h1 className="text-3xl leading-tight font-bold text-foreground sm:text-4xl">
             10 razones para tener uñas de salón sin volver al salón 💅
           </h1>
