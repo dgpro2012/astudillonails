@@ -146,14 +146,14 @@ const razones = [
     emoji: "🎨",
     titulo: "Te las hace a mano una manicurista de verdad, de Medellín",
     texto:
-      "Estas no salen de una máquina, parce: las pintamos una por una las mejores manicuristas de Medellín. ¿Viste un color, una forma o un diseño que te encantó? Mándanos la idea por WhatsApp y lo hacemos a mano para ti. También puedes escoger uno ya listo del catálogo. Tú sueñas tus uñas y nosotras les damos vida ✨.",
+      "Estas no salen de una máquina: las pintamos una por una las mejores manicuristas de Medellín. ¿Viste un color, una forma o un diseño que te encantó? Mándanos la idea por WhatsApp y lo hacemos a mano para ti. También puedes escoger uno ya listo del catálogo. Tú sueñas tus uñas y nosotras les damos vida ✨.",
   },
   {
     n: 7,
     emoji: "💰",
     titulo: "Te ahorras más de $1.500.000 al año",
     texto:
-      "Haz la cuenta, parce: una visita al salón cuesta entre $60.000 y $120.000. Si vas cada tres semanas, se te van más de $1.500.000 al año. Con un set de $49.900 consigues el mismo efecto y hasta puedes repetir el look.",
+      "Haz la cuenta: una visita al salón cuesta entre $60.000 y $120.000. Si vas cada tres semanas, se te van más de $1.500.000 al año. Con un set de $49.900 consigues el mismo efecto y hasta puedes repetir el look.",
   },
   {
     n: 8,
@@ -167,7 +167,7 @@ const razones = [
     emoji: "🌸",
     titulo: "Perfectas si eres alérgica a la semipermanente o el acrílico",
     texto:
-      "¿Te salió alergia a los químicos de la semipermanente, el acrílico o el gel del salón? Tranquila, parce: estas no van ni un poquito a tu uña natural. Son resistentes, brillan rico, no se pelan a la semana y encima las dejas respirar. Un diseño divino sin maltratar tus uñas.",
+      "¿Te salió alergia a los químicos de la semipermanente, el acrílico o el gel del salón? Tranquila: estas no van ni un poquito a tu uña natural. Son resistentes, brillan rico, no se pelan a la semana y encima las dejas respirar. Un diseño divino sin maltratar tus uñas.",
   },
   {
     n: 10,
@@ -419,7 +419,7 @@ function GaleriaDisenos() {
         Los más bendidos <span className="font-sans" aria-label="producto en tendencia">🔥</span>
       </h3>
       <p className="mt-2 text-sm text-muted-foreground">
-        Los diseños que están volando, parce. Elige tu favorito antes de que se agote.
+        Los diseños que están volando. Elige tu favorito antes de que se agote.
       </p>
       <div className="mt-5 grid grid-cols-3 gap-3">
         {items.map((d) => (
