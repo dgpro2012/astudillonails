@@ -2,6 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useRef, useState } from "react";
 
 import logoAsset from "@/assets/astudillo-logo.png.asset.json";
+import modeloAntojo from "@/assets/modelo-antojo.png.asset.json";
 import razon1 from "@/assets/razon-1.jpg";
 import razon2 from "@/assets/razon-2.jpg";
 import razon3 from "@/assets/razon-3.jpg";
@@ -559,18 +560,29 @@ function CtaRapido() {
 
 function CatalogoSanValentin() {
   const carruselRef = useRef<HTMLDivElement>(null);
-  const modelos = Array.from({ length: 5 }, (_, index) => {
-    const numero = index + 1;
-    const nombre = `Modelo ${String(numero).padStart(2, "0")}`;
-    return {
-      nombre,
-      href:
-        "https://wa.me/573503712704?text=" +
-        encodeURIComponent(
-          `¡Hola, Astudillo Nails! 💅 Quiero separar el ${nombre} de la edición San Valentín por $49.900.`,
-        ),
-    };
-  });
+  const modelos = [
+    {
+      nombre: "Antojo",
+      foto: modeloAntojo.url,
+      alt: "Set de uñas press on Antojo de la edición San Valentín de Astudillo Nails",
+    },
+    ...Array.from({ length: 4 }, (_, index) => {
+      const numero = index + 2;
+      const nombre = `Modelo ${String(numero).padStart(2, "0")}`;
+      return {
+        nombre,
+        foto: null as string | null,
+        alt: nombre,
+      };
+    }),
+  ].map((modelo) => ({
+    ...modelo,
+    href:
+      "https://wa.me/573503712704?text=" +
+      encodeURIComponent(
+        `¡Hola, Astudillo Nails! 💅 Quiero separar el modelo ${modelo.nombre} de la edición San Valentín por $49.900.`,
+      ),
+  }));
 
   return (
     <section className="mt-12 overflow-hidden border-y border-primary/25 py-10">
@@ -600,13 +612,22 @@ function CatalogoSanValentin() {
             key={modelo.nombre}
             className="w-[82%] shrink-0 snap-start overflow-hidden rounded-2xl border border-border bg-card shadow-sm sm:w-[46%]"
           >
-            <div className="flex aspect-[4/5] flex-col items-center justify-center bg-blush/50 px-4 text-center">
-              <span className="rounded-full border border-primary/30 px-3 py-1 text-[10px] font-bold uppercase tracking-widest text-primary">
-                Foto {String(index + 1).padStart(2, "0")}
-              </span>
-              <p className="mt-3 text-sm font-bold text-foreground">Tu foto va aquí</p>
-              <p className="mt-1 text-xs text-muted-foreground">Colección San Valentín</p>
-            </div>
+            {modelo.foto ? (
+              <img
+                src={modelo.foto}
+                alt={modelo.alt}
+                loading="lazy"
+                className="aspect-[4/5] w-full object-cover"
+              />
+            ) : (
+              <div className="flex aspect-[4/5] flex-col items-center justify-center bg-blush/50 px-4 text-center">
+                <span className="rounded-full border border-primary/30 px-3 py-1 text-[10px] font-bold uppercase tracking-widest text-primary">
+                  Foto {String(index + 1).padStart(2, "0")}
+                </span>
+                <p className="mt-3 text-sm font-bold text-foreground">Tu foto va aquí</p>
+                <p className="mt-1 text-xs text-muted-foreground">Colección San Valentín</p>
+              </div>
+            )}
             <div className="p-3">
               <div className="flex items-start justify-between gap-2">
                 <h3 className="text-sm font-bold text-foreground">{modelo.nombre}</h3>
