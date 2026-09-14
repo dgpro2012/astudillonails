@@ -1,9 +1,20 @@
+import { useState } from "react";
 import { createFileRoute, Link } from "@tanstack/react-router";
 
 import logoAsset from "@/assets/astudillo-logo.png.asset.json";
-import { formatoCOP, productos, PRECIO_PERSONALIZADO } from "@/data/productos";
+import { formatoCOP, productos, PRECIO_PERSONALIZADO, type Producto } from "@/data/productos";
 import { CarritoProvider, useCarrito } from "@/components/carrito";
 import { BotonCarrito, CarritoDrawer } from "@/components/CarritoDrawer";
+import { OpcionesModal } from "@/components/OpcionesModal";
+
+const PRODUCTO_PERSONALIZADO: Producto = {
+  id: "personalizado",
+  nombre: "Diseño personalizado",
+  precio: PRECIO_PERSONALIZADO,
+  img: "",
+  coleccion: "Personalizado",
+  descripcion: "Tú mandas la foto y lo pintamos a mano solo para ti.",
+};
 
 export const Route = createFileRoute("/catalogo")({
   head: () => ({
@@ -38,6 +49,7 @@ function CatalogoPage() {
 function CatalogoContenido() {
   const { agregar, items, unidades, abrir } = useCarrito();
   const colecciones = [...new Set(productos.map((p) => p.coleccion))];
+  const [seleccionado, setSeleccionado] = useState<Producto | null>(null);
 
   return (
     <div className="min-h-screen bg-background pb-28">
@@ -72,7 +84,9 @@ function CatalogoContenido() {
               {productos
                 .filter((p) => p.coleccion === coleccion)
                 .map((p) => {
-                  const enCarrito = items.find((i) => i.id === p.id);
+                  const enCarrito = items
+                    .filter((i) => i.id.startsWith(`${p.id}-`))
+                    .reduce((acc, i) => acc + i.cantidad, 0);
                   return (
                     <article
                       key={p.id}
@@ -92,10 +106,10 @@ function CatalogoContenido() {
                         <p className="mt-2 text-sm font-bold text-sale">{formatoCOP(p.precio)}</p>
                         <button
                           type="button"
-                          onClick={() => agregar(p)}
+                          onClick={() => setSeleccionado(p)}
                           className="mt-3 w-full rounded-full bg-primary px-3 py-2 text-xs font-bold text-primary-foreground transition hover:brightness-95"
                         >
-                          {enCarrito ? `Agregar otro (${enCarrito.cantidad})` : "Agregar al carrito"}
+                          {enCarrito > 0 ? `Agregar otro (${enCarrito})` : "Agregar al carrito"}
                         </button>
                       </div>
                     </article>
@@ -106,29 +120,21 @@ function CatalogoContenido() {
         ))}
 
         <section className="mt-12 rounded-3xl border border-dashed border-primary bg-card p-6 text-center">
-          <h2 className="text-xl font-bold text-foreground">
-            ¿Quieres uno hecho a tu gusto? 🎨
-          </h2>
+          <h2 className="text-xl font-bold text-foreground">¿Quieres uno hecho a tu gusto? 🎨</h2>
           <p className="mx-auto mt-2 max-w-lg text-sm text-muted-foreground">
-            Nos cuentas el color, la forma o nos mandas una foto y lo pintamos a mano solo para ti.
-            Queda listo en 48 horas después de confirmar el pago.
+            Súbenos la foto del diseño que te encantó, eliges talla y forma, y lo pintamos a mano
+            solo para ti. Queda listo en 48 horas después de confirmar el pago.
           </p>
           <p className="mt-3 font-display text-3xl font-bold text-sale">
             {formatoCOP(PRECIO_PERSONALIZADO)}
           </p>
-          <a
-            href={
-              "https://wa.me/573503712704?text=" +
-              encodeURIComponent(
-                "¡Hola, Astudillo Nails! 💅 Quiero un diseño personalizado por $59.900. Te cuento la idea:",
-              )
-            }
-            target="_blank"
-            rel="noopener noreferrer"
-            className="mt-4 inline-flex rounded-full bg-whatsapp px-6 py-3 text-sm font-bold text-whatsapp-foreground shadow-lg"
+          <button
+            type="button"
+            onClick={() => setSeleccionado(PRODUCTO_PERSONALIZADO)}
+            className="mt-4 inline-flex rounded-full bg-primary px-6 py-3 text-sm font-bold text-primary-foreground shadow-lg transition hover:brightness-95"
           >
-            Cuéntanos tu idea por WhatsApp
-          </a>
+            Subir mi foto y agregar al carrito 📸
+          </button>
         </section>
 
         <p className="mt-10 text-center text-sm text-muted-foreground">
@@ -159,6 +165,18 @@ function CatalogoContenido() {
           </button>
         </div>
       </div>
+
+      {seleccionado && (
+        <OpcionesModal
+          producto={seleccionado}
+          personalizado={seleccionado.id === "personalizado"}
+          onCerrar={() => setSeleccionado(null)}
+          onAgregar={(opciones) => {
+            agregar(seleccionado, opciones);
+            setSeleccionado(null);
+          }}
+        />
+      )}
 
       <CarritoDrawer />
     </div>

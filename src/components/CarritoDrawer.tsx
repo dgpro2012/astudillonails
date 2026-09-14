@@ -76,12 +76,18 @@ export function CarritoDrawer() {
             <ul className="space-y-4">
               {items.map((i) => (
                 <li key={i.id} className="flex gap-3 rounded-2xl border border-border p-3">
-                  <img
-                    src={i.img}
-                    alt={i.nombre}
-                    loading="lazy"
-                    className="size-20 shrink-0 rounded-xl object-cover"
-                  />
+                  {i.img ? (
+                    <img
+                      src={i.img}
+                      alt={i.nombre}
+                      loading="lazy"
+                      className="size-20 shrink-0 rounded-xl object-cover"
+                    />
+                  ) : (
+                    <div className="flex size-20 shrink-0 items-center justify-center rounded-xl bg-muted text-2xl">
+                      🎨
+                    </div>
+                  )}
                   <div className="flex-1">
                     <div className="flex items-start justify-between gap-2">
                       <p className="text-sm font-bold text-foreground">{i.nombre}</p>
@@ -94,6 +100,12 @@ export function CarritoDrawer() {
                         Quitar
                       </button>
                     </div>
+                    <p className="mt-0.5 text-[11px] text-muted-foreground">
+                      Talla {i.tamano} · {i.forma}
+                    </p>
+                    {i.referencia && (
+                      <p className="text-[11px] text-muted-foreground">📸 {i.referencia}</p>
+                    )}
                     <p className="mt-1 text-sm font-bold text-sale">{formatoCOP(i.precio)}</p>
                     <div className="mt-2 flex items-center gap-3">
                       <button

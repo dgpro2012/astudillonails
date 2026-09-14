@@ -10,12 +10,24 @@ import {
 
 import { formatoCOP, type Producto } from "@/data/productos";
 
+export type Tamano = "S" | "M" | "L" | "XL";
+export type Forma = "Almendra" | "Cuadrada" | "Stileto" | "Coffin";
+
+export type OpcionesItem = {
+  tamano: Tamano;
+  forma: Forma;
+  referencia?: string;
+};
+
 export type ItemCarrito = {
   id: string;
   nombre: string;
   precio: number;
   img: string;
   cantidad: number;
+  tamano: Tamano;
+  forma: Forma;
+  referencia?: string;
 };
 
 type CarritoCtx = {
@@ -25,7 +37,7 @@ type CarritoCtx = {
   abierto: boolean;
   abrir: () => void;
   cerrar: () => void;
-  agregar: (p: Producto) => void;
+  agregar: (p: Producto, opciones: OpcionesItem) => void;
   quitar: (id: string) => void;
   cambiarCantidad: (id: string, delta: number) => void;
   vaciar: () => void;
@@ -55,13 +67,28 @@ export function CarritoProvider({ children }: { children: ReactNode }) {
     }
   }, [items]);
 
-  const agregar = useCallback((p: Producto) => {
+  const agregar = useCallback((p: Producto, opciones: OpcionesItem) => {
+    const id = `${p.id}-${opciones.tamano}-${opciones.forma}${
+      opciones.referencia ? "-" + Date.now() : ""
+    }`;
     setItems((prev) => {
-      const existe = prev.find((i) => i.id === p.id);
+      const existe = prev.find((i) => i.id === id);
       if (existe) {
-        return prev.map((i) => (i.id === p.id ? { ...i, cantidad: i.cantidad + 1 } : i));
+        return prev.map((i) => (i.id === id ? { ...i, cantidad: i.cantidad + 1 } : i));
       }
-      return [...prev, { id: p.id, nombre: p.nombre, precio: p.precio, img: p.img, cantidad: 1 }];
+      return [
+        ...prev,
+        {
+          id,
+          nombre: p.nombre,
+          precio: p.precio,
+          img: p.img,
+          cantidad: 1,
+          tamano: opciones.tamano,
+          forma: opciones.forma,
+          ...(opciones.referencia ? { referencia: opciones.referencia } : {}),
+        },
+      ];
     });
     setAbierto(true);
   }, []);
@@ -106,10 +133,18 @@ export function useCarrito() {
 
 export function mensajeWhatsApp(items: ItemCarrito[], total: number) {
   const lineas = items
-    .map((i) => `• ${i.cantidad} x ${i.nombre} — ${formatoCOP(i.precio * i.cantidad)}`)
+    .map(
+      (i) =>
+        `• ${i.cantidad} x ${i.nombre} — talla ${i.tamano}, forma ${i.forma} — ${formatoCOP(
+          i.precio * i.cantidad,
+        )}${i.referencia ? `\n   (Foto de referencia: ${i.referencia} — te la envío en este chat)` : ""}`,
+    )
     .join("\n");
+  const hayReferencia = items.some((i) => i.referencia);
   const texto =
     `¡Hola, Astudillo Nails! 💅 Quiero pedir esto:\n\n${lineas}\n\n` +
-    `Total: ${formatoCOP(total)}\n\n¿Me ayudas a confirmar mi talla y el envío?`;
+    `Total: ${formatoCOP(total)}\n\n` +
+    (hayReferencia ? "Ya te mando la foto de referencia por aquí 📸\n\n" : "") +
+    `¿Me ayudas a confirmar mi pedido y el envío?`;
   return "https://wa.me/573503712704?text=" + encodeURIComponent(texto);
 }
