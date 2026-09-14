@@ -11,8 +11,9 @@ import razon1 from "@/assets/razon-1.png";
 import razon3 from "@/assets/razon-3.jpg";
 import razon5 from "@/assets/razon-5.jpg";
 import kit from "@/assets/kit.jpg";
-import diseno1 from "@/assets/diseno-1.jpg";
-import diseno2 from "@/assets/diseno-2.jpg";
+import disenoCareyDorado from "@/assets/diseno-carey-dorado.png.asset.json";
+import disenoMentaBrillante from "@/assets/diseno-menta-brillante.png.asset.json";
+import disenoPerlaFrancesa from "@/assets/diseno-perla-francesa.png.asset.json";
 import diseno3 from "@/assets/diseno-3.jpg";
 import cliente1 from "@/assets/cliente-1.jpg";
 import cliente2 from "@/assets/cliente-2.jpg";
@@ -408,15 +409,15 @@ function ComparacionPrecios() {
 
 function GaleriaDisenos() {
   const items = [
-    { img: diseno1, nombre: "French Clásico · Short Round" },
-    { img: diseno2, nombre: "Nude Rosé · Short Square" },
-    { img: diseno3, nombre: "Chocolate · Medium Almond" },
+    { img: disenoCareyDorado.url, nombre: "Carey Dorado" },
+    { img: disenoMentaBrillante.url, nombre: "Menta Brillante" },
+    { img: disenoPerlaFrancesa.url, nombre: "Perla Francesa" },
   ];
   return (
     <div className="mt-8 rounded-2xl bg-muted p-6">
-      <h3 className="text-lg font-bold text-foreground">Mira estos diseños tan divinos</h3>
+      <h3 className="text-2xl font-bold text-foreground">Los más vendidos 🔥</h3>
       <p className="mt-2 text-sm text-muted-foreground">
-        Hay nudes para todos los días, french para una ocasión especial y tonos intensos para cuando quieras robarte las miradas.
+        Los diseños que están volando, parce. Elige tu favorito antes de que se agote.
       </p>
       <div className="mt-5 grid grid-cols-3 gap-3">
         {items.map((d) => (
