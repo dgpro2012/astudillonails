@@ -415,7 +415,9 @@ function GaleriaDisenos() {
   ];
   return (
     <div className="mt-8 rounded-2xl bg-muted p-6">
-      <h3 className="text-2xl font-bold text-foreground">Los más vendidos 🔥</h3>
+      <h3 className="text-2xl font-bold text-foreground">
+        Los más bendidos <span className="font-sans" aria-label="producto en tendencia">🔥</span>
+      </h3>
       <p className="mt-2 text-sm text-muted-foreground">
         Los diseños que están volando, parce. Elige tu favorito antes de que se agote.
       </p>
