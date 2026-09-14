@@ -143,9 +143,9 @@ const razones = [
   {
     n: 6,
     emoji: "🎨",
-    titulo: "Te hacemos el diseño que tienes en la cabeza",
+    titulo: "Te las hace a mano una manicurista de verdad, de Medellín",
     texto:
-      "¿Viste un color, una forma o un diseño que te encantó? Mándanos la idea por WhatsApp y lo hacemos a mano para ti. También puedes escoger uno ya listo del catálogo. Tú sueñas tus uñas y nosotras les damos vida ✨.",
+      "Estas no salen de una máquina, parce: las pintamos una por una las mejores manicuristas de Medellín. ¿Viste un color, una forma o un diseño que te encantó? Mándanos la idea por WhatsApp y lo hacemos a mano para ti. También puedes escoger uno ya listo del catálogo. Tú sueñas tus uñas y nosotras les damos vida ✨.",
     img: razon6,
   },
   {
@@ -530,6 +530,10 @@ function CtaRapido() {
         Pide tu kit Astudillo Nails por solo{" "}
         <span className="font-display text-2xl font-bold text-sale">$49.900</span>{" "}
         con envío gratis en Medellín y Área Metropolitana.
+      </p>
+      <p className="mt-2 text-sm text-muted-foreground">
+        ✋ Hechas a mano por las mejores manicuristas de Medellín y 🔁 totalmente
+        reutilizables.
       </p>
       <div className="mt-5">
         <CtaButton>Lo quiero ahora · $49.900</CtaButton>
