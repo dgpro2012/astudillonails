@@ -314,7 +314,7 @@ function Index() {
                   />
                 )}
 
-                <div className="mt-5 grid grid-cols-2 gap-4 sm:gap-8">
+                <div className="mt-5 grid grid-cols-2 gap-x-5 gap-y-2 sm:gap-x-10">
                   {razones
                     .filter((r) => par.nums.includes(r.n))
                     .map((r) => (
