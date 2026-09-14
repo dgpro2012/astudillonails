@@ -111,7 +111,6 @@ const razones = [
     titulo: "Parecen recién salidas del salón, pero sin cita",
     texto:
       "Amiga, ese brillo espejo y esa forma perfecta no tienen nada que envidiarle a una manicura de $150.000. Te las pones tranquila en casa, cuando quieras, sin esperar turno ni dejar medio sueldo en el salón.",
-    img: razon1,
   },
   {
     n: 2,
@@ -119,7 +118,6 @@ const razones = [
     titulo: "Quedas lista en solo 7 minutos",
     texto:
       "¿Vas tarde para una cita, una salida o el trabajo? Fresca: el kit trae 10 uñas, lima, limpiador y adhesivo. Limpias, pegas, presionas y quedas divina. Sin lámpara UV, sin desorden y sin tener que saber de manicura.",
-    img: razon2,
   },
   {
     n: 3,
@@ -127,7 +125,6 @@ const razones = [
     titulo: "Te duran más de 2 semanas, de verdad",
     texto:
       "Estas uñas sí se quedan en su sitio. El gel flexible se adapta a tu uña natural y aguanta mientras escribes, cocinas, entrenas o te vas de paseo. Más de dos semanas con el brillo intacto y sin dramas.",
-    img: razon3,
   },
   {
     n: 4,
@@ -135,7 +132,6 @@ const razones = [
     titulo: "Las puedes usar una y otra vez",
     texto:
       "Lo más bacano es que tu set favorito no se pierde después de una sola puesta. Si las retiras y las cuidas bien, puedes volver a usarlas varias veces. Pagas una vez y les sacas todo el jugo.",
-    img: diseno2,
   },
   {
     n: 5,
@@ -143,7 +139,6 @@ const razones = [
     titulo: "Tus uñas naturales siguen sanitas",
     texto:
       "Nada de pulidores, limas eléctricas ni removedores agresivos. Se ponen suavemente y se retiran con agua tibia, así que tus uñas quedan sanas, bonitas y sin arrepentimientos.",
-    img: razon5,
   },
   {
     n: 6,
@@ -151,7 +146,6 @@ const razones = [
     titulo: "Te las hace a mano una manicurista de verdad, de Medellín",
     texto:
       "Estas no salen de una máquina, parce: las pintamos una por una las mejores manicuristas de Medellín. ¿Viste un color, una forma o un diseño que te encantó? Mándanos la idea por WhatsApp y lo hacemos a mano para ti. También puedes escoger uno ya listo del catálogo. Tú sueñas tus uñas y nosotras les damos vida ✨.",
-    img: razon6,
   },
   {
     n: 7,
@@ -159,7 +153,6 @@ const razones = [
     titulo: "Te ahorras más de $1.500.000 al año",
     texto:
       "Haz la cuenta, parce: una visita al salón cuesta entre $60.000 y $120.000. Si vas cada tres semanas, se te van más de $1.500.000 al año. Con un set de $49.900 consigues el mismo efecto y hasta puedes repetir el look.",
-    grafico: true,
   },
   {
     n: 8,
@@ -167,7 +160,6 @@ const razones = [
     titulo: "Bonitas contigo y también con los animales",
     texto:
       "Son veganas, libres de pruebas en animales y sin esos químicos agresivos que maltratan tu uña natural. Te las pones tranquila y disfrutas tus manos lindas, como debe ser.",
-    img: diseno1,
   },
   {
     n: 9,
@@ -175,7 +167,6 @@ const razones = [
     titulo: "Perfectas si eres alérgica a la semipermanente o el acrílico",
     texto:
       "¿Te salió alergia a los químicos de la semipermanente, el acrílico o el gel del salón? Tranquila, parce: estas no van ni un poquito a tu uña natural. Son resistentes, brillan rico, no se pelan a la semana y encima las dejas respirar. Un diseño divino sin maltratar tus uñas.",
-    img: diseno3,
   },
   {
     n: 10,
@@ -183,7 +174,6 @@ const razones = [
     titulo: "Cada vez más colombianas dicen: chao, salón",
     texto:
       "Mujeres de Medellín, Bogotá, Cali, Barranquilla y todo el país ya cambiaron horas en el salón por 7 minutos en casa. Porque tener las manos lindas cuando te provoque es otro nivel.",
-    img: cliente1,
   },
 ];
 
