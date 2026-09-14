@@ -499,7 +499,7 @@ function OfertaFinal() {
         />
         <h2 className="mt-6 text-2xl font-bold text-foreground">Tu kit Astudillo Nails</h2>
         <p className="mt-2 text-sm text-muted-foreground">
-          Todo lo que necesitas: 10 uñas de gel suave + lima + limpiador + adhesivo
+          Todo lo que necesitas: 10 uñas press on + lima + limpiador + adhesivo
         </p>
         <p className="mt-3 text-sm text-muted-foreground">
           ✋ Hechas a mano por las mejores manicuristas de Medellín · 🔁 Totalmente
