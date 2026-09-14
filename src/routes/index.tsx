@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 import logoAsset from "@/assets/astudillo-logo.png.asset.json";
 import razon1 from "@/assets/razon-1.jpg";
@@ -560,6 +560,7 @@ function CtaRapido() {
 }
 
 function CatalogoSanValentin() {
+  const carruselRef = useRef<HTMLDivElement>(null);
   const modelos = Array.from({ length: 5 }, (_, index) => {
     const numero = index + 1;
     const nombre = `Modelo ${String(numero).padStart(2, "0")}`;
@@ -574,14 +575,15 @@ function CatalogoSanValentin() {
   });
 
   return (
-    <section className="mt-12 border-y border-primary/25 py-10">
+    <section className="mt-12 overflow-hidden border-y border-primary/25 py-10">
       <div className="text-center">
-        <p className="text-xs font-bold uppercase tracking-widest text-sale">
-          Edición de lanzamiento · San Valentín
-        </p>
-        <h2 className="mt-2 text-2xl font-bold text-foreground sm:text-3xl">
-          Cinco diseños listos para enamorarte 💘
+        <p className="text-xs font-bold uppercase tracking-widest text-sale">Colección limitada</p>
+        <h2 className="mt-2 text-3xl font-bold text-primary sm:text-4xl">
+          Edición de lanzamiento: San Valentín 💘
         </h2>
+        <p className="mt-2 font-display text-lg font-bold text-foreground">
+          Cinco diseños listos para enamorarte
+        </p>
         <p className="mx-auto mt-3 max-w-xl text-sm leading-relaxed text-muted-foreground">
           Escoge tu favorito por <span className="font-bold text-foreground">$49.900</span>. Cada
           set se pinta a mano, se prepara en tu talla y queda listo en 24 horas después de confirmar
@@ -589,13 +591,16 @@ function CatalogoSanValentin() {
         </p>
       </div>
 
-      <div className="mt-7 grid grid-cols-2 gap-3 sm:grid-cols-3">
+      <div className="relative mt-7">
+        <div
+          ref={carruselRef}
+          className="catalogo-carrusel flex snap-x snap-mandatory gap-3 overflow-x-auto pb-3 pr-[18%]"
+          aria-label="Modelos de la edición San Valentín"
+        >
         {modelos.map((modelo, index) => (
           <article
             key={modelo.nombre}
-            className={`overflow-hidden rounded-2xl border border-border bg-card ${
-              index === modelos.length - 1 ? "col-span-2 sm:col-span-1" : ""
-            }`}
+            className="w-[82%] shrink-0 snap-start overflow-hidden rounded-2xl border border-border bg-card shadow-sm sm:w-[46%]"
           >
             <div className="flex aspect-[4/5] flex-col items-center justify-center bg-blush/50 px-4 text-center">
               <span className="rounded-full border border-primary/30 px-3 py-1 text-[10px] font-bold uppercase tracking-widest text-primary">
@@ -615,6 +620,30 @@ function CatalogoSanValentin() {
             </div>
           </article>
         ))}
+        </div>
+
+        <button
+          type="button"
+          aria-label="Ver el siguiente diseño"
+          onClick={() =>
+            carruselRef.current?.scrollBy({
+              left: carruselRef.current.clientWidth * 0.82,
+              behavior: "smooth",
+            })
+          }
+          className="absolute top-[38%] right-2 z-10 flex size-12 items-center justify-center rounded-full border-2 border-card bg-primary text-2xl font-bold text-primary-foreground shadow-xl transition hover:scale-105"
+        >
+          <span aria-hidden="true">→</span>
+        </button>
+
+        <div className="pointer-events-none absolute top-[31%] right-[18%] z-10 flex flex-col items-center text-primary sm:right-[12%]">
+          <span className="catalogo-swipe-hand text-3xl drop-shadow-md" aria-hidden="true">
+            👆
+          </span>
+          <span className="mt-1 rounded-full bg-primary px-2 py-1 text-[10px] font-bold uppercase text-primary-foreground shadow-md">
+            Desliza
+          </span>
+        </div>
       </div>
 
       <p className="mt-5 text-center text-xs text-muted-foreground">
