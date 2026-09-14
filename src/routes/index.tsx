@@ -1,4 +1,4 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect, useRef, useState } from "react";
 
 import logoAsset from "@/assets/astudillo-logo.png.asset.json";
@@ -44,12 +44,6 @@ export const Route = createFileRoute("/")({
   component: Index,
 });
 
-const WHATSAPP =
-  "https://wa.me/573503712704?text=" +
-  encodeURIComponent(
-    "¡Hola, Astudillo Nails! 💅 Quiero pedir mi kit de uñas press on de $49.900. ¿Me ayudan a elegir?",
-  );
-
 function useCountdown(seconds: number) {
   const [left, setLeft] = useState(seconds);
   useEffect(() => {
@@ -82,26 +76,20 @@ function Countdown({ light = false }: { light?: boolean }) {
 }
 
 function CtaButton({
-  children = "Quiero mis uñas por $49.900 💅",
+  children = "Ir al catálogo 💅",
   className = "",
-  href = WHATSAPP,
 }: {
   children?: React.ReactNode;
   className?: string;
-  href?: string;
 }) {
   return (
-    <a
-      href={href}
-      target="_blank"
-      rel="noopener noreferrer"
-      className={`inline-flex w-full items-center justify-center gap-2 rounded-full bg-whatsapp px-6 py-4 text-center text-base font-bold text-whatsapp-foreground shadow-lg transition hover:brightness-95 sm:w-auto ${className}`}
+    <Link
+      to="/catalogo"
+      className={`inline-flex w-full items-center justify-center gap-2 rounded-full bg-primary px-6 py-4 text-center text-base font-bold text-primary-foreground shadow-lg transition hover:brightness-95 sm:w-auto ${className}`}
     >
-      <svg viewBox="0 0 24 24" fill="currentColor" className="size-5" aria-hidden="true">
-        <path d="M17.5 14.4c-.3-.2-1.7-.9-2-1-.3-.1-.5-.2-.7.2s-.8 1-.9 1.1c-.2.2-.3.2-.6.1-.3-.2-1.3-.5-2.4-1.5-.9-.8-1.5-1.8-1.6-2.1-.2-.3 0-.5.1-.6l.5-.6c.2-.2.2-.3.3-.5.1-.2 0-.4 0-.6l-.9-2.1c-.2-.5-.5-.5-.7-.5h-.6c-.2 0-.6.1-.8.4-.3.3-1.1 1-1.1 2.5s1.1 2.9 1.2 3.1c.2.2 2.2 3.4 5.3 4.7.7.3 1.3.5 1.8.6.7.2 1.4.2 1.9.1.6-.1 1.7-.7 2-1.4.2-.7.2-1.2.2-1.4-.1-.1-.3-.2-.6-.4M12 21.8c-1.7 0-3.4-.5-4.9-1.4l-.3-.2-3.6.9 1-3.5-.2-.4A9.7 9.7 0 1 1 12 21.8M12 2A10 10 0 0 0 3.3 17L2 22l5.2-1.4A10 10 0 1 0 12 2" />
-      </svg>
+      <span aria-hidden="true">🛒</span>
       {children}
-    </a>
+    </Link>
   );
 }
 
@@ -370,7 +358,7 @@ function Index() {
               <span className="font-bold text-sale">$49.900</span>
             </p>
           </div>
-          <CtaButton className="flex-1">Pedir por WhatsApp · $49.900</CtaButton>
+          <CtaButton className="flex-1">Ir al catálogo · $49.900</CtaButton>
         </div>
       </div>
     </div>
@@ -530,8 +518,8 @@ function OfertaFinal() {
              🚚 <span className="font-bold text-foreground">Envío gratis en Medellín y Área Metropolitana</span> · Al resto de Colombia va por transportadora
           </p>
           <p>
-             💬 Lo pides por <span className="font-bold text-foreground">WhatsApp</span>, sin
-             formularios ni vueltas raras
+             💬 Eliges en el catálogo y nos mandas el pedido por{" "}
+             <span className="font-bold text-foreground">WhatsApp</span>, sin formularios
           </p>
         </div>
       </div>
@@ -590,7 +578,7 @@ function CtaRapido() {
         ))}
       </div>
       <div className="mt-5">
-        <CtaButton>Lo quiero ahora · $49.900</CtaButton>
+        <CtaButton>Ver el catálogo · $49.900</CtaButton>
       </div>
     </section>
   );
@@ -624,14 +612,7 @@ function CatalogoSanValentin() {
       foto: modeloCacheton.url,
       alt: "Set de uñas press on Cachetón de la edición San Valentín de Astudillo Nails",
     },
-  ].map((modelo) => ({
-    ...modelo,
-    href:
-      "https://wa.me/573503712704?text=" +
-      encodeURIComponent(
-        `¡Hola, Astudillo Nails! 💅 Quiero separar el modelo ${modelo.nombre} de la edición San Valentín por $49.900.`,
-      ),
-  }));
+  ];
 
   return (
     <section className="mt-12 overflow-hidden border-y border-primary/25 py-10">
@@ -682,9 +663,7 @@ function CatalogoSanValentin() {
                 <h3 className="text-sm font-bold text-foreground">{modelo.nombre}</h3>
                 <span className="text-sm font-bold text-sale">$49.900</span>
               </div>
-              <CtaButton href={modelo.href} className="mt-3 px-3 py-2 text-xs">
-                Elegir este
-              </CtaButton>
+              <CtaButton className="mt-3 px-3 py-2 text-xs">Elegir este</CtaButton>
             </div>
           </article>
         ))}
@@ -715,7 +694,7 @@ function CatalogoSanValentin() {
       </div>
 
       <p className="mt-5 text-center text-xs text-muted-foreground">
-        Unidades limitadas de lanzamiento · Pide el tuyo directo por WhatsApp
+        Unidades limitadas de lanzamiento · Elige los tuyos en el catálogo
       </p>
     </section>
   );
@@ -781,7 +760,7 @@ function DisenoPersonalizado() {
       </div>
 
       <div className="mt-6 text-center">
-        <CtaButton>Quiero uno hecho para mí · $59.900</CtaButton>
+        <CtaButton>Ir al catálogo y elegir</CtaButton>
       </div>
     </section>
   );
