@@ -178,28 +178,33 @@ const razones = [
 ];
 
 // De a 2 razones por fila, compartiendo una sola imagen por par
-const paresRazones = [
+const paresRazones: {
+  nums: [number, number];
+  img?: string;
+  alt?: string;
+  visual?: string;
+}[] = [
   {
-    razones: [razones[0], razones[1]],
+    nums: [1, 2],
     img: razon1,
     alt: "Uñas press on con acabado de salón de Astudillo Nails",
   },
   {
-    razones: [razones[2], razones[3]],
+    nums: [3, 4],
     img: razon3,
     alt: "Uñas press on resistentes de larga duración de Astudillo Nails",
   },
   {
-    razones: [razones[4], razones[5]],
+    nums: [5, 6],
     img: razon5,
     alt: "Uñas naturales sanas con press on de Astudillo Nails",
   },
   {
-    razones: [razones[6], razones[7]],
+    nums: [7, 8],
     visual: "grafico",
   },
   {
-    razones: [razones[8], razones[9]],
+    nums: [9, 10],
     img: diseno3,
     alt: "Diseño de uñas press on apto para piel alérgica, de Astudillo Nails",
   },
@@ -310,16 +315,18 @@ function Index() {
                 )}
 
                 <div className="mt-5 grid grid-cols-2 gap-4 sm:gap-8">
-                  {par.razones.map((r) => (
-                    <div key={r.n}>
-                      <h2 className="text-sm leading-snug font-bold text-foreground sm:text-xl">
-                        {r.n}. {r.emoji} {r.titulo}
-                      </h2>
-                      <p className="mt-2 text-[13px] leading-relaxed text-muted-foreground sm:text-base">
-                        {r.texto}
-                      </p>
-                    </div>
-                  ))}
+                  {razones
+                    .filter((r) => par.nums.includes(r.n))
+                    .map((r) => (
+                      <div key={r.n}>
+                        <h2 className="text-sm leading-snug font-bold text-foreground sm:text-xl">
+                          {r.n}. {r.emoji} {r.titulo}
+                        </h2>
+                        <p className="mt-2 text-[13px] leading-relaxed text-muted-foreground sm:text-base">
+                          {r.texto}
+                        </p>
+                      </div>
+                    ))}
                 </div>
 
                 {i === 0 && <GaleriaDisenos />}
