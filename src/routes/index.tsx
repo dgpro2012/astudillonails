@@ -560,18 +560,29 @@ function CtaRapido() {
 
 function CatalogoSanValentin() {
   const carruselRef = useRef<HTMLDivElement>(null);
-  const modelos = Array.from({ length: 5 }, (_, index) => {
-    const numero = index + 1;
-    const nombre = `Modelo ${String(numero).padStart(2, "0")}`;
-    return {
-      nombre,
-      href:
-        "https://wa.me/573503712704?text=" +
-        encodeURIComponent(
-          `¡Hola, Astudillo Nails! 💅 Quiero separar el ${nombre} de la edición San Valentín por $49.900.`,
-        ),
-    };
-  });
+  const modelos = [
+    {
+      nombre: "Antojo",
+      foto: modeloAntojo.url,
+      alt: "Set de uñas press on Antojo de la edición San Valentín de Astudillo Nails",
+    },
+    ...Array.from({ length: 4 }, (_, index) => {
+      const numero = index + 2;
+      const nombre = `Modelo ${String(numero).padStart(2, "0")}`;
+      return {
+        nombre,
+        foto: null as string | null,
+        alt: nombre,
+      };
+    }),
+  ].map((modelo) => ({
+    ...modelo,
+    href:
+      "https://wa.me/573503712704?text=" +
+      encodeURIComponent(
+        `¡Hola, Astudillo Nails! 💅 Quiero separar el modelo ${modelo.nombre} de la edición San Valentín por $49.900.`,
+      ),
+  }));
 
   return (
     <section className="mt-12 overflow-hidden border-y border-primary/25 py-10">
