@@ -3,6 +3,7 @@ import { useEffect, useRef, useState } from "react";
 
 import logoAsset from "@/assets/astudillo-logo.png.asset.json";
 import modeloAntojo from "@/assets/modelo-antojo.png.asset.json";
+import modeloFlechazo from "@/assets/modelo-flechazo.png.asset.json";
 import modeloLatido from "@/assets/modelo-latido.png.asset.json";
 import razon1 from "@/assets/razon-1.jpg";
 import razon2 from "@/assets/razon-2.jpg";
@@ -572,8 +573,13 @@ function CatalogoSanValentin() {
       foto: modeloLatido.url,
       alt: "Set de uñas press on Latido de la edición San Valentín de Astudillo Nails",
     },
-    ...Array.from({ length: 3 }, (_, index) => {
-      const numero = index + 3;
+    {
+      nombre: "Flechazo",
+      foto: modeloFlechazo.url,
+      alt: "Set de uñas press on Flechazo de la edición San Valentín de Astudillo Nails",
+    },
+    ...Array.from({ length: 2 }, (_, index) => {
+      const numero = index + 4;
       const nombre = `Modelo ${String(numero).padStart(2, "0")}`;
       return {
         nombre,
