@@ -598,7 +598,9 @@ function CatalogoSanValentin() {
             }`}
           >
             <div className="flex aspect-[4/5] flex-col items-center justify-center bg-blush/50 px-4 text-center">
-              <span className="text-3xl" aria-hidden="true">💅</span>
+              <span className="rounded-full border border-primary/30 px-3 py-1 text-[10px] font-bold uppercase tracking-widest text-primary">
+                Foto {String(index + 1).padStart(2, "0")}
+              </span>
               <p className="mt-3 text-sm font-bold text-foreground">Tu foto va aquí</p>
               <p className="mt-1 text-xs text-muted-foreground">Colección San Valentín</p>
             </div>
