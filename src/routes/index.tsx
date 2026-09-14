@@ -113,7 +113,7 @@ const razones = [
     emoji: "⏰",
     titulo: "Quedas lista en solo 7 minutos",
     texto:
-      "¿Vas tarde para una cita, una salida o el trabajo? Fresca: el kit trae 20 uñas, lima, limpiador y adhesivo. Limpias, pegas, presionas y quedas divina. Sin lámpara UV, sin desorden y sin tener que saber de manicura.",
+      "¿Vas tarde para una cita, una salida o el trabajo? Fresca: el kit trae 10 uñas, lima, limpiador y adhesivo. Limpias, pegas, presionas y quedas divina. Sin lámpara UV, sin desorden y sin tener que saber de manicura.",
     img: razon2,
   },
   {
@@ -143,9 +143,9 @@ const razones = [
   {
     n: 6,
     emoji: "🎨",
-    titulo: "Te hacemos el diseño que tienes en la cabeza",
+    titulo: "Te las hace a mano una manicurista de verdad, de Medellín",
     texto:
-      "¿Viste un color, una forma o un diseño que te encantó? Mándanos la idea por WhatsApp y lo hacemos a mano para ti. También puedes escoger uno ya listo del catálogo. Tú sueñas tus uñas y nosotras les damos vida ✨.",
+      "Estas no salen de una máquina, parce: las pintamos una por una las mejores manicuristas de Medellín. ¿Viste un color, una forma o un diseño que te encantó? Mándanos la idea por WhatsApp y lo hacemos a mano para ti. También puedes escoger uno ya listo del catálogo. Tú sueñas tus uñas y nosotras les damos vida ✨.",
     img: razon6,
   },
   {
@@ -297,7 +297,7 @@ function Index() {
                       Todo el kit por $49.900
                     </p>
                     <p className="mt-1 mb-4 text-sm text-muted-foreground">
-                      Te llegan 20 uñas + lima + limpiador + adhesivo
+                      Te llegan 10 uñas + lima + limpiador + adhesivo
                     </p>
                     <CtaButton />
                   </div>
@@ -449,7 +449,7 @@ function OfertaFinal() {
       <div className="p-6 text-center">
         <img
           src={kit}
-          alt="Kit de uñas press on Astudillo Nails con 20 uñas, lima, limpiador y adhesivo"
+          alt="Kit de uñas press on Astudillo Nails con 10 uñas, lima, limpiador y adhesivo"
           loading="lazy"
           width={1024}
           height={1024}
@@ -457,7 +457,11 @@ function OfertaFinal() {
         />
         <h2 className="mt-6 text-2xl font-bold text-foreground">Tu kit Astudillo Nails</h2>
         <p className="mt-2 text-sm text-muted-foreground">
-          Todo lo que necesitas: 20 uñas de gel suave + lima + limpiador + adhesivo
+          Todo lo que necesitas: 10 uñas de gel suave + lima + limpiador + adhesivo
+        </p>
+        <p className="mt-3 text-sm text-muted-foreground">
+          ✋ Hechas a mano por las mejores manicuristas de Medellín · 🔁 Totalmente
+          reutilizables
         </p>
 
         <div className="mt-4 flex items-center justify-center gap-3">
@@ -526,6 +530,10 @@ function CtaRapido() {
         Pide tu kit Astudillo Nails por solo{" "}
         <span className="font-display text-2xl font-bold text-sale">$49.900</span>{" "}
         con envío gratis en Medellín y Área Metropolitana.
+      </p>
+      <p className="mt-2 text-sm text-muted-foreground">
+        ✋ Hechas a mano por las mejores manicuristas de Medellín y 🔁 totalmente
+        reutilizables.
       </p>
       <div className="mt-5">
         <CtaButton>Lo quiero ahora · $49.900</CtaButton>

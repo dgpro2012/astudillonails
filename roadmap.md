@@ -11,3 +11,4 @@
 5. [ ] Agregar sección "¿Cómo sé qué talla pedir?" (foto con moneda de $500).
 6. [ ] Agregar línea visible de garantía/cambios cerca del botón de compra.
 7. [ ] Aplicar paleta fucsia (#E91E7A) + coral (#FF6B5C) + crema (#FFF5EE) + grafito.
+- [x] Kit de 10 uñas (corregido) + beneficios: hechas a mano por manicuristas de Medellín y reutilizables
