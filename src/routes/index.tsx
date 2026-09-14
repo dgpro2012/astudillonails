@@ -168,10 +168,10 @@ const razones = [
   },
   {
     n: 9,
-    emoji: "✨",
-    titulo: "No se sienten tiesas ni parecen de plástico",
+    emoji: "🌸",
+    titulo: "Perfectas si eres alérgica a la semipermanente o el acrílico",
     texto:
-      "Son 100% gel suave: flexible, liviano y cómodo. Se mueven contigo y se sienten como una uña real, sin esa presión incómoda ni ese acabado artificial que nadie quiere.",
+      "¿Te salió alergia a los químicos de la semipermanente, el acrílico o el gel del salón? Tranquila, parce: estas no van ni un poquito a tu uña natural. Son resistentes, brillan rico, no se pelan a la semana y encima las dejas respirar. Un diseño divino sin maltratar tus uñas.",
     img: diseno3,
   },
   {
