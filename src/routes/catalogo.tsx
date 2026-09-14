@@ -84,7 +84,9 @@ function CatalogoContenido() {
               {productos
                 .filter((p) => p.coleccion === coleccion)
                 .map((p) => {
-                  const enCarrito = items.find((i) => i.id === p.id);
+                  const enCarrito = items
+                    .filter((i) => i.id.startsWith(`${p.id}-`))
+                    .reduce((acc, i) => acc + i.cantidad, 0);
                   return (
                     <article
                       key={p.id}
