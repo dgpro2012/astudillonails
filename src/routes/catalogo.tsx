@@ -120,29 +120,21 @@ function CatalogoContenido() {
         ))}
 
         <section className="mt-12 rounded-3xl border border-dashed border-primary bg-card p-6 text-center">
-          <h2 className="text-xl font-bold text-foreground">
-            ¿Quieres uno hecho a tu gusto? 🎨
-          </h2>
+          <h2 className="text-xl font-bold text-foreground">¿Quieres uno hecho a tu gusto? 🎨</h2>
           <p className="mx-auto mt-2 max-w-lg text-sm text-muted-foreground">
-            Nos cuentas el color, la forma o nos mandas una foto y lo pintamos a mano solo para ti.
-            Queda listo en 48 horas después de confirmar el pago.
+            Súbenos la foto del diseño que te encantó, eliges talla y forma, y lo pintamos a mano
+            solo para ti. Queda listo en 48 horas después de confirmar el pago.
           </p>
           <p className="mt-3 font-display text-3xl font-bold text-sale">
             {formatoCOP(PRECIO_PERSONALIZADO)}
           </p>
-          <a
-            href={
-              "https://wa.me/573503712704?text=" +
-              encodeURIComponent(
-                "¡Hola, Astudillo Nails! 💅 Quiero un diseño personalizado por $59.900. Te cuento la idea:",
-              )
-            }
-            target="_blank"
-            rel="noopener noreferrer"
-            className="mt-4 inline-flex rounded-full bg-whatsapp px-6 py-3 text-sm font-bold text-whatsapp-foreground shadow-lg"
+          <button
+            type="button"
+            onClick={() => setSeleccionado(PRODUCTO_PERSONALIZADO)}
+            className="mt-4 inline-flex rounded-full bg-primary px-6 py-3 text-sm font-bold text-primary-foreground shadow-lg transition hover:brightness-95"
           >
-            Cuéntanos tu idea por WhatsApp
-          </a>
+            Subir mi foto y agregar al carrito 📸
+          </button>
         </section>
 
         <p className="mt-10 text-center text-sm text-muted-foreground">
