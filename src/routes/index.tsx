@@ -567,8 +567,13 @@ function CatalogoSanValentin() {
       foto: modeloAntojo.url,
       alt: "Set de uñas press on Antojo de la edición San Valentín de Astudillo Nails",
     },
-    ...Array.from({ length: 4 }, (_, index) => {
-      const numero = index + 2;
+    {
+      nombre: "Latido",
+      foto: modeloLatido.url,
+      alt: "Set de uñas press on Latido de la edición San Valentín de Astudillo Nails",
+    },
+    ...Array.from({ length: 3 }, (_, index) => {
+      const numero = index + 3;
       const nombre = `Modelo ${String(numero).padStart(2, "0")}`;
       return {
         nombre,
