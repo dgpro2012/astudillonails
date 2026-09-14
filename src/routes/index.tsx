@@ -15,9 +15,9 @@ import disenoCareyDorado from "@/assets/diseno-carey-dorado.png.asset.json";
 import disenoMentaBrillante from "@/assets/diseno-menta-brillante.png.asset.json";
 import disenoPerlaFrancesa from "@/assets/diseno-perla-francesa.png.asset.json";
 import diseno3 from "@/assets/diseno-3.jpg";
-import cliente1 from "@/assets/cliente-1.jpg";
-import cliente2 from "@/assets/cliente-2.jpg";
-import cliente3 from "@/assets/cliente-3.jpg";
+import cliente1 from "@/assets/cliente-1.png.asset.json";
+import cliente2 from "@/assets/cliente-2.png.asset.json";
+import cliente3 from "@/assets/cliente-3.png.asset.json";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -459,7 +459,7 @@ function Comentarios() {
 }
 
 function ClientasFelices() {
-  const fotos = [cliente1, cliente2, cliente3];
+  const fotos = [cliente1.url, cliente2.url, cliente3.url];
   return (
     <section className="mt-16">
       <h2 className="text-center text-2xl font-bold text-foreground">
