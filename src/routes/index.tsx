@@ -8,10 +8,8 @@ import modeloLatido from "@/assets/modelo-latido.png.asset.json";
 import modeloChispa from "@/assets/modelo-chispa.png.asset.json";
 import modeloCacheton from "@/assets/modelo-cacheton.png.asset.json";
 import razon1 from "@/assets/razon-1.jpg";
-import razon2 from "@/assets/razon-2.jpg";
 import razon3 from "@/assets/razon-3.jpg";
 import razon5 from "@/assets/razon-5.jpg";
-import razon6 from "@/assets/razon-6.jpg";
 import kit from "@/assets/kit.jpg";
 import diseno1 from "@/assets/diseno-1.jpg";
 import diseno2 from "@/assets/diseno-2.jpg";
@@ -113,7 +111,6 @@ const razones = [
     titulo: "Parecen recién salidas del salón, pero sin cita",
     texto:
       "Amiga, ese brillo espejo y esa forma perfecta no tienen nada que envidiarle a una manicura de $150.000. Te las pones tranquila en casa, cuando quieras, sin esperar turno ni dejar medio sueldo en el salón.",
-    img: razon1,
   },
   {
     n: 2,
@@ -121,7 +118,6 @@ const razones = [
     titulo: "Quedas lista en solo 7 minutos",
     texto:
       "¿Vas tarde para una cita, una salida o el trabajo? Fresca: el kit trae 10 uñas, lima, limpiador y adhesivo. Limpias, pegas, presionas y quedas divina. Sin lámpara UV, sin desorden y sin tener que saber de manicura.",
-    img: razon2,
   },
   {
     n: 3,
@@ -129,7 +125,6 @@ const razones = [
     titulo: "Te duran más de 2 semanas, de verdad",
     texto:
       "Estas uñas sí se quedan en su sitio. El gel flexible se adapta a tu uña natural y aguanta mientras escribes, cocinas, entrenas o te vas de paseo. Más de dos semanas con el brillo intacto y sin dramas.",
-    img: razon3,
   },
   {
     n: 4,
@@ -137,7 +132,6 @@ const razones = [
     titulo: "Las puedes usar una y otra vez",
     texto:
       "Lo más bacano es que tu set favorito no se pierde después de una sola puesta. Si las retiras y las cuidas bien, puedes volver a usarlas varias veces. Pagas una vez y les sacas todo el jugo.",
-    img: diseno2,
   },
   {
     n: 5,
@@ -145,7 +139,6 @@ const razones = [
     titulo: "Tus uñas naturales siguen sanitas",
     texto:
       "Nada de pulidores, limas eléctricas ni removedores agresivos. Se ponen suavemente y se retiran con agua tibia, así que tus uñas quedan sanas, bonitas y sin arrepentimientos.",
-    img: razon5,
   },
   {
     n: 6,
@@ -153,7 +146,6 @@ const razones = [
     titulo: "Te las hace a mano una manicurista de verdad, de Medellín",
     texto:
       "Estas no salen de una máquina, parce: las pintamos una por una las mejores manicuristas de Medellín. ¿Viste un color, una forma o un diseño que te encantó? Mándanos la idea por WhatsApp y lo hacemos a mano para ti. También puedes escoger uno ya listo del catálogo. Tú sueñas tus uñas y nosotras les damos vida ✨.",
-    img: razon6,
   },
   {
     n: 7,
@@ -161,7 +153,6 @@ const razones = [
     titulo: "Te ahorras más de $1.500.000 al año",
     texto:
       "Haz la cuenta, parce: una visita al salón cuesta entre $60.000 y $120.000. Si vas cada tres semanas, se te van más de $1.500.000 al año. Con un set de $49.900 consigues el mismo efecto y hasta puedes repetir el look.",
-    grafico: true,
   },
   {
     n: 8,
@@ -169,7 +160,6 @@ const razones = [
     titulo: "Bonitas contigo y también con los animales",
     texto:
       "Son veganas, libres de pruebas en animales y sin esos químicos agresivos que maltratan tu uña natural. Te las pones tranquila y disfrutas tus manos lindas, como debe ser.",
-    img: diseno1,
   },
   {
     n: 9,
@@ -177,7 +167,6 @@ const razones = [
     titulo: "Perfectas si eres alérgica a la semipermanente o el acrílico",
     texto:
       "¿Te salió alergia a los químicos de la semipermanente, el acrílico o el gel del salón? Tranquila, parce: estas no van ni un poquito a tu uña natural. Son resistentes, brillan rico, no se pelan a la semana y encima las dejas respirar. Un diseño divino sin maltratar tus uñas.",
-    img: diseno3,
   },
   {
     n: 10,
@@ -185,7 +174,39 @@ const razones = [
     titulo: "Cada vez más colombianas dicen: chao, salón",
     texto:
       "Mujeres de Medellín, Bogotá, Cali, Barranquilla y todo el país ya cambiaron horas en el salón por 7 minutos en casa. Porque tener las manos lindas cuando te provoque es otro nivel.",
-    img: cliente1,
+  },
+];
+
+// De a 2 razones por fila, compartiendo una sola imagen por par
+const paresRazones: {
+  nums: [number, number];
+  img?: string;
+  alt?: string;
+  visual?: string;
+}[] = [
+  {
+    nums: [1, 2],
+    img: razon1,
+    alt: "Uñas press on con acabado de salón de Astudillo Nails",
+  },
+  {
+    nums: [3, 4],
+    img: razon3,
+    alt: "Uñas press on resistentes de larga duración de Astudillo Nails",
+  },
+  {
+    nums: [5, 6],
+    img: razon5,
+    alt: "Uñas naturales sanas con press on de Astudillo Nails",
+  },
+  {
+    nums: [7, 8],
+    visual: "grafico",
+  },
+  {
+    nums: [9, 10],
+    img: diseno3,
+    alt: "Diseño de uñas press on apto para piel alérgica, de Astudillo Nails",
   },
 ];
 
@@ -276,30 +297,40 @@ function Index() {
           {/* Catálogo de lanzamiento */}
           <CatalogoSanValentin />
 
-          {/* Razones */}
+          {/* Razones en pares: 2 beneficios por fila, una imagen por par */}
           <div className="mt-12 space-y-14">
-            {razones.map((r) => (
-              <section key={r.n}>
-                <h2 className="text-xl font-bold text-foreground sm:text-2xl">
-                  {r.n}. {r.emoji} {r.titulo}
-                </h2>
-                <p className="mt-3 leading-relaxed text-muted-foreground">{r.texto}</p>
-
-                {r.grafico ? (
+            {paresRazones.map((par, i) => (
+              <section key={i}>
+                {par.visual === "grafico" ? (
                   <ComparacionPrecios />
                 ) : (
                   <img
-                    src={r.img}
-                    alt={r.titulo}
-                    loading={r.n === 1 ? "eager" : "lazy"}
+                    src={par.img}
+                    alt={par.alt}
+                    loading={i === 0 ? "eager" : "lazy"}
                     width={1024}
-                    height={768}
-                    className="mt-5 w-full rounded-2xl object-cover"
+                    height={640}
+                    className="aspect-[16/10] w-full rounded-2xl object-cover"
                   />
                 )}
 
-                {r.n === 2 && <GaleriaDisenos />}
-                {r.n === 5 && (
+                <div className="mt-5 grid grid-cols-2 gap-x-5 gap-y-2 sm:gap-x-10">
+                  {razones
+                    .filter((r) => par.nums.includes(r.n))
+                    .map((r) => (
+                      <div key={r.n}>
+                        <h2 className="text-sm leading-snug font-bold text-foreground sm:text-xl">
+                          {r.n}. {r.emoji} {r.titulo}
+                        </h2>
+                        <p className="mt-2 text-[13px] leading-relaxed text-muted-foreground sm:text-base">
+                          {r.texto}
+                        </p>
+                      </div>
+                    ))}
+                </div>
+
+                {i === 0 && <GaleriaDisenos />}
+                {i === 2 && (
                   <div className="mt-8 rounded-2xl bg-cream p-6 text-center">
                     <p className="font-display text-lg font-bold text-foreground">
                       Todo el kit por $49.900
@@ -310,7 +341,7 @@ function Index() {
                     <CtaButton />
                   </div>
                 )}
-                {r.n === 10 && <Comentarios />}
+                {i === 4 && <Comentarios />}
               </section>
             ))}
           </div>
