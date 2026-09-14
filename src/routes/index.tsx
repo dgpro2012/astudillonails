@@ -1,4 +1,4 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect, useRef, useState } from "react";
 
 import logoAsset from "@/assets/astudillo-logo.png.asset.json";
@@ -43,12 +43,6 @@ export const Route = createFileRoute("/")({
   }),
   component: Index,
 });
-
-const WHATSAPP =
-  "https://wa.me/573503712704?text=" +
-  encodeURIComponent(
-    "¡Hola, Astudillo Nails! 💅 Quiero pedir mi kit de uñas press on de $49.900. ¿Me ayudan a elegir?",
-  );
 
 function useCountdown(seconds: number) {
   const [left, setLeft] = useState(seconds);
@@ -364,7 +358,7 @@ function Index() {
               <span className="font-bold text-sale">$49.900</span>
             </p>
           </div>
-          <CtaButton className="flex-1">Pedir por WhatsApp · $49.900</CtaButton>
+          <CtaButton className="flex-1">Ir al catálogo · $49.900</CtaButton>
         </div>
       </div>
     </div>
@@ -524,8 +518,8 @@ function OfertaFinal() {
              🚚 <span className="font-bold text-foreground">Envío gratis en Medellín y Área Metropolitana</span> · Al resto de Colombia va por transportadora
           </p>
           <p>
-             💬 Lo pides por <span className="font-bold text-foreground">WhatsApp</span>, sin
-             formularios ni vueltas raras
+             💬 Eliges en el catálogo y nos mandas el pedido por{" "}
+             <span className="font-bold text-foreground">WhatsApp</span>, sin formularios
           </p>
         </div>
       </div>
@@ -584,7 +578,7 @@ function CtaRapido() {
         ))}
       </div>
       <div className="mt-5">
-        <CtaButton>Lo quiero ahora · $49.900</CtaButton>
+        <CtaButton>Ver el catálogo · $49.900</CtaButton>
       </div>
     </section>
   );
@@ -618,14 +612,7 @@ function CatalogoSanValentin() {
       foto: modeloCacheton.url,
       alt: "Set de uñas press on Cachetón de la edición San Valentín de Astudillo Nails",
     },
-  ].map((modelo) => ({
-    ...modelo,
-    href:
-      "https://wa.me/573503712704?text=" +
-      encodeURIComponent(
-        `¡Hola, Astudillo Nails! 💅 Quiero separar el modelo ${modelo.nombre} de la edición San Valentín por $49.900.`,
-      ),
-  }));
+  ];
 
   return (
     <section className="mt-12 overflow-hidden border-y border-primary/25 py-10">
@@ -676,9 +663,7 @@ function CatalogoSanValentin() {
                 <h3 className="text-sm font-bold text-foreground">{modelo.nombre}</h3>
                 <span className="text-sm font-bold text-sale">$49.900</span>
               </div>
-              <CtaButton href={modelo.href} className="mt-3 px-3 py-2 text-xs">
-                Elegir este
-              </CtaButton>
+              <CtaButton className="mt-3 px-3 py-2 text-xs">Elegir este</CtaButton>
             </div>
           </article>
         ))}
@@ -709,7 +694,7 @@ function CatalogoSanValentin() {
       </div>
 
       <p className="mt-5 text-center text-xs text-muted-foreground">
-        Unidades limitadas de lanzamiento · Pide el tuyo directo por WhatsApp
+        Unidades limitadas de lanzamiento · Elige los tuyos en el catálogo
       </p>
     </section>
   );
@@ -775,7 +760,7 @@ function DisenoPersonalizado() {
       </div>
 
       <div className="mt-6 text-center">
-        <CtaButton>Quiero uno hecho para mí · $59.900</CtaButton>
+        <CtaButton>Ir al catálogo y elegir</CtaButton>
       </div>
     </section>
   );
