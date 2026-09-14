@@ -49,6 +49,7 @@ function CatalogoPage() {
 function CatalogoContenido() {
   const { agregar, items, unidades, abrir } = useCarrito();
   const colecciones = [...new Set(productos.map((p) => p.coleccion))];
+  const [seleccionado, setSeleccionado] = useState<Producto | null>(null);
 
   return (
     <div className="min-h-screen bg-background pb-28">
