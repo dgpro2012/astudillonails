@@ -459,7 +459,7 @@ function Comentarios() {
 }
 
 function ClientasFelices() {
-  const fotos = [cliente1, cliente2, cliente3];
+  const fotos = [cliente1.url, cliente2.url, cliente3.url];
   return (
     <section className="mt-16">
       <h2 className="text-center text-2xl font-bold text-foreground">
