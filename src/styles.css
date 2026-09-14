@@ -95,3 +95,43 @@
     color: var(--color-muted-foreground);
   }
 }
+
+@keyframes catalogo-swipe-hand {
+  0%,
+  18% {
+    opacity: 0;
+    transform: translateX(1.5rem) rotate(-12deg);
+  }
+  28% {
+    opacity: 1;
+  }
+  68% {
+    opacity: 1;
+    transform: translateX(-2.5rem) rotate(-12deg);
+  }
+  82%,
+  100% {
+    opacity: 0;
+    transform: translateX(-2.5rem) rotate(-12deg);
+  }
+}
+
+.catalogo-carrusel {
+  scrollbar-width: none;
+  overscroll-behavior-inline: contain;
+  -webkit-overflow-scrolling: touch;
+}
+
+.catalogo-carrusel::-webkit-scrollbar {
+  display: none;
+}
+
+.catalogo-swipe-hand {
+  animation: catalogo-swipe-hand 2.4s ease-in-out 0.6s 2;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .catalogo-swipe-hand {
+    animation: none;
+  }
+}

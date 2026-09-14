@@ -13,3 +13,4 @@
 7. [ ] Aplicar paleta fucsia (#E91E7A) + coral (#FF6B5C) + crema (#FFF5EE) + grafito.
 - [x] Kit de 10 uñas (corregido) + beneficios: hechas a mano por manicuristas de Medellín y reutilizables
 - [x] Reorganizar beneficios y preparar catálogo de 5 modelos para la edición de San Valentín (pendiente reemplazar marcadores por fotos finales).
+- [x] Dar protagonismo al título de San Valentín y convertir sus 5 modelos en un carrusel con pista de deslizamiento.
