@@ -166,6 +166,18 @@ function CatalogoContenido() {
         </div>
       </div>
 
+      {seleccionado && (
+        <OpcionesModal
+          producto={seleccionado}
+          personalizado={seleccionado.id === "personalizado"}
+          onCerrar={() => setSeleccionado(null)}
+          onAgregar={(opciones) => {
+            agregar(seleccionado, opciones);
+            setSeleccionado(null);
+          }}
+        />
+      )}
+
       <CarritoDrawer />
     </div>
   );
