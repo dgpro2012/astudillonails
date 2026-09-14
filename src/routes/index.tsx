@@ -177,6 +177,34 @@ const razones = [
   },
 ];
 
+// De a 2 razones por fila, compartiendo una sola imagen por par
+const paresRazones = [
+  {
+    razones: [razones[0], razones[1]],
+    img: razon1,
+    alt: "Uñas press on con acabado de salón de Astudillo Nails",
+  },
+  {
+    razones: [razones[2], razones[3]],
+    img: razon3,
+    alt: "Uñas press on resistentes de larga duración de Astudillo Nails",
+  },
+  {
+    razones: [razones[4], razones[5]],
+    img: razon5,
+    alt: "Uñas naturales sanas con press on de Astudillo Nails",
+  },
+  {
+    razones: [razones[6], razones[7]],
+    visual: "grafico",
+  },
+  {
+    razones: [razones[8], razones[9]],
+    img: diseno3,
+    alt: "Diseño de uñas press on apto para piel alérgica, de Astudillo Nails",
+  },
+];
+
 const comentarios = [
   {
     user: "cata.moreno_",
