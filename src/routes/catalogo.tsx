@@ -1,9 +1,20 @@
+import { useState } from "react";
 import { createFileRoute, Link } from "@tanstack/react-router";
 
 import logoAsset from "@/assets/astudillo-logo.png.asset.json";
-import { formatoCOP, productos, PRECIO_PERSONALIZADO } from "@/data/productos";
+import { formatoCOP, productos, PRECIO_PERSONALIZADO, type Producto } from "@/data/productos";
 import { CarritoProvider, useCarrito } from "@/components/carrito";
 import { BotonCarrito, CarritoDrawer } from "@/components/CarritoDrawer";
+import { OpcionesModal } from "@/components/OpcionesModal";
+
+const PRODUCTO_PERSONALIZADO: Producto = {
+  id: "personalizado",
+  nombre: "Diseño personalizado",
+  precio: PRECIO_PERSONALIZADO,
+  img: "",
+  coleccion: "Personalizado",
+  descripcion: "Tú mandas la foto y lo pintamos a mano solo para ti.",
+};
 
 export const Route = createFileRoute("/catalogo")({
   head: () => ({
