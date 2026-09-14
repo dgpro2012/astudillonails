@@ -5,6 +5,7 @@ import logoAsset from "@/assets/astudillo-logo.png.asset.json";
 import modeloAntojo from "@/assets/modelo-antojo.png.asset.json";
 import modeloFlechazo from "@/assets/modelo-flechazo.png.asset.json";
 import modeloLatido from "@/assets/modelo-latido.png.asset.json";
+import modeloChispa from "@/assets/modelo-chispa.png.asset.json";
 import razon1 from "@/assets/razon-1.jpg";
 import razon2 from "@/assets/razon-2.jpg";
 import razon3 from "@/assets/razon-3.jpg";
@@ -578,8 +579,13 @@ function CatalogoSanValentin() {
       foto: modeloFlechazo.url,
       alt: "Set de uñas press on Flechazo de la edición San Valentín de Astudillo Nails",
     },
-    ...Array.from({ length: 2 }, (_, index) => {
-      const numero = index + 4;
+    {
+      nombre: "Chispa",
+      foto: modeloChispa.url,
+      alt: "Set de uñas press on Chispa de la edición San Valentín de Astudillo Nails",
+    },
+    ...Array.from({ length: 1 }, (_, index) => {
+      const numero = index + 5;
       const nombre = `Modelo ${String(numero).padStart(2, "0")}`;
       return {
         nombre,
