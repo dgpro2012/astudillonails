@@ -82,26 +82,20 @@ function Countdown({ light = false }: { light?: boolean }) {
 }
 
 function CtaButton({
-  children = "Quiero mis uñas por $49.900 💅",
+  children = "Ir al catálogo 💅",
   className = "",
-  href = WHATSAPP,
 }: {
   children?: React.ReactNode;
   className?: string;
-  href?: string;
 }) {
   return (
-    <a
-      href={href}
-      target="_blank"
-      rel="noopener noreferrer"
-      className={`inline-flex w-full items-center justify-center gap-2 rounded-full bg-whatsapp px-6 py-4 text-center text-base font-bold text-whatsapp-foreground shadow-lg transition hover:brightness-95 sm:w-auto ${className}`}
+    <Link
+      to="/catalogo"
+      className={`inline-flex w-full items-center justify-center gap-2 rounded-full bg-primary px-6 py-4 text-center text-base font-bold text-primary-foreground shadow-lg transition hover:brightness-95 sm:w-auto ${className}`}
     >
-      <svg viewBox="0 0 24 24" fill="currentColor" className="size-5" aria-hidden="true">
-        <path d="M17.5 14.4c-.3-.2-1.7-.9-2-1-.3-.1-.5-.2-.7.2s-.8 1-.9 1.1c-.2.2-.3.2-.6.1-.3-.2-1.3-.5-2.4-1.5-.9-.8-1.5-1.8-1.6-2.1-.2-.3 0-.5.1-.6l.5-.6c.2-.2.2-.3.3-.5.1-.2 0-.4 0-.6l-.9-2.1c-.2-.5-.5-.5-.7-.5h-.6c-.2 0-.6.1-.8.4-.3.3-1.1 1-1.1 2.5s1.1 2.9 1.2 3.1c.2.2 2.2 3.4 5.3 4.7.7.3 1.3.5 1.8.6.7.2 1.4.2 1.9.1.6-.1 1.7-.7 2-1.4.2-.7.2-1.2.2-1.4-.1-.1-.3-.2-.6-.4M12 21.8c-1.7 0-3.4-.5-4.9-1.4l-.3-.2-3.6.9 1-3.5-.2-.4A9.7 9.7 0 1 1 12 21.8M12 2A10 10 0 0 0 3.3 17L2 22l5.2-1.4A10 10 0 1 0 12 2" />
-      </svg>
+      <span aria-hidden="true">🛒</span>
       {children}
-    </a>
+    </Link>
   );
 }
 
