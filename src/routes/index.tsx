@@ -612,13 +612,22 @@ function CatalogoSanValentin() {
             key={modelo.nombre}
             className="w-[82%] shrink-0 snap-start overflow-hidden rounded-2xl border border-border bg-card shadow-sm sm:w-[46%]"
           >
-            <div className="flex aspect-[4/5] flex-col items-center justify-center bg-blush/50 px-4 text-center">
-              <span className="rounded-full border border-primary/30 px-3 py-1 text-[10px] font-bold uppercase tracking-widest text-primary">
-                Foto {String(index + 1).padStart(2, "0")}
-              </span>
-              <p className="mt-3 text-sm font-bold text-foreground">Tu foto va aquí</p>
-              <p className="mt-1 text-xs text-muted-foreground">Colección San Valentín</p>
-            </div>
+            {modelo.foto ? (
+              <img
+                src={modelo.foto}
+                alt={modelo.alt}
+                loading="lazy"
+                className="aspect-[4/5] w-full object-cover"
+              />
+            ) : (
+              <div className="flex aspect-[4/5] flex-col items-center justify-center bg-blush/50 px-4 text-center">
+                <span className="rounded-full border border-primary/30 px-3 py-1 text-[10px] font-bold uppercase tracking-widest text-primary">
+                  Foto {String(index + 1).padStart(2, "0")}
+                </span>
+                <p className="mt-3 text-sm font-bold text-foreground">Tu foto va aquí</p>
+                <p className="mt-1 text-xs text-muted-foreground">Colección San Valentín</p>
+              </div>
+            )}
             <div className="p-3">
               <div className="flex items-start justify-between gap-2">
                 <h3 className="text-sm font-bold text-foreground">{modelo.nombre}</h3>
