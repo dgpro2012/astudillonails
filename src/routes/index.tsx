@@ -22,7 +22,7 @@ export const Route = createFileRoute("/")({
       {
         name: "description",
         content:
-          "Uñas press on de gel con acabado de salón en 7 minutos. Kit completo por $49.900 con envío a toda Colombia. Medellín recibe al siguiente día hábil.",
+          "Uñas press on de gel que te dejan las manos divinas en 7 minutos. Kit completo por $49.900, con envío a toda Colombia.",
       },
       {
         property: "og:title",
@@ -31,7 +31,7 @@ export const Route = createFileRoute("/")({
       {
         property: "og:description",
         content:
-          "Uñas press on de gel con acabado de salón en 7 minutos. Kit completo por $49.900 con envío a toda Colombia.",
+          "Ten unas uñas divinas en 7 minutos con el kit completo de Astudillo Nails por $49.900.",
       },
       { property: "og:type", content: "article" },
       { name: "twitter:card", content: "summary_large_image" },
@@ -43,7 +43,7 @@ export const Route = createFileRoute("/")({
 const WHATSAPP =
   "https://wa.me/573503712704?text=" +
   encodeURIComponent(
-    "¡Hola Astudillo Nails! 💅 Quiero pedir el kit de uñas press on de $49.900. ¿Me ayudas?",
+    "¡Hola, Astudillo Nails! 💅 Quiero pedir mi kit de uñas press on de $49.900. ¿Me ayudan a elegir?",
   );
 
 function useCountdown(seconds: number) {
@@ -78,7 +78,7 @@ function Countdown({ light = false }: { light?: boolean }) {
 }
 
 function CtaButton({
-  children = "Quiero mis uñas por $49.900",
+  children = "Quiero mis uñas por $49.900 💅",
   className = "",
 }: {
   children?: React.ReactNode;
@@ -103,81 +103,81 @@ const razones = [
   {
     n: 1,
     emoji: "💎",
-    titulo: "Se ven como una manicura de gel de $150.000, sin cita",
+    titulo: "Parecen recién salidas del salón, pero sin cita",
     texto:
-      "Las uñas press on de gel de Astudillo Nails tienen el mismo brillo espejo y la forma perfecta de un salón costoso. En vez de esperar turno y gastar una fortuna cada mes, tienes el acabado profesional en tu casa, cuando tú quieras.",
+      "Amiga, ese brillo espejo y esa forma perfecta no tienen nada que envidiarle a una manicura de $150.000. Te las pones tranquila en casa, cuando quieras, sin esperar turno ni dejar medio sueldo en el salón.",
     img: razon1,
   },
   {
     n: 2,
     emoji: "⏰",
-    titulo: "Uñas de ensueño en solo 7 minutos",
+    titulo: "Quedas lista en solo 7 minutos",
     texto:
-      "¿Sin tiempo? No hay problema. Con el kit completo (20 uñas, lima, limpiador y adhesivo) te haces una manicura profesional en menos de 10 minutos, sin experiencia previa. Sin secado, sin lámpara UV, sin desorden. Limpias, pegas, presionas y listo.",
+      "¿Vas tarde para una cita, una salida o el trabajo? Fresca: el kit trae 20 uñas, lima, limpiador y adhesivo. Limpias, pegas, presionas y quedas divina. Sin lámpara UV, sin desorden y sin tener que saber de manicura.",
     img: razon2,
   },
   {
     n: 3,
     emoji: "💪",
-    titulo: "Duran más de 2 semanas, te lo prometemos",
+    titulo: "Te duran más de 2 semanas, de verdad",
     texto:
-      "Estas uñas se quedan donde deben estar. El gel flexible se adapta a tu uña natural y aguanta firme mientras escribes, cocinas, entrenas o viajas. Dos semanas de brillo impecable, sin saltarse ni astillarse.",
+      "Estas uñas sí se quedan en su sitio. El gel flexible se adapta a tu uña natural y aguanta mientras escribes, cocinas, entrenas o te vas de paseo. Más de dos semanas con el brillo intacto y sin dramas.",
     img: razon3,
   },
   {
     n: 4,
     emoji: "🔁",
-    titulo: "Reutilizables: las usas varias veces",
+    titulo: "Las puedes usar una y otra vez",
     texto:
-      "A diferencia de las uñas del salón que se pierden al retirarlas, las press on de Astudillo Nails se pueden volver a usar. Con el cuidado correcto repites tu set favorito varias veces: pagas una vez y disfrutas muchas más.",
+      "Lo más bacano es que tu set favorito no se pierde después de una sola puesta. Si las retiras y las cuidas bien, puedes volver a usarlas varias veces. Pagas una vez y les sacas todo el jugo.",
     img: diseno2,
   },
   {
     n: 5,
     emoji: "🧴",
-    titulo: "Cero daño en tu uña natural",
+    titulo: "Tus uñas naturales siguen sanitas",
     texto:
-      "Olvídate del pulidor, la lima eléctrica y los removedores agresivos. Se aplican suave y se retiran igual de suave, con agua tibia. Uñas sanas, brillantes y sin arrepentimientos.",
+      "Nada de pulidores, limas eléctricas ni removedores agresivos. Se ponen suavemente y se retiran con agua tibia, así que tus uñas quedan sanas, bonitas y sin arrepentimientos.",
     img: razon5,
   },
   {
     n: 6,
     emoji: "🎨",
-    titulo: "Diseños que se roban todas las miradas",
+    titulo: "Te hacemos el diseño que tienes en la cabeza",
     texto:
-      "Desde nudes elegantes para la oficina hasta rojos de infarto para una cita. Nuestras colecciones cambian constantemente y cada set está curado para que tus manos se vean impecables en cualquier foto.",
+      "¿Viste un color, una forma o un diseño que te encantó? Mándanos la idea por WhatsApp y lo hacemos a mano para ti. También puedes escoger uno ya listo del catálogo. Tú sueñas tus uñas y nosotras les damos vida ✨.",
     img: razon6,
   },
   {
     n: 7,
     emoji: "💰",
-    titulo: "Ahorra más de $1.500.000 al año",
+    titulo: "Te ahorras más de $1.500.000 al año",
     texto:
-      "Una visita al salón en Colombia cuesta entre $60.000 y $120.000. Si vas cada tres semanas, son más de $1.500.000 al año. Con Astudillo Nails logras el mismo resultado (o mejor) por $49.900 y puedes repetir el look.",
+      "Haz la cuenta, parce: una visita al salón cuesta entre $60.000 y $120.000. Si vas cada tres semanas, se te van más de $1.500.000 al año. Con un set de $49.900 consigues el mismo efecto y hasta puedes repetir el look.",
     grafico: true,
   },
   {
     n: 8,
     emoji: "🌎",
-    titulo: "Veganas, libres de crueldad y sin químicos agresivos",
+    titulo: "Bonitas contigo y también con los animales",
     texto:
-      "La belleza no debería exigir sacrificios. Nuestras uñas son veganas, libres de pruebas en animales y sin los químicos que maltratan tu lámina natural. Te las pones tranquila.",
+      "Son veganas, libres de pruebas en animales y sin esos químicos agresivos que maltratan tu uña natural. Te las pones tranquila y disfrutas tus manos lindas, como debe ser.",
     img: diseno1,
   },
   {
     n: 9,
     emoji: "✨",
-    titulo: "Nada de plástico duro. Nada de acrílico. 100% gel suave",
+    titulo: "No se sienten tiesas ni parecen de plástico",
     texto:
-      "No son uñas de plástico barato ni acrílico pesado. Son de gel suave: un material flexible y ultraliviano que se mueve y se siente como una uña real. Sin presión incómoda, sin look artificial.",
+      "Son 100% gel suave: flexible, liviano y cómodo. Se mueven contigo y se sienten como una uña real, sin esa presión incómoda ni ese acabado artificial que nadie quiere.",
     img: diseno3,
   },
   {
     n: 10,
     emoji: "💖",
-    titulo: "Miles de colombianas ya no vuelven al salón",
+    titulo: "Cada vez más colombianas dicen: chao, salón",
     texto:
-      "Mujeres de Medellín, Bogotá, Cali, Barranquilla y todo el país ya cambiaron la cita del salón por 7 minutos en casa. Esto no es solo un producto: es la forma más cómoda de tener las manos siempre listas.",
+      "Mujeres de Medellín, Bogotá, Cali, Barranquilla y todo el país ya cambiaron horas en el salón por 7 minutos en casa. Porque tener las manos lindas cuando te provoque es otro nivel.",
     img: cliente1,
   },
 ];
@@ -186,22 +186,22 @@ const comentarios = [
   {
     user: "cata.moreno_",
     texto:
-      "Me llegaron al otro día en Medellín 😍 me las puse en 6 minutos y ya llevo 3 semanas con ellas puestas. No vuelvo al salón.",
+      "Me llegaron al otro día en Medellín 😍 Me las puse en 6 minutos y ya llevo 3 semanas con ellas. De verdad, no vuelvo al salón.",
   },
   {
     user: "valentinaosp",
     texto:
-      "Pedí desde Bucaramanga y llegaron perfectas. Lo que más me gustó: no me dañaron la uña. Antes las tenía delgaditas y ahora están sanas 🥺",
+      "Pedí desde Bucaramanga y llegaron perfectas. Lo que más me gustó fue que no me dañaron la uña. Antes las tenía delgaditas y ahora están sanas 🥺",
   },
   {
     user: "lauris.gil",
     texto:
-      "Por $49.900 con lima, limpiador y pegante… yo pagaba 90 mil en el salón cada 3 semanas. La cuenta se hace sola 😅",
+      "Por $49.900 con lima, limpiador y pegante… yo pagaba 90 mil en el salón cada 3 semanas. Amiga, la cuenta se hace sola 😅",
   },
   {
     user: "manuelaq",
     texto:
-      "Se ven MUY naturales, nadie cree que son postizas. Ya voy por mi tercer set 💅🏽",
+      "Se ven demasiado naturales, nadie cree que son postizas. Ya voy por mi tercer set 💅🏽",
   },
 ];
 
@@ -212,7 +212,7 @@ function Index() {
       <div className="bg-sale text-sale-foreground">
         <div className="mx-auto flex max-w-3xl flex-col items-center gap-2 px-4 py-2 text-center sm:flex-row sm:justify-between">
           <p className="text-xs font-bold tracking-wide sm:text-sm">
-            ✨ ENVÍO GRATIS A MEDELLÍN · Resto de Colombia por transportadora 💅
+            ✨ ENVÍO GRATIS EN MEDELLÍN Y ÁREA METROPOLITANA
           </p>
           <Countdown />
         </div>
@@ -232,10 +232,10 @@ function Index() {
         {/* Encabezado del artículo */}
         <article className="pt-8">
           <p className="mb-3 text-xs font-bold uppercase tracking-widest text-primary">
-            Belleza · Manicura en casa
+            Entre amigas · Uñas lindas en casa
           </p>
           <h1 className="text-3xl leading-tight font-bold text-foreground sm:text-4xl">
-            10 razones por las que las colombianas inteligentes ya no vuelven al salón de uñas 💅
+            10 razones para tener uñas de salón sin volver al salón 💅
           </h1>
 
           <div className="mt-6 flex items-center gap-3 border-y border-border py-4">
@@ -244,24 +244,24 @@ function Index() {
             </div>
             <div className="text-sm">
               <p className="font-bold text-foreground">Fernanda Astudillo</p>
-              <p className="text-muted-foreground">Actualizado hoy · Lectura de 4 min</p>
+              <p className="text-muted-foreground">Te lo cuento en 4 minuticos</p>
             </div>
           </div>
 
           <div className="mt-6 rounded-xl bg-muted p-5">
             <p className="text-sm leading-relaxed text-foreground">
-              <span className="font-bold">En resumen:</span> hoy puedes tener una manicura de gel
-              profesional desde tu casa, sin salón, sin daño y sin gastar una fortuna. Las uñas
-              press on de <span className="font-bold">Astudillo Nails</span> son la forma más
-              cómoda, bonita y duradera de tener las manos listas. Sigue leyendo y descubre por qué
-              tantas mujeres ya no vuelven atrás.
+              <span className="font-bold">Te cuento rapidito:</span> puedes tener una manicura de
+              gel divina desde tu casa, sin cita, sin maltratar tus uñas y sin gastar una fortuna.
+              Con <span className="font-bold">Astudillo Nails</span> quedas lista en minutos y tus
+              manos se ven hermosas por semanas. Sigue leyendo y vas a entender por qué tantas ya
+              dijeron: chao, salón.
             </p>
           </div>
 
           <div className="mt-4 rounded-xl border border-dashed border-primary/40 bg-blush/40 p-4">
             <p className="text-sm text-foreground">
-              <span className="font-bold">Nota:</span> con este método tienes uñas de calidad de
-              salón en menos de 7 minutos, sin lámpara UV y sin experiencia.
+              <span className="font-bold">Dato que te va a encantar:</span> en menos de 7 minutos
+              tienes uñas con acabado de salón, sin lámpara UV y sin experiencia.
             </p>
           </div>
 
@@ -294,10 +294,10 @@ function Index() {
                 {r.n === 5 && (
                   <div className="mt-8 rounded-2xl bg-cream p-6 text-center">
                     <p className="font-display text-lg font-bold text-foreground">
-                      Kit completo por $49.900
+                      Todo el kit por $49.900
                     </p>
                     <p className="mt-1 mb-4 text-sm text-muted-foreground">
-                      20 uñas + lima + limpiador + adhesivo
+                      Te llegan 20 uñas + lima + limpiador + adhesivo
                     </p>
                     <CtaButton />
                   </div>
@@ -346,7 +346,7 @@ function ComparacionPrecios() {
   return (
     <div className="mt-5 rounded-2xl bg-cream p-6">
       <p className="mb-6 text-center text-xs font-bold uppercase tracking-widest text-muted-foreground">
-        Gasto aproximado al año
+        Lo que podrías gastar en un año
       </p>
       <div className="flex items-end justify-center gap-4">
         {barras.map((b) => (
@@ -375,9 +375,9 @@ function GaleriaDisenos() {
   ];
   return (
     <div className="mt-8 rounded-2xl bg-muted p-6">
-      <h3 className="text-lg font-bold text-foreground">Mira todos los diseños disponibles</h3>
+      <h3 className="text-lg font-bold text-foreground">Mira estos diseños tan divinos</h3>
       <p className="mt-2 text-sm text-muted-foreground">
-        Nudes para el día a día, french para tu matrimonio o un rojo elegante para tu cita.
+        Hay nudes para todos los días, french para una ocasión especial y tonos intensos para cuando quieras robarte las miradas.
       </p>
       <div className="mt-5 grid grid-cols-3 gap-3">
         {items.map((d) => (
@@ -404,10 +404,10 @@ function GaleriaDisenos() {
 function Comentarios() {
   return (
     <div className="mt-8 space-y-3">
-      {comentarios.map((c) => (
+         {comentarios.map((c) => (
         <div key={c.user} className="rounded-xl border border-border bg-card p-4">
           <p className="text-sm font-bold text-foreground">
-            {c.user} <span className="ml-1 text-xs text-muted-foreground">· Verificado</span>
+            {c.user} <span className="ml-1 text-xs text-muted-foreground">· Compra verificada</span>
           </p>
           <p className="mt-1 text-sm leading-relaxed text-muted-foreground">{c.texto}</p>
         </div>
@@ -421,7 +421,7 @@ function ClientasFelices() {
   return (
     <section className="mt-16">
       <h2 className="text-center text-2xl font-bold text-foreground">
-        Miles de colombianas ya tienen sus uñas listas
+        Mira cómo les quedan a nuestras clientas
       </h2>
       <div className="mt-6 grid grid-cols-3 gap-3">
         {fotos.map((f, i) => (
@@ -444,7 +444,7 @@ function OfertaFinal() {
   return (
     <section className="mt-16 overflow-hidden rounded-3xl border border-border bg-card shadow-xl">
       <div className="bg-sale py-2 text-center text-xs font-bold uppercase tracking-widest text-sale-foreground">
-        Oferta de lanzamiento
+        Precio especial por lanzamiento
       </div>
       <div className="p-6 text-center">
         <img
@@ -455,9 +455,9 @@ function OfertaFinal() {
           height={1024}
           className="mx-auto w-full max-w-sm rounded-2xl object-cover"
         />
-        <h2 className="mt-6 text-2xl font-bold text-foreground">Kit Astudillo Nails</h2>
+        <h2 className="mt-6 text-2xl font-bold text-foreground">Tu kit Astudillo Nails</h2>
         <p className="mt-2 text-sm text-muted-foreground">
-          20 uñas de gel suave + lima + limpiador + adhesivo
+          Todo lo que necesitas: 20 uñas de gel suave + lima + limpiador + adhesivo
         </p>
 
         <div className="mt-4 flex items-center justify-center gap-3">
@@ -467,7 +467,7 @@ function OfertaFinal() {
 
         <div className="mt-5 flex flex-col items-center gap-2">
           <p className="text-xs font-bold uppercase tracking-widest text-muted-foreground">
-            La oferta termina en:
+            Aprovecha este precio antes de que termine:
           </p>
           <Countdown light />
         </div>
@@ -478,14 +478,14 @@ function OfertaFinal() {
 
         <div className="mt-6 grid gap-2 text-left text-sm text-muted-foreground">
           <p>
-            🔥 Riesgo de agotarse: <span className="font-bold text-foreground">alto</span>
+             🔥 Se están acabando: <span className="font-bold text-foreground">quedan pocos kits</span>
           </p>
           <p>
-            🚚 Envío: <span className="font-bold text-foreground">gratis a Medellín</span> · Resto de Colombia por transportadora
+             🚚 <span className="font-bold text-foreground">Envío gratis en Medellín y Área Metropolitana</span> · Al resto de Colombia va por transportadora
           </p>
           <p>
-            💬 Pides fácil por <span className="font-bold text-foreground">WhatsApp</span>, sin
-            formularios
+             💬 Lo pides por <span className="font-bold text-foreground">WhatsApp</span>, sin
+             formularios ni vueltas raras
           </p>
         </div>
       </div>
@@ -496,18 +496,18 @@ function OfertaFinal() {
 function Envios() {
   return (
     <section className="mt-10 rounded-2xl bg-muted p-6">
-      <h2 className="text-lg font-bold text-foreground">Envíos y entregas</h2>
+      <h2 className="text-lg font-bold text-foreground">¿Cuándo te llegan?</h2>
       <ul className="mt-3 space-y-2 text-sm text-muted-foreground">
         <li>
           📍 <span className="font-bold text-foreground">Medellín y Área Metropolitana:</span>{" "}
-          envío gratis y recibes al siguiente día hábil.
+           el envío va por nuestra cuenta y recibes al siguiente día hábil.
         </li>
         <li>
-          🇨🇴 <span className="font-bold text-foreground">Resto del país:</span> tiempo de entrega
-          sujeto a la transportadora.
+           🇨🇴 <span className="font-bold text-foreground">Resto del país:</span> te enviamos por
+           transportadora y el tiempo depende de tu ciudad.
         </li>
         <li>
-          💬 ¿Dudas antes de pedir? Escríbenos al WhatsApp{" "}
+           💬 ¿Te quedó alguna duda? Escríbenos con confianza al WhatsApp{" "}
           <span className="font-bold text-foreground">350 371 2704</span>.
         </li>
       </ul>
@@ -518,20 +518,20 @@ function Envios() {
 function CtaRapido() {
   return (
     <section className="mt-8 rounded-3xl border-2 border-dashed border-primary bg-card p-6 text-center shadow-lg">
-      <p className="text-xs font-bold uppercase tracking-widest text-sale">Oferta de lanzamiento</p>
+      <p className="text-xs font-bold uppercase tracking-widest text-sale">Precio de lanzamiento</p>
       <h2 className="mt-2 text-2xl font-bold text-foreground sm:text-3xl">
-        ¿Lista sin leer todo? 💅
+        ¿Ya las quieres? No tienes que leer todo 💅
       </h2>
       <p className="mt-2 text-sm text-muted-foreground">
-        Lleva tu kit Astudillo Nails por solo{" "}
+        Pide tu kit Astudillo Nails por solo{" "}
         <span className="font-display text-2xl font-bold text-sale">$49.900</span>{" "}
-        con envío gratis a Medellín.
+        con envío gratis en Medellín y Área Metropolitana.
       </p>
       <div className="mt-5">
-        <CtaButton>Quiero mi kit ahora · $49.900</CtaButton>
+        <CtaButton>Lo quiero ahora · $49.900</CtaButton>
       </div>
       <p className="mt-3 text-xs text-muted-foreground">
-        🌸 ¿Tienes miedo de no elegir la talla correcta? Usamos tu talla personalizada para que te queden perfectas.
+        🌸 ¿Te preocupa la talla? La personalizamos para que te queden perfectas.
       </p>
     </section>
   );
@@ -542,62 +542,62 @@ function DisenoPersonalizado() {
     <section className="mt-14 rounded-3xl border border-border bg-card p-6 shadow-xl sm:p-8">
       <div className="text-center">
         <p className="text-xs font-bold uppercase tracking-widest text-primary">
-          Hecho a mano para ti
+           Tú las imaginas, nosotras las hacemos
         </p>
         <h2 className="mt-2 text-2xl font-bold text-foreground sm:text-3xl">
-          ¿Cómo elegimos tu diseño personalizado? ✨
+           ¿Cómo hacemos tu diseño personalizado? ✨
         </h2>
         <p className="mx-auto mt-3 max-w-xl text-sm text-muted-foreground">
-          Tienes dos opciones: escoger un set ya listo del catálogo o pedirlo hecho a tu gusto. Tú eliges, nosotras lo hacemos realidad.
+           Tú mandas: puedes escoger un set del catálogo que ya está listo o pedir uno hecho a tu gusto. Cuéntanos tu idea y la volvemos uñas.
         </p>
       </div>
 
       <div className="mt-8 grid gap-4 sm:grid-cols-2">
         <div className="rounded-2xl bg-muted p-5 text-center">
           <p className="text-2xl">💅</p>
-          <h3 className="mt-2 text-lg font-bold text-foreground">Set del catálogo</h3>
+          <h3 className="mt-2 text-lg font-bold text-foreground">Uno listo del catálogo</h3>
           <p className="mt-1 text-sm text-muted-foreground">
-            Diseños ya hechos, listos para enviar.
+            Escoges el que más te guste y queda listo para salir.
           </p>
           <p className="mt-3 font-display text-3xl font-bold text-sale">$49.900</p>
           <p className="mt-1 text-xs font-bold uppercase tracking-widest text-muted-foreground">
-            Entrega en 24h tras confirmar pago
+             Listo en 24h después de confirmar el pago
           </p>
         </div>
 
         <div className="rounded-2xl bg-muted p-5 text-center">
           <p className="text-2xl">🎨</p>
-          <h3 className="mt-2 text-lg font-bold text-foreground">Diseño personalizado</h3>
+          <h3 className="mt-2 text-lg font-bold text-foreground">Uno hecho a tu gusto</h3>
           <p className="mt-1 text-sm text-muted-foreground">
-            Color, forma y detalles hechos a tu gusto.
+            Tú eliges el color, la forma y esos detallitos que amas.
           </p>
           <p className="mt-3 font-display text-3xl font-bold text-sale">$59.900</p>
           <p className="mt-1 text-xs font-bold uppercase tracking-widest text-muted-foreground">
-            Entrega en 48h tras confirmar pago
+             Listo en 48h después de confirmar el pago
           </p>
         </div>
       </div>
 
       <div className="mt-8 rounded-2xl bg-cream p-6">
-        <h3 className="text-lg font-bold text-foreground">Así funciona el paso a paso</h3>
+        <h3 className="text-lg font-bold text-foreground">Así de fácil lo hacemos</h3>
         <ol className="mt-4 space-y-3 text-sm text-muted-foreground">
           <li>
-            <span className="font-bold text-foreground">1. Escríbenos por WhatsApp</span> con el color, la forma o una foto de referencia.
+            <span className="font-bold text-foreground">1. Nos escribes por WhatsApp</span> y nos mandas el color, la forma o una foto de lo que te gustó.
           </li>
           <li>
-            <span className="font-bold text-foreground">2. Te confirmamos el diseño</span> y el precio antes de que pagues.
+            <span className="font-bold text-foreground">2. Lo revisamos contigo</span> y te confirmamos el diseño y el precio antes de que pagues.
           </li>
           <li>
-            <span className="font-bold text-foreground">3. Pagas y empezamos</span> a hacer tu set a mano, una a una.
+            <span className="font-bold text-foreground">3. Confirmas el pago y arrancamos</span> a hacer cada uña a mano, solo para ti.
           </li>
           <li>
-            <span className="font-bold text-foreground">4. Te enviamos</span> en el tiempo acordado: 24h para catálogo, 48h para personalizado.
+            <span className="font-bold text-foreground">4. Te avisamos cuando salga</span>: 24h para catálogo o 48h para personalizado, siempre después de confirmar el pago.
           </li>
         </ol>
       </div>
 
       <div className="mt-6 text-center">
-        <CtaButton>Quiero mi diseño personalizado · $59.900</CtaButton>
+        <CtaButton>Quiero uno hecho para mí · $59.900</CtaButton>
       </div>
     </section>
   );
