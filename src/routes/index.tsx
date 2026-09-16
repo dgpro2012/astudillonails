@@ -20,6 +20,7 @@ import glazedPearl from "@/assets/glazed-pearl.webp";
 import animalPrint from "@/assets/animal-print.webp";
 import pistacho from "@/assets/pistacho.webp";
 
+import { Carrusel } from "@/components/Carrusel";
 import {
   Cinta,
   Cuticula,
@@ -423,15 +424,23 @@ function Historia() {
 
 /* ---------- Página ---------- */
 
-function Inicio() {
-  const pares: { nums: number[]; img?: string; alt?: string; grafico?: boolean; extra?: "puesta" | "galeria" | "kit" | "historia" }[] = [
-    { nums: [1, 2], img: razon1, alt: "Uñas press on con acabado de salón de Astudillo Nails", extra: "puesta" },
-    { nums: [3, 4], img: razon3, alt: "Manos con uñas press on de Astudillo Nails escribiendo en un computador", extra: "galeria" },
-    { nums: [5, 6], extra: "historia" },
-    { nums: [7, 8], grafico: true, extra: "kit" },
-    { nums: [9, 10], img: diseno3, alt: "Mano con uñas press on de Astudillo Nails sosteniendo un café, las llaves y las gafas" },
-  ];
+type Par = {
+  nums: number[];
+  img?: string;
+  alt?: string;
+  grafico?: boolean;
+  extra?: "puesta" | "galeria" | "kit" | "historia";
+};
 
+const PARES: Par[] = [
+  { nums: [1, 2], img: razon1, alt: "Uñas press on con acabado de salón de Astudillo Nails", extra: "puesta" },
+  { nums: [3, 4], img: razon3, alt: "Manos con uñas press on de Astudillo Nails escribiendo en un computador", extra: "galeria" },
+  { nums: [5, 6], extra: "historia" },
+  { nums: [7, 8], grafico: true, extra: "kit" },
+  { nums: [9, 10], img: diseno3, alt: "Mano con uñas press on de Astudillo Nails sosteniendo un café, las llaves y las gafas" },
+];
+
+function Inicio() {
   return (
     <div className="min-h-screen bg-background pb-24">
       <div className="bg-sale text-sale-foreground">
@@ -507,7 +516,7 @@ function Inicio() {
               </p>
             </div>
 
-            <div className="catalogo-carrusel mt-7 flex snap-x snap-mandatory gap-3 overflow-x-auto pb-3">
+            <Carrusel>
               {MODELOS.map((m) => (
                 <article
                   key={m.nombre}
@@ -528,7 +537,7 @@ function Inicio() {
                   </div>
                 </article>
               ))}
-            </div>
+            </Carrusel>
 
             <p className="mt-5 text-center text-xs text-muted-foreground">
               Uno por uno, en el taller de Medellín · Elige el tuyo en el catálogo
@@ -560,7 +569,7 @@ function Inicio() {
 
           {/* Las 10 razones */}
           <div className="mt-12 space-y-14">
-            {pares.map((par, i) => (
+            {PARES.map((par, i) => (
               <section key={par.nums.join("-")}>
                 {par.grafico ? (
                   <Comparacion />
@@ -848,7 +857,9 @@ function Inicio() {
               loading="lazy"
               className="kit-flotante mx-auto w-full max-w-md"
             />
-            <h2 className="mt-6 text-2xl font-bold text-foreground">Tu kit, listo para estrenar 💅</h2>
+            <h2 className="mt-6 text-2xl font-bold text-foreground">
+              Tu kit, listo para estrenar 💅
+            </h2>
             <p className="mt-2 text-sm text-muted-foreground">
               Te llega todo: 10 uñas press on + lima + limpiador + pegante
             </p>
