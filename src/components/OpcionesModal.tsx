@@ -1,199 +1,221 @@
 import { useEffect, useState } from "react";
 
-import type { Forma, OpcionesItem, Tamano } from "@/components/carrito";
+import { FormaUna, LargoUna } from "@/components/UnaSvg";
+import {
+  FORMAS,
+  TAMANOS,
+  formaDisponible,
+  formasDe,
+  useCarrito,
+  type Forma,
+  type Tamano,
+} from "@/components/carrito";
 import { formatoCOP, type Producto } from "@/data/productos";
 
-const TAMANOS: Tamano[] = ["S", "M", "L", "XL"];
-const FORMAS: Forma[] = ["Almendra", "Cuadrada", "Stileto", "Coffin"];
-
-const SIN_TAMANO: Record<Forma, Tamano[]> = {
-  Almendra: ["XL"],
-  Cuadrada: ["XL"],
-  Stileto: ["S"],
-  Coffin: ["S"],
-};
-
-function combinacionValida(forma: Forma, tamano: Tamano) {
-  return !SIN_TAMANO[forma].includes(tamano);
-}
+const estiloOpcion = (activa: boolean) =>
+  activa
+    ? "border-primary bg-primary text-primary-foreground shadow-md"
+    : "border-border bg-card text-foreground hover:border-primary/50 hover:bg-muted";
 
 export function OpcionesModal({
   producto,
-  personalizado = false,
   onCerrar,
-  onAgregar,
 }: {
-  producto: Producto;
-  personalizado?: boolean;
+  producto: Producto | null;
   onCerrar: () => void;
-  onAgregar: (opciones: OpcionesItem) => void;
 }) {
-  const [forma, setForma] = useState<Forma | null>(null);
-  const [tamano, setTamano] = useState<Tamano | null>(null);
-  const [referencia, setReferencia] = useState<string | null>(null);
-  const [preview, setPreview] = useState<string | null>(null);
-  const [error, setError] = useState<string | null>(null);
+  const { agregar } = useCarrito();
+  const [tamano, setTamano] = useState<Tamano>("M");
+  const [forma, setForma] = useState<Forma>("Almendra");
+  const [referencia, setReferencia] = useState("");
 
+  const personalizado = producto?.id === "personalizado";
+
+  // Cada vez que se abre, vuelve a los valores por defecto
   useEffect(() => {
-    return () => {
-      if (preview) URL.revokeObjectURL(preview);
+    if (producto) {
+      setTamano("M");
+      setForma("Almendra");
+      setReferencia("");
+    }
+  }, [producto]);
+
+  // Escape cierra el modal y el fondo no se desplaza mientras está abierto
+  useEffect(() => {
+    if (!producto) return;
+    const alTeclear = (e: KeyboardEvent) => {
+      if (e.key === "Escape") onCerrar();
     };
-  }, [preview]);
+    document.addEventListener("keydown", alTeclear);
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.removeEventListener("keydown", alTeclear);
+      document.body.style.overflow = "";
+    };
+  }, [producto, onCerrar]);
 
-  useEffect(() => {
-    if (forma && tamano && !combinacionValida(forma, tamano)) setTamano(null);
-  }, [forma, tamano]);
+  if (!producto) return null;
 
-  const listo = forma && tamano && (!personalizado || referencia);
+  const permitidas = formasDe(tamano);
+  const fuera = FORMAS.filter((f) => !permitidas.includes(f));
+
+  const elegirTamano = (t: Tamano) => {
+    setTamano(t);
+    if (!formaDisponible(t, forma)) setForma(formasDe(t)[0]);
+  };
+
+  const confirmar = () => {
+    agregar(producto, {
+      tamano,
+      forma,
+      ...(personalizado
+        ? { referencia: referencia.trim() || "sin nombre" }
+        : {}),
+    });
+    onCerrar();
+  };
 
   return (
-    <div className="fixed inset-0 z-[80] flex items-end justify-center sm:items-center">
-      <div
+    <div className="fixed inset-0 z-[70] flex items-end justify-center sm:items-center sm:p-4">
+      <button
+        type="button"
+        aria-label="Cerrar"
         onClick={onCerrar}
-        aria-hidden="true"
-        className="absolute inset-0 bg-foreground/50 backdrop-blur-[2px]"
+        className="absolute inset-0 bg-foreground/40 backdrop-blur-[2px]"
       />
+
       <div
         role="dialog"
-        aria-label={`Elegir talla y forma de ${producto.nombre}`}
-        className="relative w-full max-w-md rounded-t-3xl border border-border bg-card p-5 shadow-2xl sm:rounded-3xl"
+        aria-modal="true"
+        aria-labelledby="modal-titulo"
+        className="relative max-h-[92vh] w-full overflow-y-auto rounded-t-3xl border-t border-border bg-card p-6 shadow-2xl sm:max-w-md sm:rounded-3xl sm:border"
       >
-        <div className="flex items-start gap-3">
-          {producto.img && (
-            <img
-              src={producto.img}
-              alt={producto.nombre}
-              className="size-16 rounded-xl object-cover"
-            />
-          )}
-          <div className="flex-1">
-            <p className="font-display text-lg font-bold text-foreground">{producto.nombre}</p>
-            <p className="text-sm font-bold text-sale">{formatoCOP(producto.precio)}</p>
+        <div className="flex items-start justify-between gap-3">
+          <div>
+            <p
+              id="modal-titulo"
+              className="font-display text-lg font-bold text-foreground"
+            >
+              Elige tamaño y forma
+            </p>
+            <p className="text-sm text-muted-foreground">
+              {producto.nombre} · {formatoCOP(producto.precio)}
+            </p>
           </div>
           <button
             type="button"
             onClick={onCerrar}
             aria-label="Cerrar"
-            className="rounded-full px-2 text-xl text-muted-foreground"
+            className="rounded-full px-3 py-1 text-xl text-muted-foreground transition hover:bg-muted"
           >
             ✕
           </button>
         </div>
 
-        {personalizado && (
-          <div className="mt-5">
-            <p className="text-sm font-bold text-foreground">1. Sube tu foto de referencia 📸</p>
-            <p className="mt-1 text-xs text-muted-foreground">
-              Mándanos la foto del diseño que te encantó y lo pintamos a mano para ti.
-            </p>
-            <label className="mt-3 flex cursor-pointer items-center justify-center rounded-2xl border border-dashed border-primary bg-muted px-4 py-5 text-center text-sm font-bold text-primary">
-              {referencia ? "Cambiar la foto" : "Elegir foto del diseño"}
-              <input
-                type="file"
-                accept="image/*"
-                className="hidden"
-                onChange={(e) => {
-                  const file = e.target.files?.[0];
-                  if (!file) return;
-                  if (preview) URL.revokeObjectURL(preview);
-                  setPreview(URL.createObjectURL(file));
-                  setReferencia(file.name);
-                }}
-              />
-            </label>
-            {preview && (
-              <div className="mt-3 flex items-center gap-3 rounded-2xl border border-border p-3">
-                <img src={preview} alt="Foto de referencia" className="size-16 rounded-xl object-cover" />
-                <p className="flex-1 text-xs text-muted-foreground">
-                  Guardamos el nombre de tu foto en el pedido. Cuando abras WhatsApp, envíanosla en
-                  el chat 💬
-                </p>
-              </div>
-            )}
-          </div>
-        )}
+        <p className="mt-5 text-xs font-bold tracking-widest text-muted-foreground uppercase">
+          Tamaño
+        </p>
+        <div className="mt-2 grid grid-cols-4 gap-1.5">
+          {TAMANOS.map((t) => {
+            const activa = tamano === t.sigla;
+            return (
+              <button
+                key={t.sigla}
+                type="button"
+                aria-pressed={activa}
+                onClick={() => elegirTamano(t.sigla)}
+                className={`flex flex-col items-center gap-0.5 rounded-2xl border-2 px-1 py-2.5 transition ${estiloOpcion(activa)}`}
+              >
+                <LargoUna tamano={t.sigla} />
+                <span className="text-xs font-bold">{t.sigla}</span>
+                <span
+                  className={`text-[10px] ${activa ? "opacity-80" : "text-muted-foreground"}`}
+                >
+                  {t.mm}
+                </span>
+              </button>
+            );
+          })}
+        </div>
+        <p className="mt-2 text-xs leading-relaxed text-muted-foreground">
+          El tamaño es el{" "}
+          <span className="font-bold text-foreground">largo de la uña</span>, de
+          la cutícula a la punta. Si dudas, escríbenos y te ayudamos antes de
+          que pagues.
+        </p>
 
-        <div className="mt-5">
-          <p className="text-sm font-bold text-foreground">
-            {personalizado ? "2." : "1."} Elige la forma
-          </p>
-          <div className="mt-2 grid grid-cols-2 gap-2">
-            {FORMAS.map((f) => (
+        <p className="mt-5 text-xs font-bold tracking-widest text-muted-foreground uppercase">
+          Forma
+        </p>
+        <div className="mt-2 grid grid-cols-4 gap-2">
+          {FORMAS.map((f) => {
+            const libre = permitidas.includes(f);
+            const activa = libre && forma === f;
+            if (!libre) {
+              return (
+                <div
+                  key={f}
+                  title={`No disponible en tamaño ${tamano}`}
+                  className="flex cursor-not-allowed flex-col items-center gap-1 rounded-2xl border-2 border-dashed border-border px-2 py-3 text-[11px] font-bold opacity-40"
+                >
+                  <FormaUna forma={f} />
+                  <span>{f}</span>
+                  <span className="text-[9px] font-normal">No en {tamano}</span>
+                </div>
+              );
+            }
+            return (
               <button
                 key={f}
                 type="button"
-                onClick={() => {
-                  setForma(f);
-                  setError(null);
-                }}
-                className={`rounded-full border px-3 py-2 text-sm font-bold transition ${
-                  forma === f
-                    ? "border-primary bg-primary text-primary-foreground"
-                    : "border-border bg-card text-foreground hover:border-primary"
-                }`}
+                aria-pressed={activa}
+                onClick={() => setForma(f)}
+                className={`flex flex-col items-center gap-1 rounded-2xl border-2 px-2 py-3 text-[11px] font-bold transition ${estiloOpcion(activa)}`}
               >
-                {f}
+                <FormaUna forma={f} />
+                <span>{f}</span>
               </button>
-            ))}
-          </div>
+            );
+          })}
         </div>
-
-        <div className="mt-5">
-          <p className="text-sm font-bold text-foreground">
-            {personalizado ? "3." : "2."} Elige la talla
-          </p>
-          <div className="mt-2 grid grid-cols-4 gap-2">
-            {TAMANOS.map((t) => {
-              const deshabilitado = forma ? !combinacionValida(forma, t) : false;
-              return (
-                <button
-                  key={t}
-                  type="button"
-                  disabled={deshabilitado}
-                  onClick={() => {
-                    setTamano(t);
-                    setError(null);
-                  }}
-                  className={`rounded-full border px-3 py-2 text-sm font-bold transition ${
-                    tamano === t
-                      ? "border-primary bg-primary text-primary-foreground"
-                      : "border-border bg-card text-foreground hover:border-primary"
-                  } ${deshabilitado ? "cursor-not-allowed opacity-35 hover:border-border" : ""}`}
-                >
-                  {t}
-                </button>
-              );
-            })}
-          </div>
-          {forma && (
-            <p className="mt-2 text-[11px] text-muted-foreground">
-              La forma {forma} no viene en talla {SIN_TAMANO[forma].join(", ")}.
-            </p>
+        <p className="mt-2 text-xs leading-relaxed text-muted-foreground">
+          {fuera.length > 0 ? (
+            <>
+              En tamaño{" "}
+              <span className="font-bold text-foreground">{tamano}</span> no
+              podemos hacer {fuera.join(" ni ")}: la uña queda muy corta para
+              esa punta.
+            </>
+          ) : (
+            "En este tamaño puedes pedir cualquiera de las cuatro formas."
           )}
-        </div>
+        </p>
 
-        {error && <p className="mt-3 text-xs font-bold text-sale">{error}</p>}
+        {personalizado && (
+          <div className="mt-5 rounded-2xl bg-muted p-4">
+            <p className="text-sm font-bold text-foreground">
+              Tu foto de referencia 📸
+            </p>
+            <p className="mt-1 text-xs leading-relaxed text-muted-foreground">
+              Ponle un nombre a tu idea y nos mandas la foto por el chat.
+            </p>
+            <input
+              type="text"
+              value={referencia}
+              onChange={(e) => setReferencia(e.target.value)}
+              placeholder="Ej: uñas con margaritas azules"
+              className="mt-3 w-full rounded-full border border-border bg-card px-4 py-2 text-sm text-foreground outline-none focus:border-primary"
+            />
+          </div>
+        )}
 
         <button
           type="button"
-          onClick={() => {
-            if (!listo || !forma || !tamano) {
-              setError(
-                personalizado && !referencia
-                  ? "Súbenos la foto de referencia y elige forma y talla 💅"
-                  : "Elige la forma y la talla para continuar 💅",
-              );
-              return;
-            }
-            onAgregar({ tamano, forma, ...(referencia ? { referencia } : {}) });
-          }}
-          className="mt-5 w-full rounded-full bg-primary px-6 py-4 text-base font-bold text-primary-foreground shadow-lg transition hover:brightness-95"
+          onClick={confirmar}
+          className="mt-6 w-full rounded-full bg-primary px-6 py-3.5 text-sm font-bold text-primary-foreground shadow-lg transition hover:brightness-95"
         >
           Agregar al carrito 🛒
         </button>
-        <p className="mt-2 text-center text-[11px] text-muted-foreground">
-          ¿No sabes tu talla? Tranquila, la confirmamos contigo por WhatsApp.
-        </p>
       </div>
     </div>
   );
