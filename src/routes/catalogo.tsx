@@ -1,10 +1,10 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { useRef, useState } from "react";
+import { useState } from "react";
 
 import logo from "@/assets/astudillo-logo.png";
+import { Carrusel } from "@/components/Carrusel";
 import { BotonCarrito, CarritoDrawer } from "@/components/CarritoDrawer";
 import { OpcionesModal } from "@/components/OpcionesModal";
-import { PistaDesliza } from "@/components/PistaDesliza";
 import { CarritoProvider, contarSets, useCarrito } from "@/components/carrito";
 import {
   colecciones,
@@ -109,91 +109,6 @@ function Tarjeta({ p, onElegir }: { p: Producto; onElegir: (p: Producto) => void
   );
 }
 
-function Flechas({ onMover }: { onMover: (dir: number) => void }) {
-  return (
-    <div className="hidden shrink-0 gap-2 sm:flex">
-      <button
-        type="button"
-        aria-label="Ver diseños anteriores"
-        onClick={() => onMover(-1)}
-        className="grid size-9 place-items-center rounded-full border border-border bg-card text-lg font-bold text-primary transition hover:bg-muted"
-      >
-        ‹
-      </button>
-      <button
-        type="button"
-        aria-label="Ver más diseños"
-        onClick={() => onMover(1)}
-        className="grid size-9 place-items-center rounded-full border border-border bg-card text-lg font-bold text-primary transition hover:bg-muted"
-      >
-        ›
-      </button>
-    </div>
-  );
-}
-
-function Fila({
-  etiqueta,
-  items,
-  onElegir,
-}: {
-  etiqueta?: string;
-  items: Producto[];
-  onElegir: (p: Producto) => void;
-}) {
-  const pista = useRef<HTMLDivElement>(null);
-  const [deslizado, setDeslizado] = useState(false);
-
-  const mover = (dir: number) => {
-    const c = pista.current;
-    if (!c) return;
-    const card = c.querySelector("article");
-    const paso = card ? card.clientWidth + 12 : c.clientWidth * 0.7;
-    c.scrollBy({ left: paso * dir, behavior: "smooth" });
-  };
-
-  return (
-    <>
-      <div className="mt-6 mb-1 flex items-center justify-between gap-3">
-        {etiqueta ? (
-          <p className="text-xs font-bold tracking-widest text-muted-foreground uppercase">
-            {etiqueta}
-          </p>
-        ) : (
-          <span />
-        )}
-        <Flechas onMover={mover} />
-      </div>
-
-      <div className="relative mt-3">
-        <div
-          ref={pista}
-          onScroll={(e) => {
-            if (e.currentTarget.scrollLeft > 8) setDeslizado(true);
-          }}
-          className="catalogo-carrusel -mx-4 flex snap-x snap-mandatory gap-3 overflow-x-auto px-4 pb-2"
-        >
-          {items.map((p) => (
-            <Tarjeta key={p.id} p={p} onElegir={onElegir} />
-          ))}
-          <div className="w-1 shrink-0" aria-hidden="true" />
-        </div>
-
-        <PistaDesliza oculta={deslizado} />
-
-        <button
-          type="button"
-          aria-label="Ver más diseños"
-          onClick={() => mover(1)}
-          className="absolute right-1 bottom-[44%] z-10 grid size-11 place-items-center rounded-full border-2 border-card bg-primary text-xl font-bold text-primary-foreground shadow-xl transition hover:scale-105 sm:hidden"
-        >
-          ›
-        </button>
-      </div>
-    </>
-  );
-}
-
 function Seccion({ col, onElegir }: { col: Coleccion; onElegir: (p: Producto) => void }) {
   const grupos = col.grupos ?? [];
 
@@ -217,10 +132,18 @@ function Seccion({ col, onElegir }: { col: Coleccion; onElegir: (p: Producto) =>
 
       {grupos.length > 0 ? (
         grupos.map((g) => (
-          <Fila key={g} etiqueta={g} items={productosDe(col.nombre, g)} onElegir={onElegir} />
+          <Carrusel key={g} etiqueta={g} className="-mx-4 px-4">
+            {productosDe(col.nombre, g).map((p) => (
+              <Tarjeta key={p.id} p={p} onElegir={onElegir} />
+            ))}
+          </Carrusel>
         ))
       ) : (
-        <Fila items={productosDe(col.nombre)} onElegir={onElegir} />
+        <Carrusel className="-mx-4 px-4">
+          {productosDe(col.nombre).map((p) => (
+            <Tarjeta key={p.id} p={p} onElegir={onElegir} />
+          ))}
+        </Carrusel>
       )}
     </section>
   );
