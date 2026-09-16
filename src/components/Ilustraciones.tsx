@@ -1,14 +1,13 @@
 /**
- * Ilustraciones de la landing: los seis pasos para ponerse las uñas
- * y los cinco pasos para medirse la talla.
+ * Ilustraciones de la landing: los seis pasos para ponerse las uñas,
+ * los cinco para medirse la talla y los iconos de medios de pago.
  */
 
-const base =
-  'viewBox="0 0 48 48"';
+import type { ReactNode } from "react";
 
 type P = { className?: string };
 
-const svg = (contenido: React.ReactNode, className = "size-9 text-primary") => (
+const svg = (contenido: ReactNode, className = "size-9 text-primary") => (
   <svg
     viewBox="0 0 48 48"
     fill="none"
