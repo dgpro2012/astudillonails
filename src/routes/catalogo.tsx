@@ -5,7 +5,7 @@ import logo from "@/assets/astudillo-logo.png";
 import { BotonCarrito, CarritoDrawer } from "@/components/CarritoDrawer";
 import { OpcionesModal } from "@/components/OpcionesModal";
 import { PistaDesliza } from "@/components/PistaDesliza";
-import { contarSets, useCarrito } from "@/components/carrito";
+import { CarritoProvider, contarSets, useCarrito } from "@/components/carrito";
 import {
   colecciones,
   formatoCOP,
@@ -136,12 +136,10 @@ function Fila({
   etiqueta,
   items,
   onElegir,
-  conFlechas,
 }: {
   etiqueta?: string;
   items: Producto[];
   onElegir: (p: Producto) => void;
-  conFlechas?: boolean;
 }) {
   const pista = useRef<HTMLDivElement>(null);
   const [deslizado, setDeslizado] = useState(false);
@@ -156,14 +154,16 @@ function Fila({
 
   return (
     <>
-      {etiqueta && (
-        <div className="mt-6 mb-1 flex items-center justify-between gap-3">
+      <div className="mt-6 mb-1 flex items-center justify-between gap-3">
+        {etiqueta ? (
           <p className="text-xs font-bold tracking-widest text-muted-foreground uppercase">
             {etiqueta}
           </p>
-          <Flechas onMover={mover} />
-        </div>
-      )}
+        ) : (
+          <span />
+        )}
+        <Flechas onMover={mover} />
+      </div>
 
       <div className="relative mt-3">
         <div
@@ -190,74 +190,52 @@ function Fila({
           ›
         </button>
       </div>
-
-      {!etiqueta && conFlechas && (
-        <div className="sr-only">
-          <Flechas onMover={mover} />
-        </div>
-      )}
     </>
   );
 }
 
 function Seccion({ col, onElegir }: { col: Coleccion; onElegir: (p: Producto) => void }) {
-  const pista = useRef<HTMLDivElement>(null);
   const grupos = col.grupos ?? [];
 
   return (
     <section id={col.slug} className="mt-12 scroll-mt-32">
-      <div className="flex items-start justify-between gap-3">
-        <div>
-          <div className="flex flex-wrap items-center gap-2">
-            <h2 className="text-xl font-bold text-primary sm:text-2xl">
-              {col.emoji} {col.nombre}
-            </h2>
-            {col.etiqueta && (
-              <span className="rounded-full bg-blush/60 px-2.5 py-1 text-[10px] font-bold tracking-wide text-primary uppercase">
-                {col.etiqueta}
-              </span>
-            )}
-          </div>
-          <p className="mt-1 font-display text-base font-bold text-foreground">
-            «{col.lema}»
-          </p>
-          <p className="mt-2 max-w-xl text-sm leading-relaxed text-muted-foreground">
-            {col.texto}
-          </p>
-          <p className="mt-2 text-xs text-muted-foreground">👉 {col.ideal}</p>
+      <div>
+        <div className="flex flex-wrap items-center gap-2">
+          <h2 className="text-xl font-bold text-primary sm:text-2xl">
+            {col.emoji} {col.nombre}
+          </h2>
+          {col.etiqueta && (
+            <span className="rounded-full bg-blush/60 px-2.5 py-1 text-[10px] font-bold tracking-wide text-primary uppercase">
+              {col.etiqueta}
+            </span>
+          )}
         </div>
-        {grupos.length === 0 && (
-          <Flechas
-            onMover={(dir) => {
-              const c = pista.current?.querySelector(".catalogo-carrusel");
-              if (!c) return;
-              const card = c.querySelector("article");
-              const paso = card ? card.clientWidth + 12 : c.clientWidth * 0.7;
-              c.scrollBy({ left: paso * dir, behavior: "smooth" });
-            }}
-          />
-        )}
+        <p className="mt-1 font-display text-base font-bold text-foreground">«{col.lema}»</p>
+        <p className="mt-2 max-w-xl text-sm leading-relaxed text-muted-foreground">{col.texto}</p>
+        <p className="mt-2 text-xs text-muted-foreground">👉 {col.ideal}</p>
       </div>
 
-      <div ref={pista}>
-        {grupos.length > 0 ? (
-          grupos.map((g) => (
-            <Fila
-              key={g}
-              etiqueta={g}
-              items={productosDe(col.nombre, g)}
-              onElegir={onElegir}
-            />
-          ))
-        ) : (
-          <Fila items={productosDe(col.nombre)} onElegir={onElegir} />
-        )}
-      </div>
+      {grupos.length > 0 ? (
+        grupos.map((g) => (
+          <Fila key={g} etiqueta={g} items={productosDe(col.nombre, g)} onElegir={onElegir} />
+        ))
+      ) : (
+        <Fila items={productosDe(col.nombre)} onElegir={onElegir} />
+      )}
     </section>
   );
 }
 
+/** El carrito vive aquí, así que la página se envuelve con su proveedor. */
 function Catalogo() {
+  return (
+    <CarritoProvider>
+      <Contenido />
+    </CarritoProvider>
+  );
+}
+
+function Contenido() {
   const { unidades, total, abrir } = useCarrito();
   const [elegido, setElegido] = useState<Producto | null>(null);
 
@@ -278,13 +256,11 @@ function Catalogo() {
 
       <main className="mx-auto max-w-3xl px-4">
         <section className="pt-8 text-center">
-          <h1 className="text-3xl font-bold text-foreground sm:text-4xl">
-            Escoge tus diseños 💅
-          </h1>
+          <h1 className="text-3xl font-bold text-foreground sm:text-4xl">Escoge tus diseños 💅</h1>
           <p className="mx-auto mt-3 max-w-xl text-sm leading-relaxed text-muted-foreground">
-            Seis colecciones, cada una con su propio mood. Agrega los que te
-            enamoren, arma tu carrito y nos mandas el pedido por WhatsApp. Cada
-            set trae 10 uñas press on, lima, limpiador y pegante.
+            Seis colecciones, cada una con su propio mood. Agrega los que te enamoren, arma tu
+            carrito y nos mandas el pedido por WhatsApp. Cada set trae 10 uñas press on, lima,
+            limpiador y pegante.
           </p>
         </section>
 
@@ -316,9 +292,8 @@ function Catalogo() {
               ¿Lo quieres a tu gusto? 🎨
             </h2>
             <p className="mx-auto mt-2 max-w-lg text-sm leading-relaxed text-foreground/70">
-              Nos mandas la foto del diseño que te encantó, eliges tamaño y
-              forma, y lo pintamos solo para ti. Queda listo en 48 horas después
-              de confirmar el pago.
+              Nos mandas la foto del diseño que te encantó, eliges tamaño y forma, y lo pintamos
+              solo para ti. Queda listo en 48 horas después de confirmar el pago.
             </p>
             <p className="mt-3 font-display text-3xl font-bold text-sale">
               {formatoCOP(PRECIO_PERSONALIZADO)}
