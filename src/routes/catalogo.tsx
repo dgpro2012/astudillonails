@@ -125,7 +125,6 @@ function Seccion({ col, onElegir }: { col: Coleccion; onElegir: (p: Producto) =>
             </span>
           )}
         </div>
-        <p className="mt-1 font-display text-base font-bold text-foreground">«{col.lema}»</p>
         <p className="mt-2 max-w-xl text-sm leading-relaxed text-muted-foreground">{col.texto}</p>
         <p className="mt-2 text-xs text-muted-foreground">👉 {col.ideal}</p>
       </div>
