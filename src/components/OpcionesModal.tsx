@@ -38,6 +38,13 @@ export function OpcionesModal({
       setTamano("M");
       setForma("Almendra");
       setReferencia("");
+      metaEvento("ViewContent", {
+        content_ids: [producto.id],
+        content_name: producto.nombre,
+        content_type: "product",
+        value: producto.precio,
+        currency: "COP",
+      });
     }
   }, [producto]);
 
@@ -66,6 +73,14 @@ export function OpcionesModal({
   };
 
   const confirmar = () => {
+    metaEvento("AddToCart", {
+      content_ids: [producto.id],
+      content_name: producto.nombre,
+      content_type: "product",
+      value: producto.precio,
+      currency: "COP",
+      contents: [{ id: producto.id, quantity: 1, item_price: producto.precio }],
+    });
     agregar(producto, {
       tamano,
       forma,
