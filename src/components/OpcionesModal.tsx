@@ -11,6 +11,7 @@ import {
   type Tamano,
 } from "@/components/carrito";
 import { formatoCOP, type Producto } from "@/data/productos";
+import { metaEvento } from "@/lib/meta-pixel";
 
 const estiloOpcion = (activa: boolean) =>
   activa
