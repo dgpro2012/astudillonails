@@ -12,7 +12,7 @@ import { useEffect, type ReactNode } from "react";
 import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
 import { PIXEL_ID, SNIPPET_PIXEL } from "../lib/pixel";
-import { usePixelPageView } from "../hooks/usePixelPageView";
+import { usePixelPageView, usePixelWhatsApp } from "../hooks/usePixelPageView";
 
 function NotFoundComponent() {
   return (
@@ -137,6 +137,7 @@ function RootShell({ children }: { children: ReactNode }) {
 function RootComponent() {
   const { queryClient } = Route.useRouteContext();
   usePixelPageView();
+  usePixelWhatsApp();
 
   return (
     <QueryClientProvider client={queryClient}>
