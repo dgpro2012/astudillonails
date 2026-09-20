@@ -11,6 +11,7 @@ import {
   type Tamano,
 } from "@/components/carrito";
 import { formatoCOP, type Producto } from "@/data/productos";
+import { pixelAgregarAlCarrito, pixelVerDiseno } from "@/lib/pixel";
 
 const estiloOpcion = (activa: boolean) =>
   activa
@@ -25,7 +26,7 @@ export function OpcionesModal({
   onCerrar: () => void;
 }) {
   const { agregar } = useCarrito();
-  const [tamano, setTamano] = useState<Tamano>("M");
+  const [tamano, setTamano] = useState<Tamano>("Medio");
   const [forma, setForma] = useState<Forma>("Almendra");
   const [referencia, setReferencia] = useState("");
 
@@ -34,9 +35,10 @@ export function OpcionesModal({
   // Cada vez que se abre, vuelve a los valores por defecto
   useEffect(() => {
     if (producto) {
-      setTamano("M");
+      setTamano("Medio");
       setForma("Almendra");
       setReferencia("");
+      pixelVerDiseno(producto.nombre, producto.precio);
     }
   }, [producto]);
 
@@ -68,10 +70,9 @@ export function OpcionesModal({
     agregar(producto, {
       tamano,
       forma,
-      ...(personalizado
-        ? { referencia: referencia.trim() || "sin nombre" }
-        : {}),
+      ...(personalizado ? { referencia: referencia.trim() || "sin nombre" } : {}),
     });
+    pixelAgregarAlCarrito(producto.nombre, producto.precio);
     onCerrar();
   };
 
@@ -127,7 +128,7 @@ export function OpcionesModal({
                 className={`flex flex-col items-center gap-0.5 rounded-2xl border-2 px-1 py-2.5 transition ${estiloOpcion(activa)}`}
               >
                 <LargoUna tamano={t.sigla} />
-                <span className="text-xs font-bold">{t.sigla}</span>
+                <span className="text-[11px] leading-tight font-bold">{t.sigla}</span>
                 <span
                   className={`text-[10px] ${activa ? "opacity-80" : "text-muted-foreground"}`}
                 >
@@ -138,10 +139,9 @@ export function OpcionesModal({
           })}
         </div>
         <p className="mt-2 text-xs leading-relaxed text-muted-foreground">
-          El tamaño es el{" "}
-          <span className="font-bold text-foreground">largo de la uña</span>, de
-          la cutícula a la punta. Si dudas, escríbenos y te ayudamos antes de
-          que pagues.
+          El tamaño es el <span className="font-bold text-foreground">largo</span> que quieres, de
+          la cutícula a la punta. El <span className="font-bold text-foreground">ancho</span> lo
+          confirmamos contigo por WhatsApp antes de que pagues.
         </p>
 
         <p className="mt-5 text-xs font-bold tracking-widest text-muted-foreground uppercase">
@@ -181,10 +181,8 @@ export function OpcionesModal({
         <p className="mt-2 text-xs leading-relaxed text-muted-foreground">
           {fuera.length > 0 ? (
             <>
-              En tamaño{" "}
-              <span className="font-bold text-foreground">{tamano}</span> no
-              podemos hacer {fuera.join(" ni ")}: la uña queda muy corta para
-              esa punta.
+              En tamaño <span className="font-bold text-foreground">{tamano}</span> no podemos hacer{" "}
+              {fuera.join(" ni ")}: la uña queda muy corta para esa punta.
             </>
           ) : (
             "En este tamaño puedes pedir cualquiera de las cuatro formas."
@@ -193,9 +191,7 @@ export function OpcionesModal({
 
         {personalizado && (
           <div className="mt-5 rounded-2xl bg-muted p-4">
-            <p className="text-sm font-bold text-foreground">
-              Tu foto de referencia 📸
-            </p>
+            <p className="text-sm font-bold text-foreground">Tu foto de referencia 📸</p>
             <p className="mt-1 text-xs leading-relaxed text-muted-foreground">
               Ponle un nombre a tu idea y nos mandas la foto por el chat.
             </p>
