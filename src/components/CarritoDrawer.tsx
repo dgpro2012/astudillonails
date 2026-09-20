@@ -109,9 +109,10 @@ export function CarritoDrawer() {
       setConfirmandoVaciar(false);
       return;
     }
-    if (items.length > 0) metaEvento("InitiateCheckout", datosCarrito(items, total));
-    // Solo al abrir el panel: no depende de los cambios posteriores del carrito.
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+    // Solo al abrir el panel, una vez por apertura.
+    if (items.length > 0) {
+      metaEvento("InitiateCheckout", datosCarrito(items, total));
+    }
     const alTeclear = (e: KeyboardEvent) => {
       if (e.key === "Escape") cerrar();
     };
