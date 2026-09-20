@@ -11,6 +11,8 @@ import { useEffect, type ReactNode } from "react";
 
 import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
+import { PIXEL_ID, SNIPPET_PIXEL } from "../lib/pixel";
+import { usePixelPageView } from "../hooks/usePixelPageView";
 
 function NotFoundComponent() {
   return (
@@ -99,6 +101,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       },
       { rel: "icon", href: "/favicon.png", type: "image/png" },
     ],
+    scripts: [{ children: SNIPPET_PIXEL }],
   }),
 
   shellComponent: RootShell,
@@ -114,6 +117,16 @@ function RootShell({ children }: { children: ReactNode }) {
         <HeadContent />
       </head>
       <body>
+        {/* Respaldo del píxel para quien navegue sin JavaScript */}
+        <noscript>
+          <img
+            height="1"
+            width="1"
+            style={{ display: "none" }}
+            alt=""
+            src={`https://www.facebook.com/tr?id=${PIXEL_ID}&ev=PageView&noscript=1`}
+          />
+        </noscript>
         {children}
         <Scripts />
       </body>
@@ -123,6 +136,7 @@ function RootShell({ children }: { children: ReactNode }) {
 
 function RootComponent() {
   const { queryClient } = Route.useRouteContext();
+  usePixelPageView();
 
   return (
     <QueryClientProvider client={queryClient}>
