@@ -7,7 +7,26 @@ import {
   contarSets,
   mensajeWhatsApp,
   useCarrito,
+  type ItemCarrito,
 } from "@/components/carrito";
+import { metaEvento } from "@/lib/meta-pixel";
+
+/** El id del item lleva tamaño y forma; el píxel necesita el id del diseño. */
+const idProducto = (id: string) =>
+  id.replace(/-(S|M|L|XL)-(Almendra|Cuadrada|Stiletto|Coffin)(-\d+)?$/, "");
+
+const datosCarrito = (items: ItemCarrito[], total: number) => ({
+  content_ids: items.map((i) => idProducto(i.id)),
+  content_type: "product",
+  contents: items.map((i) => ({
+    id: idProducto(i.id),
+    quantity: i.cantidad,
+    item_price: i.precio,
+  })),
+  value: total,
+  currency: "COP",
+  num_items: items.reduce((acc, i) => acc + i.cantidad, 0),
+});
 
 export function BotonCarrito() {
   const { unidades, abrir } = useCarrito();
