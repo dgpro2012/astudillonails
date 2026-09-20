@@ -109,6 +109,9 @@ export function CarritoDrawer() {
       setConfirmandoVaciar(false);
       return;
     }
+    if (items.length > 0) metaEvento("InitiateCheckout", datosCarrito(items, total));
+    // Solo al abrir el panel: no depende de los cambios posteriores del carrito.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     const alTeclear = (e: KeyboardEvent) => {
       if (e.key === "Escape") cerrar();
     };
@@ -343,6 +346,9 @@ export function CarritoDrawer() {
               href={mensajeWhatsApp(items, total)}
               target="_blank"
               rel="noopener noreferrer"
+              onClick={() =>
+                metaEvento("WhatsAppCheckout", datosCarrito(items, total), true)
+              }
               className="mt-4 flex w-full items-center justify-center gap-2 rounded-full bg-whatsapp px-6 py-4 text-base font-bold text-whatsapp-foreground shadow-lg transition hover:brightness-95"
             >
               <IconoWhatsApp />
