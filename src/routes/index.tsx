@@ -587,6 +587,7 @@ function Inicio() {
                 >
                   {par.nums.map((n) => {
                     const r = RAZONES[n - 1];
+                    if (!r) return null;
                     return (
                       <div key={n}>
                         <h2 className="text-lg leading-snug font-bold text-foreground sm:text-xl">

@@ -69,7 +69,7 @@ export function OpcionesModal({
 
   const elegirTamano = (t: Tamano) => {
     setTamano(t);
-    if (!formaDisponible(t, forma)) setForma(formasDe(t)[0]);
+    if (!formaDisponible(t, forma)) setForma(formasDe(t)[0] ?? "Almendra");
   };
 
   const confirmar = () => {
