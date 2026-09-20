@@ -8,6 +8,7 @@ import {
   mensajeWhatsApp,
   useCarrito,
 } from "@/components/carrito";
+import { pixelIniciarPedido } from "@/lib/pixel";
 
 export function BotonCarrito() {
   const { unidades, abrir } = useCarrito();
@@ -48,10 +49,8 @@ function AvisoEnvio({ unidades }: { unidades: number }) {
         <p className="font-bold text-foreground">Llévate uno más 🚚</p>
         <p className="mt-1 leading-relaxed text-muted-foreground">
           Desde 2 sets, el envío al resto del país te queda en{" "}
-          <span className="font-bold text-foreground">
-            {formatoCOP(ENVIO_DESDE_DOS)}
-          </span>{" "}
-          en total. En Medellín siempre va gratis.
+          <span className="font-bold text-foreground">{formatoCOP(ENVIO_DESDE_DOS)}</span> en total.
+          En Medellín siempre va gratis.
         </p>
       </div>
     );
@@ -62,8 +61,8 @@ function AvisoEnvio({ unidades }: { unidades: number }) {
         ✓ Ya tienes el envío de {formatoCOP(ENVIO_DESDE_DOS)}
       </p>
       <p className="mt-1 leading-relaxed text-muted-foreground">
-        Al resto del país son {formatoCOP(ENVIO_DESDE_DOS)} en total, lleves los
-        que lleves. En Medellín y Área Metropolitana va gratis.
+        Al resto del país son {formatoCOP(ENVIO_DESDE_DOS)} en total, lleves los que lleves. En
+        Medellín y Área Metropolitana va gratis.
       </p>
     </div>
   );
@@ -122,9 +121,7 @@ export function CarritoDrawer() {
         }`}
       >
         <div className="flex items-center justify-between border-b border-border px-5 py-4">
-          <p className="font-display text-lg font-bold text-foreground">
-            Tu carrito 🛒
-          </p>
+          <p className="font-display text-lg font-bold text-foreground">Tu carrito 🛒</p>
           <button
             type="button"
             onClick={cerrar}
@@ -139,9 +136,7 @@ export function CarritoDrawer() {
           {items.length === 0 ? (
             <div className="mt-16 text-center">
               <p className="text-4xl">💅</p>
-              <p className="mt-3 font-bold text-foreground">
-                Todavía no has elegido nada
-              </p>
+              <p className="mt-3 font-bold text-foreground">Todavía no has elegido nada</p>
               <p className="mt-1 text-sm text-muted-foreground">
                 Agrega los diseños que más te gusten y te los mandamos juntos.
               </p>
@@ -157,10 +152,7 @@ export function CarritoDrawer() {
             <>
               <ul className="space-y-4">
                 {items.map((i) => (
-                  <li
-                    key={i.id}
-                    className="flex gap-3 rounded-2xl border border-border p-3"
-                  >
+                  <li key={i.id} className="flex gap-3 rounded-2xl border border-border p-3">
                     {i.img ? (
                       <img
                         src={i.img}
@@ -179,9 +171,7 @@ export function CarritoDrawer() {
                     )}
                     <div className="flex-1">
                       <div className="flex items-start justify-between gap-2">
-                        <p className="text-sm font-bold text-foreground">
-                          {i.nombre}
-                        </p>
+                        <p className="text-sm font-bold text-foreground">{i.nombre}</p>
                         <button
                           type="button"
                           onClick={() => quitar(i.id)}
@@ -191,20 +181,14 @@ export function CarritoDrawer() {
                           Quitar
                         </button>
                       </div>
-                      <p className="mt-0.5 text-[11px] text-muted-foreground">
-                        {i.forma}
-                      </p>
+                      <p className="mt-0.5 text-[11px] text-muted-foreground">{i.forma}</p>
                       {i.referencia && (
-                        <p className="text-[11px] text-muted-foreground">
-                          📸 {i.referencia}
-                        </p>
+                        <p className="text-[11px] text-muted-foreground">📸 {i.referencia}</p>
                       )}
 
-                      {/* El tamaño se cambia aquí mismo, sin quitar el producto */}
+                      {/* El largo se cambia aquí mismo, sin quitar el producto */}
                       <div className="mt-1.5 flex flex-wrap items-center gap-1.5">
-                        <span className="text-[11px] text-muted-foreground">
-                          Tamaño
-                        </span>
+                        <span className="text-[11px] text-muted-foreground">Largo</span>
                         {TAMANOS.map((t) => {
                           const activa = i.tamano === t.sigla;
                           return (
@@ -235,9 +219,7 @@ export function CarritoDrawer() {
                           >
                             −
                           </button>
-                          <span className="text-sm font-bold tabular-nums">
-                            {i.cantidad}
-                          </span>
+                          <span className="text-sm font-bold tabular-nums">{i.cantidad}</span>
                           <button
                             type="button"
                             onClick={() => cambiarCantidad(i.id, 1)}
@@ -268,9 +250,7 @@ export function CarritoDrawer() {
                 </button>
                 {confirmandoVaciar && (
                   <div className="mt-2 rounded-2xl border border-border bg-muted p-3 text-sm">
-                    <p className="text-foreground">
-                      ¿Seguro que quieres quitar todo?
-                    </p>
+                    <p className="text-foreground">¿Seguro que quieres quitar todo?</p>
                     <div className="mt-2 flex gap-2">
                       <button
                         type="button"
@@ -320,18 +300,21 @@ export function CarritoDrawer() {
               </span>
             </div>
 
+            {/* data-pixel evita que el detector global lo cuente dos veces:
+                aquí sí podemos mandar el valor y la cantidad del pedido. */}
             <a
               href={mensajeWhatsApp(items, total)}
               target="_blank"
               rel="noopener noreferrer"
+              data-pixel="carrito"
+              onClick={() => pixelIniciarPedido(total, unidades)}
               className="mt-4 flex w-full items-center justify-center gap-2 rounded-full bg-whatsapp px-6 py-4 text-base font-bold text-whatsapp-foreground shadow-lg transition hover:brightness-95"
             >
               <IconoWhatsApp />
               Enviar mi pedido por WhatsApp
             </a>
             <p className="mt-2 text-center text-[11px] leading-relaxed text-muted-foreground">
-              Te llega el resumen al chat. Ahí confirmamos tu ciudad, el envío y
-              cómo pagas.
+              Te llega el resumen al chat. Ahí confirmamos tu ciudad, el envío y cómo pagas.
             </p>
           </div>
         )}
