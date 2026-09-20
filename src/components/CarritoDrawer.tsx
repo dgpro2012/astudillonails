@@ -7,7 +7,26 @@ import {
   contarSets,
   mensajeWhatsApp,
   useCarrito,
+  type ItemCarrito,
 } from "@/components/carrito";
+import { metaEvento } from "@/lib/meta-pixel";
+
+/** El id del item lleva tamaño y forma; el píxel necesita el id del diseño. */
+const idProducto = (id: string) =>
+  id.replace(/-(S|M|L|XL)-(Almendra|Cuadrada|Stiletto|Coffin)(-\d+)?$/, "");
+
+const datosCarrito = (items: ItemCarrito[], total: number) => ({
+  content_ids: items.map((i) => idProducto(i.id)),
+  content_type: "product",
+  contents: items.map((i) => ({
+    id: idProducto(i.id),
+    quantity: i.cantidad,
+    item_price: i.precio,
+  })),
+  value: total,
+  currency: "COP",
+  num_items: items.reduce((acc, i) => acc + i.cantidad, 0),
+});
 
 export function BotonCarrito() {
   const { unidades, abrir } = useCarrito();
@@ -89,6 +108,10 @@ export function CarritoDrawer() {
     if (!abierto) {
       setConfirmandoVaciar(false);
       return;
+    }
+    // Solo al abrir el panel, una vez por apertura.
+    if (items.length > 0) {
+      metaEvento("InitiateCheckout", datosCarrito(items, total));
     }
     const alTeclear = (e: KeyboardEvent) => {
       if (e.key === "Escape") cerrar();
@@ -324,6 +347,9 @@ export function CarritoDrawer() {
               href={mensajeWhatsApp(items, total)}
               target="_blank"
               rel="noopener noreferrer"
+              onClick={() =>
+                metaEvento("WhatsAppCheckout", datosCarrito(items, total), true)
+              }
               className="mt-4 flex w-full items-center justify-center gap-2 rounded-full bg-whatsapp px-6 py-4 text-base font-bold text-whatsapp-foreground shadow-lg transition hover:brightness-95"
             >
               <IconoWhatsApp />

@@ -236,6 +236,11 @@ function Contenido() {
             Vuelve a la página principal
           </Link>
         </p>
+        <p className="mt-2 text-center text-xs text-muted-foreground">
+          <Link to="/privacidad" className="underline">
+            Privacidad y cookies
+          </Link>
+        </p>
       </main>
 
       <div className="fixed inset-x-0 bottom-0 z-40 border-t border-border bg-card/95 px-4 py-3 backdrop-blur">

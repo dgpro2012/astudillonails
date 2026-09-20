@@ -587,6 +587,7 @@ function Inicio() {
                 >
                   {par.nums.map((n) => {
                     const r = RAZONES[n - 1];
+                    if (!r) return null;
                     return (
                       <div key={n}>
                         <h2 className="text-lg leading-snug font-bold text-foreground sm:text-xl">
@@ -979,6 +980,11 @@ function Inicio() {
         <p className="font-display text-base font-bold text-primary">Astudillo Nails</p>
         <p className="mt-2">Envíos a toda Colombia · WhatsApp 350 371 2704</p>
         <p className="mt-1">© 2026 Astudillo Nails</p>
+        <p className="mt-1">
+          <Link to="/privacidad" className="underline">
+            Privacidad y cookies
+          </Link>
+        </p>
       </footer>
 
       <div className="fixed inset-x-0 bottom-0 z-50 border-t border-border bg-card/95 px-4 py-3 backdrop-blur">

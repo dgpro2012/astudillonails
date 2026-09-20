@@ -145,7 +145,7 @@ export function CarritoProvider({ children }: { children: ReactNode }) {
               tamano,
               forma: formaDisponible(tamano, i.forma)
                 ? i.forma
-                : formasDe(tamano)[0],
+                : (formasDe(tamano)[0] ?? "Almendra"),
             }
           : i,
       ),
